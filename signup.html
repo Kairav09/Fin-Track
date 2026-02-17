@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - FinTrack</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left Side - Branding & Info -->
+      <div class="brand-side">
+        <div class="brand-content">
+          <div class="logo">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <rect width="40" height="40" rx="8" fill="#10b981" />
+              <path
+                d="M20 10v20M12 18l8-8 8 8"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>FinTrack</span>
+          </div>
+
+          <h1>Start your journey to<br />financial freedom</h1>
+
+          <p class="description">
+            Join thousands of users who are taking control of their finances.
+            Create your free account and start tracking today.
+          </p>
+
+          <div class="benefits">
+            <div class="benefit-item">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="10" fill="#10b981" />
+                <path
+                  d="M6 10l3 3 5-6"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Free forever, no credit card required</span>
+            </div>
+            <div class="benefit-item">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="10" fill="#10b981" />
+                <path
+                  d="M6 10l3 3 5-6"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Secure data encryption</span>
+            </div>
+            <div class="benefit-item">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="10" fill="#10b981" />
+                <path
+                  d="M6 10l3 3 5-6"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Easy to use interface</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side - Signup Form -->
+      <div class="form-side">
+        <div class="form-container">
+          <div class="form-header">
+            <h2>Create your account</h2>
+            <p>Get started with your free account.</p>
+          </div>
+
+          <form id="signupForm">
+            <div class="form-group">
+              <label for="fullname">Full Name</label>
+              <input
+                type="text"
+                id="fullname"
+                name="fullname"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Choose a username"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password"
+                minlength="6"
+                required
+              />
+              <small>Must be at least 6 characters</small>
+            </div>
+
+            <button type="submit" class="btn-primary">Create account</button>
+          </form>
+
+          <div class="form-footer">
+            <p>Already have an account? <a href="login.html">Sign in</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
