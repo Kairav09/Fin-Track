@@ -1,3 +1,18 @@
+// ---- Theme Toggle ----
+const themeToggle = document.getElementById("themeToggle");
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+}
+if (themeToggle) {
+  themeToggle.addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem(
+      "theme",
+      document.body.classList.contains("dark-mode") ? "dark" : "light",
+    );
+  });
+}
+
 // Display user's first name in the greeting
 const fullname = localStorage.getItem("fullname");
 const username = localStorage.getItem("username");
@@ -102,38 +117,135 @@ if (existingTxns.length === 0) {
   localStorage.setItem("transactions", JSON.stringify(sampleTransactions));
 }
 
-// Simple bar chart using JavaScript
+// Dynamic bar chart from transactions
 const chartContainer = document.querySelector(".chart-container");
-if (chartContainer) {
-  const data = [
-    { day: "Mon", income: 5000, expense: 3200 },
-    { day: "Tue", income: 3500, expense: 4100 },
-    { day: "Wed", income: 4200, expense: 2800 },
-    { day: "Thu", income: 6800, expense: 5200 },
-    { day: "Fri", income: 8500, expense: 3900 },
-    { day: "Sat", income: 2100, expense: 4500 },
-    { day: "Sun", income: 3200, expense: 2100 },
-  ];
+const chartPeriod = document.getElementById("chartPeriod");
 
-  const maxVal = Math.max(...data.map((d) => Math.max(d.income, d.expense)));
+function renderChart() {
+  if (!chartContainer) return;
+
+  const transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
+  const days = parseInt(chartPeriod.value);
+  const today = new Date();
+  today.setHours(23, 59, 59, 999);
+
+  // Calculate start date
+  const startDate = new Date(today);
+  startDate.setDate(startDate.getDate() - days + 1);
+  startDate.setHours(0, 0, 0, 0);
+
+  // Filter transactions within the period
+  const filtered = transactions.filter((t) => {
+    const txnDate = new Date(t.date);
+    return txnDate >= startDate && txnDate <= today;
+  });
+
+  // Determine grouping based on period
+  let groups = [];
+
+  if (days === 7) {
+    // Group by individual day
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(startDate);
+      d.setDate(d.getDate() + i);
+      const dateStr = d.toISOString().split("T")[0];
+      const label = d.toLocaleDateString("en-IN", { weekday: "short" });
+      groups.push({ label, dateStr, income: 0, expense: 0 });
+    }
+    filtered.forEach((t) => {
+      const g = groups.find((g) => g.dateStr === t.date);
+      if (g) {
+        if (t.type === "income") g.income += t.amount;
+        else g.expense += t.amount;
+      }
+    });
+  } else if (days === 30) {
+    // Group by 5-day intervals (6 groups)
+    for (let i = 0; i < 6; i++) {
+      const gStart = new Date(startDate);
+      gStart.setDate(gStart.getDate() + i * 5);
+      const gEnd = new Date(gStart);
+      gEnd.setDate(gEnd.getDate() + 4);
+      const label = gStart.toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "short",
+      });
+      groups.push({ label, start: gStart, end: gEnd, income: 0, expense: 0 });
+    }
+    filtered.forEach((t) => {
+      const txnDate = new Date(t.date);
+      for (const g of groups) {
+        if (txnDate >= g.start && txnDate <= g.end) {
+          if (t.type === "income") g.income += t.amount;
+          else g.expense += t.amount;
+          break;
+        }
+      }
+    });
+  } else {
+    // 90 days: group by week (approx 12 weeks)
+    const numWeeks = 12;
+    for (let i = 0; i < numWeeks; i++) {
+      const wStart = new Date(startDate);
+      wStart.setDate(wStart.getDate() + i * 7);
+      const wEnd = new Date(wStart);
+      wEnd.setDate(wEnd.getDate() + 6);
+      const label = "W" + (i + 1);
+      groups.push({ label, start: wStart, end: wEnd, income: 0, expense: 0 });
+    }
+    filtered.forEach((t) => {
+      const txnDate = new Date(t.date);
+      for (const g of groups) {
+        if (txnDate >= g.start && txnDate <= g.end) {
+          if (t.type === "income") g.income += t.amount;
+          else g.expense += t.amount;
+          break;
+        }
+      }
+    });
+  }
+
+  const maxVal = Math.max(
+    ...groups.map((g) => Math.max(g.income, g.expense)),
+    1,
+  );
+
+  // Build grid lines (4 lines at 25%, 50%, 75%, 100%)
+  const gridLines = [1, 0.75, 0.5, 0.25]
+    .map((pct) => {
+      const val = Math.round(maxVal * pct);
+      const label = val >= 1000 ? `₹${(val / 1000).toFixed(1)}k` : `₹${val}`;
+      return `<div class="chart-grid-line" style="bottom:${pct * 100}%;">
+        <span class="chart-grid-label">${label}</span>
+      </div>`;
+    })
+    .join("");
 
   chartContainer.innerHTML = `
-    <div style="display:flex; align-items:flex-end; justify-content:space-around; width:100%; height:100%; padding:20px; gap:8px;">
-      ${data
-        .map(
-          (d) => `
-        <div style="display:flex; flex-direction:column; align-items:center; flex:1; gap:8px;">
-          <div style="display:flex; gap:4px; align-items:flex-end; width:100%; height:180px;">
-            <div style="flex:1; background:#10b981; border-radius:4px 4px 0 0; height:${(d.income / maxVal) * 100}%;"></div>
-            <div style="flex:1; background:#ef4444; border-radius:4px 4px 0 0; height:${(d.expense / maxVal) * 100}%;"></div>
+    <div class="chart-area">
+      <div class="chart-grid">${gridLines}</div>
+      <div class="chart-bars">
+        ${groups
+          .map(
+            (g) => `
+          <div class="chart-bar-group">
+            <div class="chart-bar-pair">
+              <div class="chart-bar income-bar" style="height:${(g.income / maxVal) * 100}%; min-height:${g.income > 0 ? "4px" : "0"};" title="Income: ₹${g.income.toLocaleString("en-IN")}"></div>
+              <div class="chart-bar expense-bar" style="height:${(g.expense / maxVal) * 100}%; min-height:${g.expense > 0 ? "4px" : "0"};" title="Expense: ₹${g.expense.toLocaleString("en-IN")}"></div>
+            </div>
+            <span class="chart-bar-label">${g.label}</span>
           </div>
-          <span style="font-size:11px; font-weight:600; color:#64748b;">${d.day}</span>
-        </div>
-      `,
-        )
-        .join("")}
+        `,
+          )
+          .join("")}
+      </div>
     </div>
   `;
+}
+
+// Listen for period change
+if (chartPeriod) {
+  chartPeriod.addEventListener("change", renderChart);
 }
 
 // ---- Add Transaction Modal ----
@@ -215,6 +327,7 @@ transactionForm.addEventListener("submit", function (e) {
     renderTransactions();
     updateStats();
     renderCategories();
+    renderChart();
     alert("Transaction updated!");
     closeModal();
   } else {
@@ -270,6 +383,7 @@ transactionForm.addEventListener("submit", function (e) {
     renderTransactions();
     updateStats();
     renderCategories();
+    renderChart();
     alert(message);
     closeModal();
   }
@@ -286,6 +400,7 @@ function deleteTransaction(id) {
   renderTransactions();
   updateStats();
   renderCategories();
+  renderChart();
 }
 
 // Edit transaction
@@ -456,63 +571,118 @@ const categoryStyles = {
 };
 
 // Render category breakdown from transactions
-function renderCategories() {
+function renderCategoryHTML(category, amount, totalExpenses) {
+  const percent = Math.round((amount / totalExpenses) * 100);
+  const style = categoryStyles[category] || categoryStyles["Other"];
+
+  return `
+    <div class="category-item">
+      <div class="category-info">
+        <div class="category-icon" style="background: ${style.bg}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="${style.icon}" stroke="${style.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="category-details">
+          <span class="category-name">${category}</span>
+          <span class="category-amount">₹${amount.toLocaleString("en-IN")}</span>
+        </div>
+      </div>
+      <div class="category-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${percent}%; background: ${style.color}"></div>
+        </div>
+        <span class="category-percent">${percent}%</span>
+      </div>
+    </div>
+  `;
+}
+
+function getCategoryData() {
   const transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
-  const categoryList = document.getElementById("categoryList");
-
-  // Only count expenses for category breakdown
   const expenses = transactions.filter((t) => t.type === "expense");
+  const incomes = transactions.filter((t) => t.type === "income");
+  const totalExpenses = expenses.reduce((sum, t) => sum + t.amount, 0);
+  const totalIncome = incomes.reduce((sum, t) => sum + t.amount, 0);
 
-  if (expenses.length === 0) {
-    categoryList.innerHTML =
-      '<p style="text-align:center; color:#94a3b8; padding:24px; font-size:14px;">No expenses to show yet.</p>';
-    return;
-  }
-
-  // Group by category and sum amounts
   const categoryTotals = {};
   expenses.forEach((txn) => {
     categoryTotals[txn.category] =
       (categoryTotals[txn.category] || 0) + txn.amount;
   });
 
-  // Total expenses for percentage calculation
-  const totalExpenses = expenses.reduce((sum, t) => sum + t.amount, 0);
-
-  // Sort categories by amount (highest first)
   const sorted = Object.entries(categoryTotals).sort((a, b) => b[1] - a[1]);
+  return { sorted, totalExpenses, totalIncome, expenses };
+}
 
-  categoryList.innerHTML = sorted
-    .map(([category, amount]) => {
-      const percent = Math.round((amount / totalExpenses) * 100);
-      const style = categoryStyles[category] || categoryStyles["Other"];
+function renderCategories() {
+  const categoryList = document.getElementById("categoryList");
+  const viewAllBtn = document.getElementById("viewAllCategories");
+  const { sorted, totalExpenses, expenses } = getCategoryData();
 
-      return `
-        <div class="category-item">
-          <div class="category-info">
-            <div class="category-icon" style="background: ${style.bg}">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="${style.icon}" stroke="${style.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="category-details">
-              <span class="category-name">${category}</span>
-              <span class="category-amount">₹${amount.toLocaleString("en-IN")}</span>
-            </div>
-          </div>
-          <div class="category-progress">
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: ${percent}%; background: ${style.color}"></div>
-            </div>
-            <span class="category-percent">${percent}%</span>
-          </div>
-        </div>
-      `;
-    })
+  if (expenses.length === 0) {
+    categoryList.innerHTML =
+      '<p style="text-align:center; color:#94a3b8; padding:24px; font-size:14px;">No expenses to show yet.</p>';
+    if (viewAllBtn) viewAllBtn.style.display = "none";
+    return;
+  }
+
+  // Always show top 3 in the dashboard card
+  const top3 = sorted.slice(0, 3);
+
+  if (viewAllBtn) {
+    viewAllBtn.style.display = sorted.length > 3 ? "inline-block" : "none";
+    viewAllBtn.textContent = `View All (${sorted.length})`;
+  }
+
+  categoryList.innerHTML = top3
+    .map(([cat, amt]) => renderCategoryHTML(cat, amt, totalExpenses))
     .join("");
+}
+
+// Category Modal
+const categoryModal = document.getElementById("categoryModal");
+const closeCategoryModalBtn = document.getElementById("closeCategoryModal");
+
+function openCategoryModal() {
+  const { sorted, totalExpenses, totalIncome } = getCategoryData();
+
+  document.getElementById("categoryModalSummary").innerHTML = `
+    <div class="summary-card expense-summary">
+      <span class="summary-label">Total Expenses</span>
+      <span class="summary-value">₹${totalExpenses.toLocaleString("en-IN")}</span>
+    </div>
+    <div class="summary-card income-summary">
+      <span class="summary-label">Total Income</span>
+      <span class="summary-value">₹${totalIncome.toLocaleString("en-IN")}</span>
+    </div>
+  `;
+
+  document.getElementById("categoryModalList").innerHTML = sorted
+    .map(([cat, amt]) => renderCategoryHTML(cat, amt, totalExpenses))
+    .join("");
+
+  categoryModal.classList.add("active");
+}
+
+const viewAllCategoriesBtn = document.getElementById("viewAllCategories");
+if (viewAllCategoriesBtn) {
+  viewAllCategoriesBtn.addEventListener("click", openCategoryModal);
+}
+
+if (closeCategoryModalBtn) {
+  closeCategoryModalBtn.addEventListener("click", function () {
+    categoryModal.classList.remove("active");
+  });
+}
+if (categoryModal) {
+  categoryModal.addEventListener("click", function (e) {
+    if (e.target === categoryModal) categoryModal.classList.remove("active");
+  });
 }
 
 // Load everything on page load
 renderTransactions();
 updateStats();
 renderCategories();
+renderChart();

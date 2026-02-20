@@ -585,6 +585,117 @@ body {
   box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
 }
 
+/* Chart */
+.chart-container {
+  height: 240px;
+  padding: 8px;
+  margin: 16px 0;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+/* Chart Area */
+.chart-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 12px 16px 0 48px;
+}
+
+.chart-grid {
+  position: absolute;
+  top: 12px;
+  left: 48px;
+  right: 16px;
+  bottom: 28px;
+  pointer-events: none;
+}
+
+.chart-grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.chart-grid-label {
+  position: absolute;
+  right: calc(100% + 8px);
+  top: -8px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  width: 100%;
+  height: calc(100% - 28px);
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.chart-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 8px;
+  height: 100%;
+}
+
+.chart-bar-pair {
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+  width: 100%;
+  flex: 1;
+}
+
+.chart-bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.4s ease;
+}
+
+.chart-bar.income-bar {
+  background: linear-gradient(180deg, #10b981, #059669);
+}
+
+.chart-bar.expense-bar {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+}
+
+.chart-bar-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 20px;
+  padding: 8px 0 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
 /* Budget Card */
 .budget-card {
   grid-column: 2 / 3;
@@ -878,4 +989,447 @@ body {
   .header-left h1 {
     font-size: 24px;
   }
+}
+
+/* ============ Modal ============ */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.modal-body {
+  padding: 20px 24px;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* Category Modal Summary */
+.category-modal-summary {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.summary-card.expense-summary {
+  background: #fef2f2;
+}
+
+.summary-card.income-summary {
+  background: #f0fdf4;
+}
+
+.summary-card .summary-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.summary-card .summary-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.summary-card.expense-summary .summary-value {
+  color: #ef4444;
+}
+
+.summary-card.income-summary .summary-value {
+  color: #10b981;
+}
+
+#categoryModalList {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 18px;
+}
+
+#categoryModalList::-webkit-scrollbar {
+  width: 6px;
+}
+
+#categoryModalList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#categoryModalList::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+#categoryModalList::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ============ Theme Toggle Button ============ */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #64748b;
+}
+
+.theme-toggle:hover {
+  background: #f1f5f9;
+  color: #f59e0b;
+  border-color: #cbd5e1;
+  transform: scale(1.05);
+}
+
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+/* ============ Dark Mode ============ */
+body.dark-mode {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+body.dark-mode .theme-toggle {
+  background: #1e293b;
+  border-color: #334155;
+  color: #94a3b8;
+}
+
+body.dark-mode .theme-toggle:hover {
+  background: #334155;
+  color: #60a5fa;
+}
+
+body.dark-mode .theme-toggle .icon-sun {
+  display: none;
+}
+
+body.dark-mode .theme-toggle .icon-moon {
+  display: block;
+}
+
+/* Sidebar */
+body.dark-mode .sidebar {
+  background: #020617;
+  border-right: 1px solid #1e293b;
+}
+
+/* Header */
+body.dark-mode .dashboard-header {
+  background: #0f172a;
+  border-bottom-color: #1e293b;
+}
+
+body.dark-mode .header-left h1 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .header-left p {
+  color: #94a3b8;
+}
+
+/* Cards */
+body.dark-mode .card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+/* Stat Cards */
+body.dark-mode .stat-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .stat-label {
+  color: #94a3b8;
+}
+
+body.dark-mode .stat-value {
+  color: #f1f5f9;
+}
+
+body.dark-mode .stat-icon.balance,
+body.dark-mode .stat-icon.savings {
+  background: rgba(16, 185, 129, 0.15);
+}
+
+body.dark-mode .stat-icon.income {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+body.dark-mode .stat-icon.expense {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* Chart */
+body.dark-mode .chart-container {
+  background: #0f172a;
+}
+
+body.dark-mode .period-select {
+  background: #334155;
+  color: #e2e8f0;
+  border-color: #475569;
+}
+
+body.dark-mode .chart-legend span {
+  color: #94a3b8;
+}
+
+body.dark-mode .chart-grid-line {
+  border-top-color: #334155;
+}
+
+body.dark-mode .chart-grid-label {
+  color: #64748b;
+}
+
+body.dark-mode .chart-bar-label {
+  color: #64748b;
+}
+
+/* Transactions */
+body.dark-mode .transaction-item {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .transaction-name {
+  color: #f1f5f9;
+}
+
+body.dark-mode .transaction-date {
+  color: #64748b;
+}
+
+body.dark-mode .transaction-icon.income-icon {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+body.dark-mode .transaction-icon.expense-icon {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+body.dark-mode .action-btn {
+  background: #334155;
+}
+
+body.dark-mode .edit-btn:hover {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+body.dark-mode .delete-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Categories */
+body.dark-mode .category-name {
+  color: #f1f5f9;
+}
+
+body.dark-mode .category-amount {
+  color: #94a3b8;
+}
+
+body.dark-mode .progress-bar {
+  background: #334155;
+}
+
+body.dark-mode .category-percent {
+  color: #94a3b8;
+}
+
+/* Budget */
+body.dark-mode .budget-label {
+  color: #f1f5f9;
+}
+
+body.dark-mode .budget-amount {
+  color: #94a3b8;
+}
+
+/* Buttons */
+body.dark-mode .btn-secondary {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-color: #334155;
+}
+
+body.dark-mode .btn-secondary:hover {
+  background: #334155;
+}
+
+body.dark-mode .btn-text {
+  color: #60a5fa;
+}
+
+body.dark-mode .card-header h3 {
+  color: #f1f5f9;
+}
+
+/* Modal */
+body.dark-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .modal-content {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .modal-header h3 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .form-group label {
+  color: #94a3b8;
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group select {
+  background: #0f172a;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+body.dark-mode .type-btn {
+  background: #334155;
+  color: #94a3b8;
+  border-color: #475569;
+}
+
+/* Dark mode modal */
+body.dark-mode .modal {
+  background: #1e293b;
+}
+
+body.dark-mode .modal-header {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .modal-footer {
+  border-top-color: #334155;
+}
+
+body.dark-mode .modal-close:hover {
+  background: #334155;
+  color: #f1f5f9;
+}
+
+body.dark-mode .summary-card.expense-summary {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+body.dark-mode .summary-card.income-summary {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+body.dark-mode .summary-card .summary-label {
+  color: #94a3b8;
+}
+
+/* Dark mode: transaction hover */
+body.dark-mode .transaction-item:hover {
+  background: #334155;
+}
+
+/* Dark mode: budget progress */
+body.dark-mode .budget-name {
+  color: #f1f5f9;
+}
+
+body.dark-mode .budget-amount {
+  color: #94a3b8;
+}
+
+body.dark-mode .budget-bar {
+  background: #334155;
+}
+
+body.dark-mode .budget-status {
+  color: #94a3b8;
 }
