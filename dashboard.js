@@ -147,6 +147,17 @@ function renderChart() {
     return txnDate >= startDate && txnDate <= today;
   });
 
+  if (filtered.length === 0) {
+    const periodLabel =
+      days === 7
+        ? "last 7 days"
+        : days === 30
+          ? "last 30 days"
+          : "last 3 months";
+    chartContainer.innerHTML = `<p style="text-align:center; color:#94a3b8; padding:80px 24px; font-size:14px;">No transactions in the ${periodLabel}. Try selecting a different time period.</p>`;
+    return;
+  }
+
   // Determine grouping based on period
   let groups = [];
 
