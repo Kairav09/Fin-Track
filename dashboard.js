@@ -125,6 +125,13 @@ function renderChart() {
   if (!chartContainer) return;
 
   const transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
+
+  if (transactions.length === 0) {
+    chartContainer.innerHTML =
+      '<p style="text-align:center; color:#94a3b8; padding:80px 24px; font-size:14px;">No transaction data to display. Add transactions to see your spending overview.</p>';
+    return;
+  }
+
   const days = parseInt(chartPeriod.value);
   const today = new Date();
   today.setHours(23, 59, 59, 999);
