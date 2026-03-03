@@ -1121,7 +1121,8 @@ body {
 }
 
 #categoryModalList::-webkit-scrollbar-track {
-  background: transparent;
+  background: #f1f5f9;
+  border-radius: 3px;
 }
 
 #categoryModalList::-webkit-scrollbar-thumb {
@@ -1136,7 +1137,8 @@ body {
 
 #allTransactionsList::-webkit-scrollbar-track,
 #budgetModalList::-webkit-scrollbar-track {
-  background: transparent;
+  background: #f1f5f9;
+  border-radius: 3px;
 }
 
 #allTransactionsList::-webkit-scrollbar-thumb,
@@ -1145,13 +1147,21 @@ body {
   border-radius: 3px;
 }
 
+body.dark-mode #categoryModalList::-webkit-scrollbar-track,
+body.dark-mode #allTransactionsList::-webkit-scrollbar-track,
+body.dark-mode #budgetModalList::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
 body.dark-mode #categoryModalList::-webkit-scrollbar-thumb,
 body.dark-mode #allTransactionsList::-webkit-scrollbar-thumb,
 body.dark-mode #budgetModalList::-webkit-scrollbar-thumb {
   background: #475569;
 }
 
-#categoryModalList::-webkit-scrollbar-thumb:hover {
+#categoryModalList::-webkit-scrollbar-thumb:hover,
+#allTransactionsList::-webkit-scrollbar-thumb:hover,
+#budgetModalList::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
 
