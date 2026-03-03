@@ -1014,6 +1014,10 @@ body {
   animation: modalSlideIn 0.3s ease;
 }
 
+#budgetModal .modal {
+  overflow-y: hidden;
+}
+
 @keyframes modalSlideIn {
   from {
     opacity: 0;
