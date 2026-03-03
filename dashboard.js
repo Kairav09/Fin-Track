@@ -699,8 +699,287 @@ if (categoryModal) {
   });
 }
 
+// ==========================================
+//  ALL TRANSACTIONS MODAL
+// ==========================================
+const allTxnModal = document.getElementById("allTransactionsModal");
+const closeAllTxnBtn = document.getElementById("closeAllTransactions");
+const viewAllTxnBtn = document.getElementById("viewAllTransactions");
+
+function openAllTransactionsModal() {
+  const transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
+
+  const totalIncome = transactions
+    .filter((t) => t.type === "income")
+    .reduce((s, t) => s + t.amount, 0);
+  const totalExpense = transactions
+    .filter((t) => t.type === "expense")
+    .reduce((s, t) => s + t.amount, 0);
+
+  document.getElementById("txnModalSummary").innerHTML = `
+    <div class="summary-card income-summary">
+      <span class="summary-label">Total Income</span>
+      <span class="summary-value">₹${totalIncome.toLocaleString("en-IN")}</span>
+    </div>
+    <div class="summary-card expense-summary">
+      <span class="summary-label">Total Expenses</span>
+      <span class="summary-value">₹${totalExpense.toLocaleString("en-IN")}</span>
+    </div>
+  `;
+
+  const list = document.getElementById("allTransactionsList");
+
+  if (transactions.length === 0) {
+    list.innerHTML =
+      '<p style="text-align:center; color:#94a3b8; padding:24px; font-size:14px;">No transactions yet.</p>';
+  } else {
+    list.innerHTML = transactions
+      .map((txn) => {
+        const isIncome = txn.type === "income";
+        const iconClass = isIncome ? "income-icon" : "expense-icon";
+        const amountClass = isIncome ? "income" : "expense";
+        const sign = isIncome ? "+" : "-";
+        const date = new Date(txn.date);
+        const formattedDate = date.toLocaleDateString("en-IN", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+
+        return `
+          <div class="transaction-item">
+            <div class="transaction-icon ${iconClass}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="${isIncome ? "M12 19V5M5 12l7-7 7 7" : "M12 5v14M19 12l-7 7-7-7"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="transaction-details">
+              <span class="transaction-name">${txn.name}</span>
+              <span class="transaction-date">${formattedDate} • ${txn.category}</span>
+            </div>
+            <span class="transaction-amount ${amountClass}">${sign}₹${txn.amount.toLocaleString("en-IN")}</span>
+            <div class="transaction-actions">
+              <button class="action-btn edit-btn" onclick="editTransaction(${txn.id})" title="Edit">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="action-btn delete-btn" onclick="deleteTransaction(${txn.id}); openAllTransactionsModal();" title="Delete">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  allTxnModal.classList.add("active");
+}
+
+if (viewAllTxnBtn) {
+  viewAllTxnBtn.addEventListener("click", openAllTransactionsModal);
+}
+if (closeAllTxnBtn) {
+  closeAllTxnBtn.addEventListener("click", function () {
+    allTxnModal.classList.remove("active");
+  });
+}
+if (allTxnModal) {
+  allTxnModal.addEventListener("click", function (e) {
+    if (e.target === allTxnModal) allTxnModal.classList.remove("active");
+  });
+}
+
+// ==========================================
+//  BUDGET MANAGER MODAL
+// ==========================================
+const budgetModal = document.getElementById("budgetModal");
+const closeBudgetBtn = document.getElementById("closeBudgetModal");
+const manageBudgetBtn = document.getElementById("manageBudget");
+const addBudgetBtn = document.getElementById("addBudgetBtn");
+
+function getBudgets() {
+  return JSON.parse(localStorage.getItem("budgets") || "[]");
+}
+
+function saveBudgets(budgets) {
+  localStorage.setItem("budgets", JSON.stringify(budgets));
+}
+
+// Initialize with defaults if none exist
+function initBudgets() {
+  if (!localStorage.getItem("budgets")) {
+    const defaults = [
+      { id: 1, category: "Monthly Budget", limit: 35000 },
+      { id: 2, category: "Food & Dining", limit: 10000 },
+      { id: 3, category: "Entertainment", limit: 5000 },
+    ];
+    saveBudgets(defaults);
+  }
+}
+
+function getSpentByCategory(category) {
+  const transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
+  if (category === "Monthly Budget") {
+    return transactions
+      .filter((t) => t.type === "expense")
+      .reduce((s, t) => s + t.amount, 0);
+  }
+  return transactions
+    .filter((t) => t.type === "expense" && t.category === category)
+    .reduce((s, t) => s + t.amount, 0);
+}
+
+function renderBudgetItem(budget) {
+  const spent = getSpentByCategory(budget.category);
+  const percent = Math.min(Math.round((spent / budget.limit) * 100), 100);
+  const remaining = Math.max(budget.limit - spent, 0);
+  const fillClass = percent >= 85 ? "success" : "";
+
+  return `
+    <div class="budget-item">
+      <div class="budget-header">
+        <span class="budget-name">${budget.category}</span>
+        <span class="budget-amount">₹${spent.toLocaleString("en-IN")} / ₹${budget.limit.toLocaleString("en-IN")}</span>
+      </div>
+      <div class="budget-bar">
+        <div class="budget-fill ${fillClass}" style="width: ${percent}%"></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="budget-status">${percent}% used • ₹${remaining.toLocaleString("en-IN")} remaining</span>
+        <button class="action-btn delete-btn" onclick="deleteBudget(${budget.id})" title="Delete" style="width:28px; height:28px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function renderDashboardBudgets() {
+  const budgets = getBudgets();
+  const budgetList = document.querySelector(".budget-card .budget-list");
+  if (!budgetList) return;
+
+  if (budgets.length === 0) {
+    budgetList.innerHTML =
+      '<p style="text-align:center; color:#94a3b8; padding:24px; font-size:14px;">No budgets set. Click "Manage" to add budgets.</p>';
+    return;
+  }
+
+  budgetList.innerHTML = budgets
+    .slice(0, 3)
+    .map((b) => {
+      const spent = getSpentByCategory(b.category);
+      const percent = Math.min(Math.round((spent / b.limit) * 100), 100);
+      const remaining = Math.max(b.limit - spent, 0);
+      const fillClass = percent >= 85 ? "success" : "";
+
+      return `
+        <div class="budget-item">
+          <div class="budget-header">
+            <span class="budget-name">${b.category}</span>
+            <span class="budget-amount">₹${spent.toLocaleString("en-IN")} / ₹${b.limit.toLocaleString("en-IN")}</span>
+          </div>
+          <div class="budget-bar">
+            <div class="budget-fill ${fillClass}" style="width: ${percent}%"></div>
+          </div>
+          <span class="budget-status">${percent}% used • ₹${remaining.toLocaleString("en-IN")} remaining</span>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function openBudgetModal() {
+  const budgets = getBudgets();
+  const modalList = document.getElementById("budgetModalList");
+
+  if (budgets.length === 0) {
+    modalList.innerHTML =
+      '<p style="text-align:center; color:#94a3b8; padding:24px; font-size:14px;">No budgets set yet. Add one above!</p>';
+  } else {
+    modalList.innerHTML = budgets.map((b) => renderBudgetItem(b)).join("");
+  }
+
+  budgetModal.classList.add("active");
+}
+
+window.deleteBudget = function (id) {
+  if (!confirm("Delete this budget?")) return;
+  let budgets = getBudgets();
+  budgets = budgets.filter((b) => b.id !== id);
+  saveBudgets(budgets);
+  renderDashboardBudgets();
+  openBudgetModal();
+};
+
+if (manageBudgetBtn) {
+  manageBudgetBtn.addEventListener("click", openBudgetModal);
+}
+if (closeBudgetBtn) {
+  closeBudgetBtn.addEventListener("click", function () {
+    budgetModal.classList.remove("active");
+  });
+}
+if (budgetModal) {
+  budgetModal.addEventListener("click", function (e) {
+    if (e.target === budgetModal) budgetModal.classList.remove("active");
+  });
+}
+if (addBudgetBtn) {
+  addBudgetBtn.addEventListener("click", function () {
+    const catSelect = document.getElementById("budgetCategory");
+    const amtInput = document.getElementById("budgetAmount");
+    const category = catSelect.value;
+    const amount = parseFloat(amtInput.value);
+
+    if (!category) {
+      alert("Please select a category.");
+      return;
+    }
+    if (!amount || amount <= 0) {
+      alert("Please enter a valid budget amount.");
+      return;
+    }
+
+    const budgets = getBudgets();
+    const existing = budgets.find((b) => b.category === category);
+    if (existing) {
+      if (
+        confirm(
+          `Budget for "${category}" already exists (₹${existing.limit.toLocaleString("en-IN")}). Update it to ₹${amount.toLocaleString("en-IN")}?`,
+        )
+      ) {
+        existing.limit = amount;
+      } else {
+        return;
+      }
+    } else {
+      budgets.push({
+        id: Date.now(),
+        category,
+        limit: amount,
+      });
+    }
+
+    saveBudgets(budgets);
+    catSelect.value = "";
+    amtInput.value = "";
+    renderDashboardBudgets();
+    openBudgetModal();
+  });
+}
+
 // Load everything on page load
+initBudgets();
 renderTransactions();
 updateStats();
 renderCategories();
 renderChart();
+renderDashboardBudgets();
