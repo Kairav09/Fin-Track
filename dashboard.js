@@ -873,7 +873,6 @@ function renderDashboardBudgets() {
   }
 
   budgetList.innerHTML = budgets
-    .slice(0, 3)
     .map((b) => {
       const spent = getSpentByCategory(b.category);
       const percent = Math.min(Math.round((spent / b.limit) * 100), 100);
@@ -905,6 +904,17 @@ function openBudgetModal() {
       '<p style="text-align:center; color:#94a3b8; padding:24px; font-size:14px;">No budgets set yet. Add one above!</p>';
   } else {
     modalList.innerHTML = budgets.map((b) => renderBudgetItem(b)).join("");
+  }
+
+  // Only enable scrolling when more than 3 items
+  if (budgets.length > 3) {
+    modalList.style.maxHeight = "380px";
+    modalList.style.overflowY = "auto";
+    modalList.style.paddingRight = "18px";
+  } else {
+    modalList.style.maxHeight = "none";
+    modalList.style.overflowY = "visible";
+    modalList.style.paddingRight = "0";
   }
 
   budgetModal.classList.add("active");

@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - FinTrack</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="8" fill="#10b981" />
+            <path
+              d="M20 10v20M12 18l8-8 8 8"
+              stroke="white"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>FinTrack</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"
+          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect
+              x="3"
+              y="3"
+              width="7"
+              height="7"
+              rx="1"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <rect
+              x="14"
+              y="3"
+              width="7"
+              height="7"
+              rx="1"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <rect
+              x="3"
+              y="14"
+              width="7"
+              height="7"
+              rx="1"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <rect
+              x="14"
+              y="14"
+              width="7"
+              height="7"
+              rx="1"
+              stroke="currentColor"
+              stroke-width="2"
+            /></svg
+          ><span>Dashboard</span></a
+        >
+        <a href="transactions.html" class="nav-item"
+          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M3 12h18M3 6h18M3 18h18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+          ><span>Transactions</span></a
+        >
+        <a href="budgets.html" class="nav-item"
+          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M12 6v6l4 2"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+          ><span>Budgets</span></a
+        >
+        <a href="analytics.html" class="nav-item"
+          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M3 3v18h18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M7 16l4-4 3 3 6-6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Analytics</span></a
+        >
+        <a href="profile.html" class="nav-item active"
+          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle
+              cx="12"
+              cy="8"
+              r="4"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+          ><span>Profile</span></a
+        >
+      </nav>
+      <div class="sidebar-footer">
+        <a href="index.html" class="nav-item logout"
+          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Logout</span></a
+        >
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="dashboard-header">
+        <div class="header-left">
+          <h1>Profile</h1>
+          <p>Manage your account settings</p>
+        </div>
+        <div class="header-right">
+          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <svg
+              class="sun-icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="5"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="moon-icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              style="display: none"
+            >
+              <path
+                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="profile-layout">
+        <!-- Profile Card -->
+        <div class="card profile-card">
+          <div class="profile-avatar" id="profileAvatar">DU</div>
+          <h2 class="profile-name" id="profileName">Demo User</h2>
+          <span class="profile-email" id="profileEmail">demo@fintrack.com</span>
+          <div class="profile-meta">
+            <div class="profile-meta-item">
+              <span class="profile-meta-label">Username</span>
+              <span class="profile-meta-value" id="profileUsername">demo</span>
+            </div>
+            <div class="profile-meta-item">
+              <span class="profile-meta-label">Member Since</span>
+              <span class="profile-meta-value" id="profileSince"
+                >March 2026</span
+              >
+            </div>
+          </div>
+          <div class="profile-stats-row">
+            <div class="profile-stat">
+              <h4 id="pTxnCount">0</h4>
+              <span>Transactions</span>
+            </div>
+            <div class="profile-stat">
+              <h4 id="pBudgetCount">0</h4>
+              <span>Budgets</span>
+            </div>
+            <div class="profile-stat">
+              <h4 id="pSavingsRate">0%</h4>
+              <span>Savings</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Column -->
+        <div class="profile-settings">
+          <!-- Account Info -->
+          <div class="card">
+            <div class="card-header"><h3>Account Information</h3></div>
+            <div class="profile-form">
+              <div class="profile-form-group">
+                <label>Full Name</label>
+                <input type="text" id="settingsName" class="profile-input" />
+              </div>
+              <div class="profile-form-group">
+                <label>Email Address</label>
+                <input type="email" id="settingsEmail" class="profile-input" />
+              </div>
+              <div class="profile-form-group">
+                <label>Username</label>
+                <input
+                  type="text"
+                  id="settingsUsername"
+                  class="profile-input"
+                  readonly
+                  style="opacity: 0.6; cursor: not-allowed"
+                />
+              </div>
+              <button
+                class="btn-primary"
+                id="saveProfileBtn"
+                style="margin-top: 8px; width: fit-content; padding: 10px 28px"
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+
+          <!-- Preferences -->
+          <div class="card">
+            <div class="card-header"><h3>Preferences</h3></div>
+            <div class="profile-form">
+              <div class="pref-row">
+                <div class="pref-info">
+                  <span class="pref-label">Dark Mode</span>
+                  <span class="pref-desc"
+                    >Switch between light and dark themes</span
+                  >
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="prefDarkMode" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="pref-row">
+                <div class="pref-info">
+                  <span class="pref-label">Currency</span>
+                  <span class="pref-desc"
+                    >Display currency for all amounts</span
+                  >
+                </div>
+                <span class="pref-badge">₹ INR</span>
+              </div>
+              <div class="pref-row">
+                <div class="pref-info">
+                  <span class="pref-label">Email Notifications</span>
+                  <span class="pref-desc"
+                    >Receive budget alerts and summaries</span
+                  >
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="prefNotifications" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="pref-row">
+                <div class="pref-info">
+                  <span class="pref-label">Weekly Reports</span>
+                  <span class="pref-desc"
+                    >Get a summary of your spending every week</span
+                  >
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="prefReports" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Danger Zone -->
+          <div class="card danger-zone-card">
+            <div class="card-header">
+              <h3 style="color: #ef4444">Danger Zone</h3>
+            </div>
+            <div class="profile-form">
+              <div class="pref-row">
+                <div class="pref-info">
+                  <span class="pref-label">Clear All Data</span>
+                  <span class="pref-desc"
+                    >Remove all transactions and budgets</span
+                  >
+                </div>
+                <button class="btn-danger-outline" id="clearDataBtn">
+                  Clear Data
+                </button>
+              </div>
+              <div class="pref-row">
+                <div class="pref-info">
+                  <span class="pref-label">Delete Account</span>
+                  <span class="pref-desc"
+                    >Permanently delete your account and all data</span
+                  >
+                </div>
+                <button class="btn-danger-outline" id="deleteAccountBtn">
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Dark mode
+      const saved = localStorage.getItem("theme");
+      if (saved === "dark") document.body.classList.add("dark-mode");
+      const toggle = document.getElementById("themeToggle");
+      if (toggle)
+        toggle.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          localStorage.setItem(
+            "theme",
+            document.body.classList.contains("dark-mode") ? "dark" : "light",
+          );
+          updateThemeIcon();
+          document.getElementById("prefDarkMode").checked =
+            document.body.classList.contains("dark-mode");
+        });
+      function updateThemeIcon() {
+        const isDark = document.body.classList.contains("dark-mode");
+        document.querySelector(".sun-icon").style.display = isDark
+          ? "none"
+          : "block";
+        document.querySelector(".moon-icon").style.display = isDark
+          ? "block"
+          : "none";
+      }
+      updateThemeIcon();
+
+      // Populate profile
+      const fullname = localStorage.getItem("fullname") || "Demo User";
+      const email = localStorage.getItem("email") || "demo@fintrack.com";
+      const username = localStorage.getItem("username") || "demo";
+
+      document.getElementById("profileName").textContent = fullname;
+      document.getElementById("profileEmail").textContent = email;
+      document.getElementById("profileUsername").textContent = username;
+      document.getElementById("profileAvatar").textContent = fullname
+        .split(" ")
+        .map((w) => w[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2);
+
+      document.getElementById("settingsName").value = fullname;
+      document.getElementById("settingsEmail").value = email;
+      document.getElementById("settingsUsername").value = username;
+
+      // Stats
+      const txns = JSON.parse(localStorage.getItem("transactions") || "[]");
+      const budgets = JSON.parse(localStorage.getItem("budgets") || "[]");
+      const totalIncome = txns
+        .filter((t) => t.type === "income")
+        .reduce((s, t) => s + t.amount, 0);
+      const totalExpense = txns
+        .filter((t) => t.type === "expense")
+        .reduce((s, t) => s + t.amount, 0);
+      const savingsRate =
+        totalIncome > 0
+          ? Math.round(((totalIncome - totalExpense) / totalIncome) * 100)
+          : 0;
+
+      document.getElementById("pTxnCount").textContent = txns.length;
+      document.getElementById("pBudgetCount").textContent = budgets.length;
+      document.getElementById("pSavingsRate").textContent = savingsRate + "%";
+
+      // Dark mode pref toggle
+      const prefDark = document.getElementById("prefDarkMode");
+      prefDark.checked = document.body.classList.contains("dark-mode");
+      prefDark.addEventListener("change", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem(
+          "theme",
+          document.body.classList.contains("dark-mode") ? "dark" : "light",
+        );
+        updateThemeIcon();
+      });
+
+      // Save profile
+      document
+        .getElementById("saveProfileBtn")
+        .addEventListener("click", () => {
+          const newName = document.getElementById("settingsName").value.trim();
+          const newEmail = document
+            .getElementById("settingsEmail")
+            .value.trim();
+          if (!newName || !newEmail) {
+            alert("Name and email are required.");
+            return;
+          }
+          localStorage.setItem("fullname", newName);
+          localStorage.setItem("email", newEmail);
+          document.getElementById("profileName").textContent = newName;
+          document.getElementById("profileEmail").textContent = newEmail;
+          document.getElementById("profileAvatar").textContent = newName
+            .split(" ")
+            .map((w) => w[0])
+            .join("")
+            .toUpperCase()
+            .slice(0, 2);
+          alert("Profile updated successfully!");
+        });
+
+      // Clear data
+      document.getElementById("clearDataBtn").addEventListener("click", () => {
+        if (
+          !confirm(
+            "This will permanently delete all transactions and budgets. Are you sure?",
+          )
+        )
+          return;
+        localStorage.removeItem("transactions");
+        localStorage.removeItem("budgets");
+        alert("All data cleared.");
+        location.reload();
+      });
+
+      // Delete account
+      document
+        .getElementById("deleteAccountBtn")
+        .addEventListener("click", () => {
+          if (
+            !confirm(
+              "This will permanently delete your account and ALL data. This cannot be undone. Are you sure?",
+            )
+          )
+            return;
+          localStorage.clear();
+          alert("Account deleted.");
+          window.location.href = "index.html";
+        });
+    </script>
+  </body>
+</html>
