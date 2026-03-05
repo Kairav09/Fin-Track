@@ -625,6 +625,7 @@
       }
 
       // Seed sample data if empty
+      // Added wide range of amounts so that the heatmap shows all color variations
       if (
         !localStorage.getItem("transactions") ||
         JSON.parse(localStorage.getItem("transactions")).length === 0
@@ -632,12 +633,66 @@
         saveTxns([
           {
             id: 1001,
-            name: "Grocery Store",
-            amount: 850,
+            name: "Coffee",
+            amount: 150, // Small amount (Light Green/Level 1)
             type: "expense",
             category: "Food & Dining",
             date: "2026-03-01",
+            notes: "Morning coffee",
+          },
+          {
+            id: 1002,
+            name: "Grocery Store",
+            amount: 900, // Medium amount (Yellow/Level 2)
+            type: "expense",
+            category: "Food & Dining",
+            date: "2026-03-04",
             notes: "Weekly groceries",
+          },
+          {
+            id: 1003,
+            name: "Electricity Bill",
+            amount: 2500, // Higher amount (Orange/Level 3)
+            type: "expense",
+            category: "Utilities",
+            date: "2026-03-10",
+            notes: "Monthly bill",
+          },
+          {
+            id: 1004,
+            name: "Car Repair",
+            amount: 8500, // Max amount (Red/Level 4)
+            type: "expense",
+            category: "Transportation",
+            date: "2026-03-15",
+            notes: "New tires",
+          },
+          {
+            id: 1005,
+            name: "Sneakers",
+            amount: 3200, // Orange
+            type: "expense",
+            category: "Shopping",
+            date: "2026-02-28",
+            notes: "Nike store",
+          },
+          {
+            id: 1006,
+            name: "Movie Tickets",
+            amount: 450, // Light Green
+            type: "expense",
+            category: "Entertainment",
+            date: "2026-02-20",
+            notes: "Weekend movie",
+          },
+          {
+            id: 1007,
+            name: "Salary",
+            amount: 45000,
+            type: "income",
+            category: "Salary",
+            date: "2026-03-01",
+            notes: "March Salary",
           },
           {
             id: 1002,
