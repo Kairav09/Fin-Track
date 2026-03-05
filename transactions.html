@@ -362,91 +362,228 @@
     }
 
     // Seed sample data if empty
-    // Dates are generated dynamically relative to today so heatmap always shows data for the current month
+    // Added wide range of amounts so that the heatmap shows all color variations
     if (
       !localStorage.getItem("transactions") ||
       JSON.parse(localStorage.getItem("transactions")).length === 0
     ) {
-      // Helper: returns YYYY-MM-DD for a given day of the current month
-      function d(day) {
-        const dt = new Date();
-        dt.setDate(day);
-        return dt.toISOString().split("T")[0];
-      }
-      // Helper: returns YYYY-MM-DD for a given day of last month
-      function lm(day) {
-        const dt = new Date();
-        dt.setMonth(dt.getMonth() - 1);
-        dt.setDate(day);
-        return dt.toISOString().split("T")[0];
-      }
       saveTxns([
-        // ── Current month ────────────────────────────────────────────
-        // Day 1: Salary + tiny spend → Level 1
-        { id: 1001, name: "Salary", amount: 45000, type: "income", category: "Salary", date: d(1), notes: "Monthly salary" },
-        { id: 1002, name: "Morning Coffee", amount: 120, type: "expense", category: "Food & Dining", date: d(1), notes: "" },
-        { id: 1003, name: "Bus Ticket", amount: 30, type: "expense", category: "Transportation", date: d(1), notes: "" },
-        // Day 2: Groceries → Level 1
-        { id: 1004, name: "Grocery Store", amount: 650, type: "expense", category: "Food & Dining", date: d(2), notes: "Weekly groceries" },
-        // Day 3: Streaming + lunch → Level 2
-        { id: 1005, name: "Netflix", amount: 649, type: "expense", category: "Entertainment", date: d(3), notes: "" },
-        { id: 1006, name: "Lunch", amount: 320, type: "expense", category: "Food & Dining", date: d(3), notes: "" },
-        // Day 4: Rent → Level 4 (highest spend day)
-        { id: 1007, name: "Rent", amount: 12000, type: "expense", category: "Housing", date: d(4), notes: "Monthly rent" },
-        // Day 5: Freelance income + coffee
-        { id: 1008, name: "Freelance Project", amount: 8000, type: "income", category: "Freelance", date: d(5), notes: "Website design" },
-        { id: 1009, name: "Coffee", amount: 150, type: "expense", category: "Food & Dining", date: d(5), notes: "" },
-        // Day 6: Utility bills → Level 3
-        { id: 1010, name: "Electricity Bill", amount: 2500, type: "expense", category: "Utilities", date: d(6), notes: "Monthly bill" },
-        { id: 1011, name: "Water Bill", amount: 400, type: "expense", category: "Utilities", date: d(6), notes: "" },
-        // Day 7: Light spend → Level 1
-        { id: 1012, name: "Snacks", amount: 180, type: "expense", category: "Food & Dining", date: d(7), notes: "" },
-        // Day 8: Shopping → Level 3
-        { id: 1013, name: "Clothing Store", amount: 3200, type: "expense", category: "Shopping", date: d(8), notes: "New outfit" },
-        // Day 9: Dinner + cab → Level 2
-        { id: 1014, name: "Dinner Out", amount: 1100, type: "expense", category: "Food & Dining", date: d(9), notes: "Restaurant" },
-        { id: 1015, name: "Uber Ride", amount: 280, type: "expense", category: "Transportation", date: d(9), notes: "" },
-        // Day 10: Car repair → Level 4
-        { id: 1016, name: "Car Repair", amount: 8500, type: "expense", category: "Transportation", date: d(10), notes: "New tires" },
-        // Day 11: Internet bill → Level 2
-        { id: 1017, name: "Internet Bill", amount: 999, type: "expense", category: "Utilities", date: d(11), notes: "" },
-        // Day 12: Light day → Level 1
-        { id: 1018, name: "Coffee & Snacks", amount: 250, type: "expense", category: "Food & Dining", date: d(12), notes: "" },
-        // Day 13: Movies → Level 2
-        { id: 1019, name: "Movie Tickets", amount: 900, type: "expense", category: "Entertainment", date: d(13), notes: "Weekend movie" },
-        { id: 1020, name: "Popcorn & Drinks", amount: 350, type: "expense", category: "Food & Dining", date: d(13), notes: "" },
-        // Day 14: Big shopping → Level 4
-        { id: 1021, name: "Laptop Accessories", amount: 5500, type: "expense", category: "Shopping", date: d(14), notes: "Keyboard + mouse" },
-        { id: 1022, name: "Phone Case", amount: 799, type: "expense", category: "Shopping", date: d(14), notes: "" },
-        // Day 15: Freelance income + light spend
-        { id: 1023, name: "Freelance Payment", amount: 12000, type: "income", category: "Freelance", date: d(15), notes: "" },
-        { id: 1024, name: "Lunch", amount: 400, type: "expense", category: "Food & Dining", date: d(15), notes: "" },
-        // Day 16: Gas → Level 1
-        { id: 1025, name: "Gas Station", amount: 600, type: "expense", category: "Transportation", date: d(16), notes: "" },
-        // Day 17: Gym → Level 2
-        { id: 1026, name: "Gym Membership", amount: 1200, type: "expense", category: "Other", date: d(17), notes: "Monthly membership" },
-        // Day 18: Light day → Level 1
-        { id: 1027, name: "Tea & Breakfast", amount: 150, type: "expense", category: "Food & Dining", date: d(18), notes: "" },
-        // Day 19: Restaurant → Level 2
-        { id: 1028, name: "Restaurant", amount: 1600, type: "expense", category: "Food & Dining", date: d(19), notes: "Birthday dinner" },
-        // Day 20: Medical → Level 3
-        { id: 1029, name: "Doctor Visit", amount: 800, type: "expense", category: "Other", date: d(20), notes: "" },
-        { id: 1030, name: "Medicines", amount: 650, type: "expense", category: "Other", date: d(20), notes: "" },
-        { id: 1031, name: "Lab Tests", amount: 1200, type: "expense", category: "Other", date: d(20), notes: "" },
-        // ── Last month ───────────────────────────────────────────────
-        { id: 2001, name: "Salary", amount: 45000, type: "income", category: "Salary", date: lm(1), notes: "Monthly salary" },
-        { id: 2002, name: "Coffee", amount: 120, type: "expense", category: "Food & Dining", date: lm(1), notes: "" },
-        { id: 2003, name: "Rent", amount: 12000, type: "expense", category: "Housing", date: lm(3), notes: "Rent" },
-        { id: 2004, name: "Electricity Bill", amount: 2200, type: "expense", category: "Utilities", date: lm(5), notes: "" },
-        { id: 2005, name: "Grocery Store", amount: 850, type: "expense", category: "Food & Dining", date: lm(7), notes: "" },
-        { id: 2006, name: "Movie Tickets", amount: 700, type: "expense", category: "Entertainment", date: lm(10), notes: "" },
-        { id: 2007, name: "Freelance", amount: 10000, type: "income", category: "Freelance", date: lm(12), notes: "" },
-        { id: 2008, name: "Sneakers", amount: 3500, type: "expense", category: "Shopping", date: lm(15), notes: "Nike store" },
-        { id: 2009, name: "Internet Bill", amount: 999, type: "expense", category: "Utilities", date: lm(18), notes: "" },
-        { id: 2010, name: "Dinner Out", amount: 1800, type: "expense", category: "Food & Dining", date: lm(20), notes: "" },
-        { id: 2011, name: "Gas Station", amount: 500, type: "expense", category: "Transportation", date: lm(22), notes: "" },
-        { id: 2012, name: "Shopping Mall", amount: 4200, type: "expense", category: "Shopping", date: lm(25), notes: "" },
-        { id: 2013, name: "Restaurant", amount: 950, type: "expense", category: "Food & Dining", date: lm(28), notes: "" },
+        {
+          id: 1001,
+          name: "Coffee",
+          amount: 150, // Small amount (Light Green/Level 1)
+          type: "expense",
+          category: "Food & Dining",
+          date: "2026-03-01",
+          notes: "Morning coffee",
+        },
+        {
+          id: 1002,
+          name: "Grocery Store",
+          amount: 900, // Medium amount (Yellow/Level 2)
+          type: "expense",
+          category: "Food & Dining",
+          date: "2026-03-04",
+          notes: "Weekly groceries",
+        },
+        {
+          id: 1003,
+          name: "Electricity Bill",
+          amount: 2500, // Higher amount (Orange/Level 3)
+          type: "expense",
+          category: "Utilities",
+          date: "2026-03-10",
+          notes: "Monthly bill",
+        },
+        {
+          id: 1004,
+          name: "Car Repair",
+          amount: 8500, // Max amount (Red/Level 4)
+          type: "expense",
+          category: "Transportation",
+          date: "2026-03-15",
+          notes: "New tires",
+        },
+        {
+          id: 1005,
+          name: "Sneakers",
+          amount: 3200, // Orange
+          type: "expense",
+          category: "Shopping",
+          date: "2026-02-28",
+          notes: "Nike store",
+        },
+        {
+          id: 1006,
+          name: "Movie Tickets",
+          amount: 450, // Light Green
+          type: "expense",
+          category: "Entertainment",
+          date: "2026-02-20",
+          notes: "Weekend movie",
+        },
+        {
+          id: 1007,
+          name: "Salary",
+          amount: 45000,
+          type: "income",
+          category: "Salary",
+          date: "2026-03-01",
+          notes: "March Salary",
+        },
+        {
+          id: 1002,
+          name: "Movie Tickets",
+          amount: 600,
+          type: "expense",
+          category: "Entertainment",
+          date: "2026-03-01",
+          notes: "",
+        },
+        {
+          id: 1003,
+          name: "Uber Ride",
+          amount: 350,
+          type: "expense",
+          category: "Transportation",
+          date: "2026-03-01",
+          notes: "",
+        },
+        {
+          id: 1004,
+          name: "Salary",
+          amount: 45000,
+          type: "income",
+          category: "Salary",
+          date: "2026-03-01",
+          notes: "March salary",
+        },
+        {
+          id: 1005,
+          name: "Coffee",
+          amount: 150,
+          type: "expense",
+          category: "Food & Dining",
+          date: "2026-03-02",
+          notes: "",
+        },
+        {
+          id: 1006,
+          name: "Bus Pass",
+          amount: 200,
+          type: "expense",
+          category: "Transportation",
+          date: "2026-03-02",
+          notes: "",
+        },
+        {
+          id: 1007,
+          name: "Lunch",
+          amount: 250,
+          type: "expense",
+          category: "Food & Dining",
+          date: "2026-03-03",
+          notes: "",
+        },
+        {
+          id: 1008,
+          name: "Electricity Bill",
+          amount: 1200,
+          type: "expense",
+          category: "Utilities",
+          date: "2026-03-03",
+          notes: "Feb bill",
+        },
+        {
+          id: 1009,
+          name: "Netflix",
+          amount: 649,
+          type: "expense",
+          category: "Entertainment",
+          date: "2026-03-03",
+          notes: "",
+        },
+        {
+          id: 1010,
+          name: "Rent",
+          amount: 12000,
+          type: "expense",
+          category: "Housing",
+          date: "2026-03-04",
+          notes: "March rent",
+        },
+        {
+          id: 1011,
+          name: "Freelance Project",
+          amount: 8000,
+          type: "income",
+          category: "Freelance",
+          date: "2026-03-04",
+          notes: "Website design",
+        },
+        {
+          id: 1012,
+          name: "Dinner Out",
+          amount: 950,
+          type: "expense",
+          category: "Food & Dining",
+          date: "2026-02-28",
+          notes: "",
+        },
+        {
+          id: 1013,
+          name: "Shopping Mall",
+          amount: 3500,
+          type: "expense",
+          category: "Shopping",
+          date: "2026-02-25",
+          notes: "New shoes",
+        },
+        {
+          id: 1014,
+          name: "Gas Station",
+          amount: 500,
+          type: "expense",
+          category: "Transportation",
+          date: "2026-02-20",
+          notes: "",
+        },
+        {
+          id: 1015,
+          name: "Freelance Payment",
+          amount: 12000,
+          type: "income",
+          category: "Freelance",
+          date: "2026-02-15",
+          notes: "",
+        },
+        {
+          id: 1016,
+          name: "Restaurant",
+          amount: 1800,
+          type: "expense",
+          category: "Food & Dining",
+          date: "2026-02-10",
+          notes: "Birthday dinner",
+        },
+        {
+          id: 1017,
+          name: "Internet Bill",
+          amount: 999,
+          type: "expense",
+          category: "Utilities",
+          date: "2026-02-05",
+          notes: "",
+        },
+        {
+          id: 1018,
+          name: "Salary Feb",
+          amount: 45000,
+          type: "income",
+          category: "Salary",
+          date: "2026-02-01",
+          notes: "February salary",
+        },
       ]);
     }
 
