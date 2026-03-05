@@ -3140,20 +3140,20 @@ body.dark-mode .action-btn.delete-btn:hover {
 }
 
 /* ── Analytics insight cards ───────────────────────────────────── */
-.analytics-insights-grid .card {
+.insight-card {
   animation: slideUp 0.45s ease both;
 }
-.analytics-insights-grid .card:nth-child(1) {
+.analytics-insights-grid .insight-card:nth-child(1) {
   animation-delay: 0.05s;
 }
-.analytics-insights-grid .card:nth-child(2) {
-  animation-delay: 0.12s;
+.analytics-insights-grid .insight-card:nth-child(2) {
+  animation-delay: 0.13s;
 }
-.analytics-insights-grid .card:nth-child(3) {
-  animation-delay: 0.19s;
+.analytics-insights-grid .insight-card:nth-child(3) {
+  animation-delay: 0.21s;
 }
-.analytics-insights-grid .card:nth-child(4) {
-  animation-delay: 0.26s;
+.analytics-insights-grid .insight-card:nth-child(4) {
+  animation-delay: 0.29s;
 }
 
 /* ── Sidebar nav items stagger ─────────────────────────────────── */
@@ -3250,4 +3250,159 @@ body.dark-mode .heatmap-month-label {
 }
 body.dark-mode .heatmap-legend-label {
   color: #64748b;
+}
+
+/* ── ANALYTICS: Chart cards ──────────────────────────────────── */
+.analytics-chart-card {
+  animation: slideUp 0.5s ease both;
+}
+.analytics-grid .analytics-chart-card:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.analytics-grid .analytics-chart-card:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.analytics-grid .analytics-chart-card:nth-child(3) {
+  animation-delay: 0.24s;
+}
+.analytics-grid .analytics-chart-card:nth-child(4) {
+  animation-delay: 0.32s;
+}
+
+/* ── ANALYTICS: Income/expense bar rows ──────────────────────── */
+.ie-bar-row {
+  animation: slideUp 0.4s ease both;
+}
+.ie-bar-row:nth-child(1) {
+  animation-delay: 0.06s;
+}
+.ie-bar-row:nth-child(2) {
+  animation-delay: 0.13s;
+}
+.ie-bar-row:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* ── ANALYTICS: Monthly bar columns ──────────────────────────── */
+.monthly-bar-col {
+  animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.monthly-bar-col:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.monthly-bar-col:nth-child(2) {
+  animation-delay: 0.09s;
+}
+.monthly-bar-col:nth-child(3) {
+  animation-delay: 0.14s;
+}
+.monthly-bar-col:nth-child(4) {
+  animation-delay: 0.19s;
+}
+.monthly-bar-col:nth-child(5) {
+  animation-delay: 0.24s;
+}
+.monthly-bar-col:nth-child(6) {
+  animation-delay: 0.29s;
+}
+
+/* ── ANALYTICS: Top expense items ────────────────────────────── */
+.top-expense-item {
+  animation: slideUp 0.38s ease both;
+}
+.top-expense-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.top-expense-item:nth-child(2) {
+  animation-delay: 0.11s;
+}
+.top-expense-item:nth-child(3) {
+  animation-delay: 0.17s;
+}
+.top-expense-item:nth-child(4) {
+  animation-delay: 0.23s;
+}
+.top-expense-item:nth-child(5) {
+  animation-delay: 0.29s;
+}
+
+/* ── ANALYTICS: Donut legend items ───────────────────────────── */
+.donut-legend-item {
+  animation: slideUp 0.38s ease both;
+}
+.donut-legend-item:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.donut-legend-item:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.donut-legend-item:nth-child(3) {
+  animation-delay: 0.22s;
+}
+.donut-legend-item:nth-child(4) {
+  animation-delay: 0.29s;
+}
+
+/* ── TRANSACTIONS: Monthly group cards ───────────────────────── */
+.monthly-group {
+  animation: slideUp 0.45s ease both;
+}
+.monthly-group:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.monthly-group:nth-child(2) {
+  animation-delay: 0.13s;
+}
+.monthly-group:nth-child(3) {
+  animation-delay: 0.21s;
+}
+
+/* ── BUDGETS: BVA rows ───────────────────────────────────────── */
+.bva-row {
+  animation: slideUp 0.4s ease both;
+}
+.bva-row:nth-child(1) {
+  animation-delay: 0.06s;
+}
+.bva-row:nth-child(2) {
+  animation-delay: 0.13s;
+}
+.bva-row:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* ── PROFILE: Cards ──────────────────────────────────────────── */
+.profile-card {
+  animation: slideUp 0.45s ease 0.06s both;
+}
+.danger-zone-card {
+  animation: slideUp 0.45s ease 0.14s both;
+}
+
+/* ── PROFILE: Stats ──────────────────────────────────────────── */
+.profile-stat {
+  animation: slideUp 0.38s ease both;
+}
+.profile-stats-row .profile-stat:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.profile-stats-row .profile-stat:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.profile-stats-row .profile-stat:nth-child(3) {
+  animation-delay: 0.22s;
+}
+
+/* ── PROFILE: Preference rows ────────────────────────────────── */
+.pref-row {
+  animation: slideUp 0.38s ease both;
+}
+.pref-row:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.pref-row:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.pref-row:nth-child(3) {
+  animation-delay: 0.22s;
 }
