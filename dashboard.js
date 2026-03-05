@@ -239,7 +239,6 @@ function renderChart() {
     })
     .join("");
 
-  // Set innerHTML then force reflow so CSS animations retrigger on re-render
   chartContainer.innerHTML = `
     <div class="chart-area">
       <div class="chart-grid">${gridLines}</div>
@@ -260,8 +259,7 @@ function renderChart() {
       </div>
     </div>
   `;
-  // Force reflow so bar animations replay on period change
-  void chartContainer.offsetHeight;
+  void chartContainer.offsetHeight; // force reflow so bar animations replay
 }
 
 // Listen for period change
@@ -520,14 +518,11 @@ function renderTransactions() {
 function animateCount(el, target, prefix) {
   const duration = 900;
   const start = performance.now();
-  const startVal = 0;
   function step(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    // Ease out cubic
+    const progress = Math.min((now - start) / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
-    const current = Math.round(startVal + (target - startVal) * eased);
-    el.textContent = prefix + current.toLocaleString("en-IN");
+    el.textContent =
+      prefix + Math.round(target * eased).toLocaleString("en-IN");
     if (progress < 1) requestAnimationFrame(step);
     else el.textContent = prefix + target.toLocaleString("en-IN");
   }

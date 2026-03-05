@@ -2936,72 +2936,318 @@ body.dark-mode .action-btn.delete-btn:hover {
 }
 
 /* ================================================================
-   DARK MODE ANIMATION & HOVER FIXES
+   FINTRACK ANIMATIONS + DARK MODE FIXES
    ================================================================ */
 
-/* Stat card hover - stronger shadow in dark mode */
+/* ── Keyframes ─────────────────────────────────────────────────── */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes growUp {
+  from {
+    height: 0 !important;
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cellPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0 !important;
+  }
+}
+
+@keyframes statPulse {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ── Stat cards — staggered slide-up ───────────────────────────── */
+.stat-card {
+  animation: slideUp 0.5s ease both;
+}
+.stat-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.stat-card:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.stat-card:nth-child(3) {
+  animation-delay: 0.19s;
+}
+.stat-card:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+.stat-value {
+  animation: statPulse 0.6s ease both;
+}
+
+/* ── Dashboard cards ───────────────────────────────────────────── */
+.spending-card {
+  animation: slideUp 0.5s ease 0.1s both;
+}
+.category-card {
+  animation: slideUp 0.5s ease 0.18s both;
+}
+.transactions-card {
+  animation: slideUp 0.5s ease 0.14s both;
+}
+.budget-card {
+  animation: slideUp 0.5s ease 0.22s both;
+}
+
+/* ── Chart bars grow from bottom ───────────────────────────────── */
+.chart-bar {
+  transform-origin: bottom;
+  animation: growUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.chart-bar-group:nth-child(1) .chart-bar {
+  animation-delay: 0.05s;
+}
+.chart-bar-group:nth-child(2) .chart-bar {
+  animation-delay: 0.12s;
+}
+.chart-bar-group:nth-child(3) .chart-bar {
+  animation-delay: 0.19s;
+}
+.chart-bar-group:nth-child(4) .chart-bar {
+  animation-delay: 0.26s;
+}
+.chart-bar-group:nth-child(5) .chart-bar {
+  animation-delay: 0.33s;
+}
+.chart-bar-group:nth-child(6) .chart-bar {
+  animation-delay: 0.4s;
+}
+.chart-bar-group:nth-child(7) .chart-bar {
+  animation-delay: 0.47s;
+}
+
+/* ── Progress & budget bars expand from left ───────────────────── */
+.progress-fill {
+  animation: expandWidth 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+.budget-fill {
+  animation: expandWidth 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+/* ── Transaction items stagger ─────────────────────────────────── */
+.transaction-item {
+  animation: slideUp 0.4s ease both;
+}
+.transaction-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.transaction-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.transaction-item:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.transaction-item:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.transaction-item:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+/* ── Category items stagger ────────────────────────────────────── */
+.category-item {
+  animation: slideUp 0.4s ease both;
+}
+.category-item:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.category-item:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.category-item:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+/* ── Heatmap cells pop in ──────────────────────────────────────── */
+.heatmap-cell {
+  animation: cellPop 0.3s ease both;
+}
+
+/* ── Budget items stagger ──────────────────────────────────────── */
+.budget-item {
+  animation: slideUp 0.35s ease both;
+}
+.budget-item:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.budget-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.budget-item:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+/* ── Budget detail cards (budgets page) ────────────────────────── */
+.budget-detail-card {
+  animation: slideUp 0.45s ease both;
+}
+.budget-detail-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.budget-detail-card:nth-child(2) {
+  animation-delay: 0.13s;
+}
+.budget-detail-card:nth-child(3) {
+  animation-delay: 0.21s;
+}
+.budget-detail-card:nth-child(4) {
+  animation-delay: 0.29s;
+}
+
+/* ── Analytics insight cards ───────────────────────────────────── */
+.analytics-insights-grid .card {
+  animation: slideUp 0.45s ease both;
+}
+.analytics-insights-grid .card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.analytics-insights-grid .card:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.analytics-insights-grid .card:nth-child(3) {
+  animation-delay: 0.19s;
+}
+.analytics-insights-grid .card:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+/* ── Sidebar nav items stagger ─────────────────────────────────── */
+.nav-item {
+  animation: slideUp 0.4s ease both;
+}
+.nav-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.nav-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.nav-item:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.nav-item:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.nav-item:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+/* ── Donut ring smooth draw ────────────────────────────────────── */
+#utilArc,
+#healthArc {
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ================================================================
+   DARK MODE HOVER & ANIMATION FIXES
+   ================================================================ */
+
+/* Stat card hover - stronger shadow */
 body.dark-mode .stat-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Type button (expense/income toggle) hover in dark mode */
+/* Type button hover (Expense/Income toggle) */
 body.dark-mode .type-btn:hover:not(.active) {
   background: #334155;
   border-color: #475569;
   color: #e2e8f0;
 }
 
-/* Period select hover in dark mode */
+/* Period select hover */
 body.dark-mode .period-select:hover {
   border-color: #475569;
 }
 
-/* Card hover lift - stronger in dark mode */
+/* Card hover lift */
 body.dark-mode .card:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Budget detail card hover in dark mode */
-body.dark-mode .budget-detail-card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-}
-
-/* Insight card hover in dark mode */
-body.dark-mode .insight-card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-}
-
-/* Profile card hover in dark mode */
+/* Budget/insight/profile card hover */
+body.dark-mode .budget-detail-card:hover,
+body.dark-mode .insight-card:hover,
 body.dark-mode .profile-card:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-/* Scroll-animate visibility in dark mode - opacity/transform are color-agnostic, no fix needed */
-
-/* Category icon backgrounds stay correct in dark mode (they use inline styles) */
-
-/* Heatmap legend cells - make sure they're visible in dark mode */
-body.dark-mode .heatmap-legend-label {
-  color: #64748b;
+/* Heatmap cell hover */
+body.dark-mode .heatmap-cell:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+body.dark-mode .heatmap-cell.level-0:hover {
+  background: #475569;
+}
+body.dark-mode .heatmap-cell.level-1:hover {
+  background: #047857;
+}
+body.dark-mode .heatmap-cell.level-2:hover {
+  background: #b45309;
+}
+body.dark-mode .heatmap-cell.level-3:hover {
+  background: #b91c1c;
+}
+body.dark-mode .heatmap-cell.level-4:hover {
+  background: #ef4444;
 }
 
-/* Ensure animated budget bars are visible in dark mode */
-body.dark-mode .budget-bar {
-  background: #1e293b;
+/* Heatmap day numbers */
+body.dark-mode .heatmap-day-num {
+  color: #94a3b8;
+}
+body.dark-mode .heatmap-cell.level-4 .heatmap-day-num {
+  color: #fff;
 }
 
-/* Fix cellPop animation in dark mode - level-0 background already set, fine */
-/* Fix slideUp animation delay counters - these are transform/opacity only, fine in dark mode */
-
-/* Progress fill animation color in dark mode - fill uses inline color from JS, fine */
-
-/* Heatmap month label dark mode */
+/* Heatmap month label */
 body.dark-mode .heatmap-month-label {
   color: #e2e8f0;
 }
-
-/* Chart bar tooltip text in dark mode */
-body.dark-mode .chart-bar[title] {
-  color: #f1f5f9;
+body.dark-mode .heatmap-legend-label {
+  color: #64748b;
 }
