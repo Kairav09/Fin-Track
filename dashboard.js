@@ -239,6 +239,7 @@ function renderChart() {
     })
     .join("");
 
+  // Set innerHTML then force reflow so CSS animations retrigger on re-render
   chartContainer.innerHTML = `
     <div class="chart-area">
       <div class="chart-grid">${gridLines}</div>
@@ -259,6 +260,8 @@ function renderChart() {
       </div>
     </div>
   `;
+  // Force reflow so bar animations replay on period change
+  void chartContainer.offsetHeight;
 }
 
 // Listen for period change
@@ -512,6 +515,25 @@ function renderTransactions() {
 }
 
 // Update stat cards from transactions
+
+// Animated count-up for stat values
+function animateCount(el, target, prefix) {
+  const duration = 900;
+  const start = performance.now();
+  const startVal = 0;
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(startVal + (target - startVal) * eased);
+    el.textContent = prefix + current.toLocaleString("en-IN");
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = prefix + target.toLocaleString("en-IN");
+  }
+  requestAnimationFrame(step);
+}
+
 function updateStats() {
   const transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
 
@@ -529,14 +551,14 @@ function updateStats() {
   const balance = totalIncome - totalExpenses;
   const savings = balance > 0 ? balance : 0;
 
-  document.getElementById("statBalance").textContent =
-    "₹" + balance.toLocaleString("en-IN");
-  document.getElementById("statIncome").textContent =
-    "₹" + totalIncome.toLocaleString("en-IN");
-  document.getElementById("statExpenses").textContent =
-    "₹" + totalExpenses.toLocaleString("en-IN");
-  document.getElementById("statSavings").textContent =
-    "₹" + savings.toLocaleString("en-IN");
+  animateCount(
+    document.getElementById("statBalance"),
+    Math.abs(balance),
+    balance < 0 ? "-₹" : "₹",
+  );
+  animateCount(document.getElementById("statIncome"), totalIncome, "₹");
+  animateCount(document.getElementById("statExpenses"), totalExpenses, "₹");
+  animateCount(document.getElementById("statSavings"), savings, "₹");
 }
 
 // Category styles map

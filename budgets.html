@@ -483,6 +483,49 @@
     }
     renderAll();
   </script>
+
+  <script>
+    // Scroll-triggered fade-in for cards and sections
+    (function () {
+      const style = document.createElement('style');
+      style.textContent = `
+        .scroll-animate {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .scroll-animate.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `;
+      document.head.appendChild(style);
+
+      function initScrollAnimations() {
+        const cards = document.querySelectorAll('.card, .summary-card, .stat-card, .budget-detail-card, .transaction-item, .category-item');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => entry.target.classList.add('visible'), i * 60);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        cards.forEach(el => {
+          el.classList.add('scroll-animate');
+          observer.observe(el);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollAnimations);
+      } else {
+        initScrollAnimations();
+      }
+    })();
+  </script>
+
 </body>
 
 </html>

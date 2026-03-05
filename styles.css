@@ -361,3 +361,127 @@ body {
     gap: 20px;
   }
 }
+
+/* ================================================================
+   LOGIN / SIGNUP PAGE ANIMATIONS
+   ================================================================ */
+
+@keyframes brandSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes formSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Brand side slides in from left */
+.brand-content {
+  animation: brandSlideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Logo pops in first */
+.logo {
+  animation: brandSlideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+/* Brand heading */
+.brand-side h1 {
+  animation: brandSlideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+/* Description */
+.description {
+  animation: brandSlideIn 0.6s ease 0.3s both;
+}
+
+/* Stats count up staggered */
+.stat:nth-child(1) {
+  animation: countUp 0.5s ease 0.4s both;
+}
+.stat:nth-child(2) {
+  animation: countUp 0.5s ease 0.5s both;
+}
+.stat:nth-child(3) {
+  animation: countUp 0.5s ease 0.6s both;
+}
+
+/* Benefits stagger in */
+.benefit-item:nth-child(1) {
+  animation: countUp 0.5s ease 0.4s both;
+}
+.benefit-item:nth-child(2) {
+  animation: countUp 0.5s ease 0.5s both;
+}
+.benefit-item:nth-child(3) {
+  animation: countUp 0.5s ease 0.6s both;
+}
+
+/* Form slides in from right */
+.form-container {
+  animation: formSlideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+/* Form groups stagger */
+.form-group:nth-child(1) {
+  animation: countUp 0.4s ease 0.3s both;
+}
+.form-group:nth-child(2) {
+  animation: countUp 0.4s ease 0.38s both;
+}
+.form-group:nth-child(3) {
+  animation: countUp 0.4s ease 0.46s both;
+}
+.form-group:nth-child(4) {
+  animation: countUp 0.4s ease 0.54s both;
+}
+
+/* Submit button */
+.btn-primary {
+  animation: countUp 0.4s ease 0.5s both;
+}
+
+/* Social buttons stagger */
+.social-btn:nth-child(1) {
+  animation: countUp 0.4s ease 0.55s both;
+}
+.social-btn:nth-child(2) {
+  animation: countUp 0.4s ease 0.62s both;
+}
+.social-btn:nth-child(3) {
+  animation: countUp 0.4s ease 0.69s both;
+}
+
+/* Divider */
+.divider {
+  animation: countUp 0.4s ease 0.48s both;
+}
+
+/* Footer */
+.form-footer {
+  animation: countUp 0.4s ease 0.6s both;
+}
