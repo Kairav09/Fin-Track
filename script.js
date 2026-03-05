@@ -6,6 +6,47 @@ document.addEventListener("DOMContentLoaded", function () {
     return JSON.parse(localStorage.getItem("users") || "[]");
   }
 
+  // Custom Toast Notification Function
+  function showToast(message, type = "error") {
+    let container = document.querySelector(".toast-container");
+    if (!container) {
+      container = document.createElement("div");
+      container.className = "toast-container";
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+
+    const iconSvg =
+      type === "error"
+        ? `<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`
+        : `<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+
+    toast.innerHTML = `
+      ${iconSvg}
+      <span>${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+      toast.classList.add("show");
+    });
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => {
+        toast.remove();
+        if (container.children.length === 0) {
+          container.remove();
+        }
+      }, 300); // Wait for transition to finish
+    }, 3000);
+  }
+
   // Handle login form
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
@@ -34,8 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         window.location.href = "dashboard.html";
       } else {
-        alert(
+        showToast(
           "Invalid credentials. Please check your username/email and password.",
+          "error",
         );
       }
     });
@@ -54,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Validate password length
       if (password.length < 6) {
-        alert("Password must be at least 6 characters long");
+        showToast("Password must be at least 6 characters long", "error");
         return;
       }
 
@@ -65,8 +107,9 @@ document.addEventListener("DOMContentLoaded", function () {
         (u) => u.email.toLowerCase() === email.toLowerCase(),
       );
       if (emailTaken) {
-        alert(
+        showToast(
           "This email is already registered. Please use a different email.",
+          "error",
         );
         return;
       }
@@ -75,7 +118,10 @@ document.addEventListener("DOMContentLoaded", function () {
         (u) => u.username.toLowerCase() === username.toLowerCase(),
       );
       if (usernameTaken) {
-        alert("This username is already taken. Please choose a different one.");
+        showToast(
+          "This username is already taken. Please choose a different one.",
+          "error",
+        );
         return;
       }
 
@@ -89,8 +135,13 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("password", password);
       localStorage.setItem("fullname", fullname);
 
-      alert("Account created successfully! Please login to continue.");
-      window.location.href = "index.html";
+      showToast(
+        "Account created successfully! Redirecting to login...",
+        "success",
+      );
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1500);
     });
   }
 

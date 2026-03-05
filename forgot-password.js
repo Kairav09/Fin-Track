@@ -14,16 +14,17 @@ forgotForm.addEventListener("submit", function (e) {
 
   if (email === storedEmail) {
     generatedOtp = generateOtp();
-    alert(
+    showToast(
       "Your OTP is: " +
         generatedOtp +
-        "\n\n(In a real app, this would be sent to your email)",
+        " (In a real app, this would be sent to your email)",
+      "success",
     );
 
     document.getElementById("step1").style.display = "none";
     document.getElementById("step2").style.display = "block";
   } else {
-    alert("Email not found. Please check and try again.");
+    showToast("Email not found. Please check and try again.", "error");
   }
 });
 
@@ -37,7 +38,7 @@ otpForm.addEventListener("submit", function (e) {
     document.getElementById("step2").style.display = "none";
     document.getElementById("step3").style.display = "block";
   } else {
-    alert("Invalid OTP. Please try again.");
+    showToast("Invalid OTP. Please try again.", "error");
   }
 });
 
@@ -45,10 +46,11 @@ otpForm.addEventListener("submit", function (e) {
 document.getElementById("resendOtp").addEventListener("click", function (e) {
   e.preventDefault();
   generatedOtp = generateOtp();
-  alert(
+  showToast(
     "New OTP is: " +
       generatedOtp +
-      "\n\n(In a real app, this would be sent to your email)",
+      " (In a real app, this would be sent to your email)",
+    "success",
   );
 });
 
@@ -60,12 +62,12 @@ resetForm.addEventListener("submit", function (e) {
   const confirmPassword = document.getElementById("confirmPassword").value;
 
   if (newPassword.length < 6) {
-    alert("Password must be at least 6 characters long.");
+    showToast("Password must be at least 6 characters long.", "error");
     return;
   }
 
   if (newPassword !== confirmPassword) {
-    alert("Passwords do not match. Please try again.");
+    showToast("Passwords do not match. Please try again.", "error");
     return;
   }
 
@@ -74,3 +76,38 @@ resetForm.addEventListener("submit", function (e) {
   document.getElementById("step3").style.display = "none";
   document.getElementById("step4").style.display = "block";
 });
+
+// Custom Toast Notification Function (Shared)
+function showToast(message, type = "error") {
+  let container = document.querySelector(".toast-container");
+  if (!container) {
+    container = document.createElement("div");
+    container.className = "toast-container";
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement("div");
+  toast.className = `toast ${type}`;
+
+  const iconSvg =
+    type === "error"
+      ? `<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`
+      : `<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+
+  toast.innerHTML = `
+    ${iconSvg}
+    <span>${message}</span>
+  `;
+
+  container.appendChild(toast);
+
+  requestAnimationFrame(() => toast.classList.add("show"));
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => {
+      toast.remove();
+      if (container.children.length === 0) container.remove();
+    }, 300);
+  }, 4000);
+}
