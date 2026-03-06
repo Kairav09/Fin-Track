@@ -10,6 +10,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
+  <style>
+    .stats-grid .stat-card:nth-child(1)::before {
+      background: linear-gradient(90deg, var(--blue), transparent);
+    }
+
+    .stats-grid .stat-card:nth-child(2)::before {
+      background: linear-gradient(90deg, var(--red), transparent);
+    }
+
+    .stats-grid .stat-card:nth-child(3)::before {
+      background: linear-gradient(90deg, var(--green), transparent);
+    }
+  </style>
 </head>
 
 <body>
@@ -82,8 +95,9 @@
     <!-- Summary Stats -->
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-icon" style="background:#dbeafe"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="#3b82f6" stroke-width="2"
+        <div class="stat-icon" style="background:rgba(77,166,255,0.12)"><svg width="22" height="22" viewBox="0 0 24 24"
+            fill="none">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="#4da6ff" stroke-width="2"
               stroke-linecap="round" />
           </svg></div>
         <div class="stat-info"><span class="stat-label">Total Budget</span>
@@ -91,8 +105,9 @@
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon" style="background:#fee2e2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M12 5v14M19 12l-7 7-7-7" stroke="#ef4444" stroke-width="2" stroke-linecap="round"
+        <div class="stat-icon" style="background:rgba(255,77,77,0.12)"><svg width="22" height="22" viewBox="0 0 24 24"
+            fill="none">
+            <path d="M12 5v14M19 12l-7 7-7-7" stroke="#ff4d4d" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></div>
         <div class="stat-info"><span class="stat-label">Total Spent</span>
@@ -100,8 +115,9 @@
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon" style="background:#d1fae5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M12 19V5M5 12l7-7 7 7" stroke="#10b981" stroke-width="2" stroke-linecap="round"
+        <div class="stat-icon" style="background:rgba(0,232,122,0.12)"><svg width="22" height="22" viewBox="0 0 24 24"
+            fill="none">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke="#00e87a" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></div>
         <div class="stat-info"><span class="stat-label">Remaining</span>
@@ -263,13 +279,13 @@
         : budgetData.map(b => `
           <div class="card budget-detail-card">
             <div class="budget-detail-header">
-              <h4>${b.category}</h4>
-              <div style="display:flex;align-items:center;gap:8px">
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <h4 style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${b.category}</h4>
                 <span class="budget-detail-badge ${b.statusClass}">${b.statusText}</span>
-                <div style="display:inline-flex;gap:4px;align-items:center">
-                  <button class="budget-trash-btn edit-btn"   onclick="editBudget(${b.id})"   title="Edit"   style="display:flex;align-items:center;justify-content:center;padding:4px">${editSVG}</button>
-                  <button class="budget-trash-btn delete-btn" onclick="deleteBudget(${b.id})" title="Delete" style="display:flex;align-items:center;justify-content:center;padding:4px">${deleteSVG}</button>
-                </div>
+              </div>
+              <div style="display:inline-flex;gap:4px;align-items:center;flex-shrink:0;margin-left:8px">
+                <button class="budget-trash-btn edit-btn"   onclick="editBudget(${b.id})"   title="Edit"   style="display:flex;align-items:center;justify-content:center;padding:4px">${editSVG}</button>
+                <button class="budget-trash-btn delete-btn" onclick="deleteBudget(${b.id})" title="Delete" style="display:flex;align-items:center;justify-content:center;padding:4px">${deleteSVG}</button>
               </div>
             </div>
             <div class="budget-detail-amounts"><span>₹${b.spent.toLocaleString("en-IN")} spent</span><span>of ₹${b.limit.toLocaleString("en-IN")}</span></div>

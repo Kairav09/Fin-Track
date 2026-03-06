@@ -130,8 +130,13 @@
         <div class="card-header">
           <h3>Spending by Category</h3>
         </div>
-        <div class="donut-container">
-          <div class="donut-chart" id="donutChart"></div>
+        <div class="donut-container" style="position:relative">
+          <svg class="donut-chart" id="donutChart" viewBox="0 0 200 200" width="160" height="160">
+            <defs id="donutDefs"></defs>
+          </svg>
+          <div id="donutTooltip"
+            style="position:absolute;pointer-events:none;display:none;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.35);transform:translate(-50%,-110%);transition:opacity 0.15s;z-index:10;">
+          </div>
           <div class="donut-legend" id="donutLegend"></div>
         </div>
       </div>
@@ -233,30 +238,88 @@
       <div class="ie-bar-row"><span class="ie-label">Expenses</span><div class="ie-bar-track"><div class="ie-bar-fill expense-bar" style="width:${Math.round((totalExpense / maxVal) * 100)}%"></div></div><span class="ie-amount expense">₹${totalExpense.toLocaleString("en-IN")}</span></div>
       <div class="ie-bar-row"><span class="ie-label">Savings</span> <div class="ie-bar-track"><div class="ie-bar-fill savings-bar" style="width:${Math.max(0, Math.round(((totalIncome - totalExpense) / maxVal) * 100))}%"></div></div><span class="ie-amount" style="color:${net >= 0 ? "#10b981" : "#ef4444"}">₹${Math.abs(net).toLocaleString("en-IN")}</span></div>`;
 
-    // ── Donut Chart (CSS conic-gradient with per-segment gradients) ────────────
+    // ── Donut Chart (SVG arcs with rounded ends + real gaps) ─────────────────
     const donutGradients = [
-      ["#00e87a", "#00b8ff"],  // green → cyan
-      ["#4da6ff", "#a855f7"],  // blue → purple
-      ["#ffb84d", "#ff6b35"],  // amber → orange
-      ["#ff4d4d", "#ff0080"],  // red → pink
-      ["#a78bfa", "#6366f1"],  // purple → indigo
-      ["#f472b6", "#fb7185"],  // pink → rose
-      ["#2dd4bf", "#06b6d4"],  // teal → cyan
-      ["#fb923c", "#fbbf24"],  // orange → yellow
+      ["#00e87a", "#00b8ff"],
+      ["#4da6ff", "#a855f7"],
+      ["#ffb84d", "#ff6b35"],
+      ["#ff4d4d", "#ff0080"],
+      ["#a78bfa", "#6366f1"],
+      ["#f472b6", "#fb7185"],
+      ["#2dd4bf", "#06b6d4"],
+      ["#fb923c", "#fbbf24"],
     ];
+
+    function polarToXY(cx, cy, r, angleDeg) {
+      const rad = (angleDeg - 90) * Math.PI / 180;
+      return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+    }
+
+    const svg = document.getElementById("donutChart");
+    const defs = document.getElementById("donutDefs");
+    // Use stroke-based arcs: radius is midpoint, strokeWidth = ring thickness
+    const CX = 100, CY = 100, R = 72, STROKE = 28, GAP_DEG = 3;
+
     if (catEntries.length > 0) {
+      while (svg.childElementCount > 1) svg.removeChild(svg.lastChild);
+      defs.innerHTML = "";
+
       let angle = 0;
-      const gradParts = [];
-      catEntries.forEach(([, amt], i) => {
+      catEntries.forEach(([cat, amt], i) => {
         const pct = (amt / totalExpense) * 100;
+        const span = pct / 100 * 360;
+        const start = angle + GAP_DEG / 2;
+        const end = angle + span - GAP_DEG / 2;
         const [c1, c2] = donutGradients[i % donutGradients.length];
-        const mid = angle + pct / 2;
-        // interpolate from c1 at segment start to c2 at segment end via midpoint
-        gradParts.push(`${c1} ${angle.toFixed(2)}%`);
-        gradParts.push(`${c2} ${(angle + pct).toFixed(2)}%`);
-        angle += pct;
+
+        // gradient along the arc chord
+        const gId = `dg${i}`;
+        const p1 = polarToXY(CX, CY, R, start);
+        const p2 = polarToXY(CX, CY, R, end);
+        const grad = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+        grad.setAttribute("id", gId);
+        grad.setAttribute("gradientUnits", "userSpaceOnUse");
+        grad.setAttribute("x1", p1.x); grad.setAttribute("y1", p1.y);
+        grad.setAttribute("x2", p2.x); grad.setAttribute("y2", p2.y);
+        grad.innerHTML = `<stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/>`;
+        defs.appendChild(grad);
+
+        // stroked arc path — linecap="round" gives rounded ends for free
+        const large = end - start > 180 ? 1 : 0;
+        const s = polarToXY(CX, CY, R, start);
+        const e = polarToXY(CX, CY, R, end);
+        const d = `M ${s.x} ${s.y} A ${R} ${R} 0 ${large} 1 ${e.x} ${e.y}`;
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", d);
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", `url(#${gId})`);
+        path.setAttribute("stroke-width", STROKE);
+        path.setAttribute("stroke-linecap", "round");
+        path.style.transition = "filter 0.2s";
+        path.style.cursor = "pointer";
+        // capture loop vars for closure
+        const _cat = cat, _pct = pct, _c1 = c1, _c2 = c2;
+        const _midDeg = angle + span / 2;
+        path.addEventListener("mouseenter", () => {
+          path.style.filter = "brightness(1.25) drop-shadow(0 0 6px " + _c1 + "88)";
+          const tt = document.getElementById("donutTooltip");
+          const svgRect = svg.getBoundingClientRect();
+          const midPt = polarToXY(CX, CY, R, _midDeg);
+          tt.style.left = (midPt.x * (svgRect.width / 200)) + "px";
+          tt.style.top = (midPt.y * (svgRect.height / 200)) + "px";
+          tt.style.borderColor = _c1;
+          tt.innerHTML = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,${_c1},${_c2});margin-right:6px;vertical-align:middle"></span>${_cat} · ${Math.round(_pct)}%`;
+          tt.style.display = "block";
+        });
+        path.addEventListener("mouseleave", () => {
+          path.style.filter = "";
+          document.getElementById("donutTooltip").style.display = "none";
+        });
+        svg.appendChild(path);
+        angle += span;
       });
-      document.getElementById("donutChart").style.background = `conic-gradient(${gradParts.join(", ")})`;
+
       document.getElementById("donutLegend").innerHTML = catEntries.map(([cat, amt], i) => {
         const [c1, c2] = donutGradients[i % donutGradients.length];
         return `<div class="donut-legend-item">
@@ -266,7 +329,15 @@
         </div>`;
       }).join("");
     } else {
-      document.getElementById("donutChart").style.background = "var(--surface2)";
+      while (svg.childElementCount > 1) svg.removeChild(svg.lastChild);
+      defs.innerHTML = "";
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", CX); circle.setAttribute("cy", CY);
+      circle.setAttribute("r", R);
+      circle.setAttribute("fill", "none");
+      circle.setAttribute("stroke", "var(--surface2)");
+      circle.setAttribute("stroke-width", STROKE);
+      svg.appendChild(circle);
       document.getElementById("donutLegend").innerHTML = '<p style="color:var(--muted);font-size:13px">No expenses to display</p>';
     }
 
