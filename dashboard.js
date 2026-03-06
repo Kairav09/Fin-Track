@@ -868,15 +868,46 @@ function renderBudgetItem(budget) {
       </div>
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <span class="budget-status">${percent}% used • ₹${remaining.toLocaleString("en-IN")} remaining</span>
-        <button class="action-btn delete-btn" onclick="deleteBudget(${budget.id})" title="Delete" style="width:28px; height:28px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+        <div style="display:inline-flex; gap:4px;">
+          <button class="action-btn edit-btn" onclick="editDashboardBudget(${budget.id})" title="Edit" style="width:28px; height:28px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="action-btn delete-btn" onclick="deleteBudget(${budget.id})" title="Delete" style="width:28px; height:28px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   `;
 }
+
+// Global function to edit budget from dashboard modal
+window.editDashboardBudget = function (id) {
+  const budgets = getBudgets();
+  const budget = budgets.find((b) => b.id === id);
+  if (!budget) return;
+
+  const newLimit = prompt(
+    `Enter new budget amount for ${budget.category}:`,
+    budget.limit,
+  );
+  if (newLimit !== null) {
+    const amount = Number(newLimit);
+    if (!isNaN(amount) && amount > 0) {
+      budget.limit = amount;
+      saveBudgets(budgets);
+      renderModalBudgets();
+      renderDashboardBudgets();
+    } else {
+      alert("Please enter a valid amount greater than 0.");
+    }
+  }
+};
 
 function renderDashboardBudgets() {
   const budgets = getBudgets();
@@ -957,49 +988,6 @@ if (closeBudgetBtn) {
 if (budgetModal) {
   budgetModal.addEventListener("click", function (e) {
     if (e.target === budgetModal) budgetModal.classList.remove("active");
-  });
-}
-if (addBudgetBtn) {
-  addBudgetBtn.addEventListener("click", function () {
-    const catSelect = document.getElementById("budgetCategory");
-    const amtInput = document.getElementById("budgetAmount");
-    const category = catSelect.value;
-    const amount = parseFloat(amtInput.value);
-
-    if (!category) {
-      alert("Please select a category.");
-      return;
-    }
-    if (!amount || amount <= 0) {
-      alert("Please enter a valid budget amount.");
-      return;
-    }
-
-    const budgets = getBudgets();
-    const existing = budgets.find((b) => b.category === category);
-    if (existing) {
-      if (
-        confirm(
-          `Budget for "${category}" already exists (₹${existing.limit.toLocaleString("en-IN")}). Update it to ₹${amount.toLocaleString("en-IN")}?`,
-        )
-      ) {
-        existing.limit = amount;
-      } else {
-        return;
-      }
-    } else {
-      budgets.push({
-        id: Date.now(),
-        category,
-        limit: amount,
-      });
-    }
-
-    saveBudgets(budgets);
-    catSelect.value = "";
-    amtInput.value = "";
-    renderDashboardBudgets();
-    openBudgetModal();
   });
 }
 

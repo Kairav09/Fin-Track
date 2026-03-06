@@ -662,53 +662,11 @@
           <button class="modal-close" id="closeBudgetModal">&times;</button>
         </div>
         <div class="modal-body">
-          <div class="budget-form" id="budgetForm">
-            <div style="display: flex; gap: 10px; margin-bottom: 20px">
-              <select
-                id="budgetCategory"
-                style="
-                  flex: 2;
-                  padding: 10px 14px;
-                  border: 1px solid #e2e8f0;
-                  border-radius: 8px;
-                  font-size: 14px;
-                  font-family: inherit;
-                "
-              >
-                <option value="">Select Category</option>
-                <option value="Food & Dining">Food & Dining</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Shopping">Shopping</option>
-                <option value="Utilities">Utilities</option>
-                <option value="Housing">Housing</option>
-                <option value="Other">Other</option>
-              </select>
-              <input
-                type="number"
-                id="budgetAmount"
-                placeholder="Budget ₹"
-                min="1"
-                style="
-                  flex: 1;
-                  padding: 10px 14px;
-                  border: 1px solid #e2e8f0;
-                  border-radius: 8px;
-                  font-size: 14px;
-                  font-family: inherit;
-                "
-              />
-              <button
-                type="button"
-                class="btn-primary"
-                id="addBudgetBtn"
-                style="padding: 10px 18px; white-space: nowrap"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-          <div class="budget-list" id="budgetModalList"></div>
+          <div
+            class="budget-list"
+            id="budgetModalList"
+            style="margin-top: 20px"
+          ></div>
         </div>
       </div>
     </div>
