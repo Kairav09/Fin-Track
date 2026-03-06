@@ -5,7 +5,8 @@ const saveTxns   = (t) => localStorage.setItem("transactions", JSON.stringify(t)
 const saveBudgets = (b) => localStorage.setItem("budgets", JSON.stringify(b));
 
 // ── Theme Toggle ──────────────────────────────────────────────────────────────
-if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
+// Dark mode is always on — body.dark-mode kept for any remaining overrides
+document.body.classList.add("dark-mode");
 document.getElementById("themeToggle")?.addEventListener("click", function () {
   document.body.classList.toggle("dark-mode");
   localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");

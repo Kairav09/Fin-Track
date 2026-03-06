@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="dashboard.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
 </head>
 
 <body>
@@ -16,8 +17,8 @@
     <div class="sidebar-header">
       <div class="logo">
         <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-          <rect width="40" height="40" rx="8" fill="#10b981" />
-          <path d="M20 10v20M12 18l8-8 8 8" stroke="white" stroke-width="3" stroke-linecap="round"
+          <rect width="40" height="40" rx="8" fill="#00e87a" />
+          <path d="M20 10v20M12 18l8-8 8 8" stroke="#020a05" stroke-width="3" stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>
         <span>FinTrack</span>
@@ -83,7 +84,8 @@
       <div class="card profile-card">
         <div class="profile-avatar" id="profileAvatar">DU</div>
         <h2 class="profile-name" id="profileName">Demo User</h2>
-        <span class="profile-email" id="profileEmail">demo@fintrack.com</span>
+        <span class="profile-email" id="profileEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+            data-cfemail="b7d3d2dad8f7d1ded9c3c5d6d4dc99d4d8da">[email&#160;protected]</a></span>
         <div class="profile-meta">
           <div class="profile-meta-item"><span class="profile-meta-label">Username</span><span
               class="profile-meta-value" id="profileUsername">demo</span></div>
@@ -176,9 +178,10 @@
     </div>
   </main>
 
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
     // ── Theme ──────────────────────────────────────────────────────────────────
-    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
+    document.body.classList.add("dark-mode");
     const themeToggle = document.getElementById("themeToggle");
     themeToggle?.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
