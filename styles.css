@@ -308,3 +308,90 @@ footer a:hover { color: var(--green); }
   .cta-box { padding: 48px 28px; }
   .hero-cta { flex-direction: column; }
 }
+
+/* ── LANDING PAGE LIGHT MODE ────────────────────────────────────── */
+body.landing-light {
+  --bg:         #f8fafc;
+  --surface:    #ffffff;
+  --surface2:   #f1f5f9;
+  --border:     rgba(0,0,0,0.08);
+  --text:       #0f172a;
+  --muted:      #64748b;
+  background: var(--bg);
+  color: var(--text);
+}
+body.landing-light nav { background: rgba(248,250,252,0.9); border-bottom: 1px solid rgba(0,0,0,0.07); }
+body.landing-light nav.scrolled { background: rgba(248,250,252,0.95); }
+body.landing-light .btn-ghost { color: var(--muted); border-color: rgba(0,0,0,0.12); }
+body.landing-light .btn-ghost:hover { border-color: var(--green); color: var(--green); }
+body.landing-light #hero { background: none; }
+body.landing-light .mesh { opacity: 0.4; }
+body.landing-light .grid-bg { opacity: 0.3; }
+body.landing-light .hero-title { color: var(--text); }
+body.landing-light .hero-sub { color: var(--muted); }
+body.landing-light .hero-stats { border-top-color: rgba(0,0,0,0.08); }
+body.landing-light .hero-stat-num { color: var(--text); }
+body.landing-light .hero-stat-label { color: var(--muted); }
+body.landing-light #features { background: var(--bg); }
+body.landing-light .section-title { color: var(--text); }
+body.landing-light .section-sub { color: var(--muted); }
+body.landing-light .features-grid { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.06); }
+body.landing-light .feature-card { background: var(--surface); color: var(--muted); }
+body.landing-light .feature-card h3 { color: var(--text); }
+body.landing-light #how { background: var(--surface2); }
+body.landing-light .step { color: var(--muted); }
+body.landing-light .step h3 { color: var(--text); }
+body.landing-light .step-num { color: var(--green); }
+body.landing-light #cta-section { background: var(--bg); }
+body.landing-light .cta-box { background: linear-gradient(135deg, var(--surface), var(--surface2)); border-color: rgba(0,0,0,0.08); }
+body.landing-light .cta-box h2, body.landing-light .cta-box p { color: var(--text); }
+body.landing-light footer { color: var(--muted); border-top: 1px solid rgba(0,0,0,0.07); }
+body.landing-light .modal { background: var(--surface); border-color: rgba(0,0,0,0.1); }
+body.landing-light .modal h2 { color: var(--text); }
+body.landing-light .modal-sub { color: var(--muted); }
+body.landing-light .form-group label { color: var(--muted); }
+body.landing-light .form-group input { background: var(--surface2); color: var(--text); border-color: rgba(0,0,0,0.1); }
+body.landing-light .modal-divider { color: var(--muted); }
+body.landing-light .modal-footer { color: var(--muted); }
+
+
+/* ── Landing Page Theme Toggle Button ────────────────────────── */
+.btn-theme-toggle,
+#landingThemeToggle {
+  width: 36px; height: 36px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s;
+  padding: 0;
+}
+#landingThemeToggle:hover { border-color: var(--green); color: var(--green); }
+
+/* ── Landing Page Light Mode ──────────────────────────────────── */
+body.landing-light {
+  --bg:      #f4f7fb;
+  --surface: #ffffff;
+  --surface2:#edf2f7;
+  --border:  rgba(0,0,0,0.08);
+  --text:    #0f172a;
+  --muted:   #64748b;
+  --green-dim: rgba(0,232,122,0.1);
+  background: var(--bg);
+  color: var(--text);
+}
+body.landing-light nav.scrolled {
+  background: rgba(244,247,251,0.88);
+  border-bottom: 1px solid var(--border);
+}
+body.landing-light .feature-card { background: var(--surface); }
+body.landing-light .feature-card:hover { background: var(--surface2); }
+body.landing-light .features-grid { background: var(--border); border-color: var(--border); }
+body.landing-light #how { background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%); }
+body.landing-light .cta-box { background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%); }
+body.landing-light footer { border-top-color: var(--border); color: var(--muted); }
+body.landing-light .step-num { -webkit-text-stroke: 1px rgba(0,180,90,0.25); }
+body.landing-light .modal { background: var(--surface); box-shadow: 0 24px 64px rgba(0,0,0,0.12); }
+body.landing-light .modal-overlay { background: rgba(15,23,42,0.4); }

@@ -4,12 +4,25 @@ const getBudgets = () => JSON.parse(localStorage.getItem("budgets") || "[]");
 const saveTxns   = (t) => localStorage.setItem("transactions", JSON.stringify(t));
 const saveBudgets = (b) => localStorage.setItem("budgets", JSON.stringify(b));
 
-// ── Theme Toggle ──────────────────────────────────────────────────────────────
-// Dark mode is always on — body.dark-mode kept for any remaining overrides
-document.body.classList.add("dark-mode");
+// ── Theme ─────────────────────────────────────────────────────────────────────
+const savedTheme = localStorage.getItem("theme") || "dark";
+document.body.classList.add(savedTheme === "light" ? "light-mode" : "dark-mode");
+
+function updateThemeIcon() {
+  const isLight = document.body.classList.contains("light-mode");
+  const sunIcon  = document.querySelector(".theme-toggle .icon-sun");
+  const moonIcon = document.querySelector(".theme-toggle .icon-moon");
+  if (sunIcon)  sunIcon.style.display  = isLight ? "block" : "none";
+  if (moonIcon) moonIcon.style.display = isLight ? "none"  : "block";
+}
+updateThemeIcon();
+
 document.getElementById("themeToggle")?.addEventListener("click", function () {
-  document.body.classList.toggle("dark-mode");
-  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+  const isLight = document.body.classList.contains("light-mode");
+  document.body.classList.toggle("light-mode", !isLight);
+  document.body.classList.toggle("dark-mode",   isLight);
+  localStorage.setItem("theme", isLight ? "dark" : "light");
+  updateThemeIcon();
 });
 
 // ── Greeting ──────────────────────────────────────────────────────────────────
@@ -409,8 +422,8 @@ function renderDashboardBudgets() {
             <span class="budget-name">${b.category}</span>
             <span class="budget-amount">₹${spent.toLocaleString("en-IN")} / ₹${b.limit.toLocaleString("en-IN")}</span>
           </div>
-          <div class="budget-bar"><div class="budget-fill ${pct >= 85 ? "success" : ""}" style="width:${pct}%"></div></div>
-          <span class="budget-status">${pct}% used • ₹${rem.toLocaleString("en-IN")} remaining</span>
+          <div class="budget-bar"><div class="budget-fill ${spent >= b.limit ? "danger" : pct >= 85 ? "success" : ""}" style="width:${pct}%"></div></div>
+          <span class="budget-status" style="${spent >= b.limit ? "color:var(--red)" : ""}">${pct}% used • ${spent >= b.limit ? "⚠ over budget" : "₹" + rem.toLocaleString("en-IN") + " remaining"}</span>
         </div>`;
       }).join("");
 }

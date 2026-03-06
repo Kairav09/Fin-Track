@@ -229,6 +229,7 @@ body {
 .budget-bar { height: 7px; background: var(--surface3); border-radius: 4px; overflow: hidden; }
 .budget-fill { height: 100%; background: linear-gradient(90deg, var(--green), #00b85f); border-radius: 4px; transition: width 0.3s ease; }
 .budget-fill.success { background: linear-gradient(90deg, var(--amber), #e09000); }
+.budget-fill.danger  { background: linear-gradient(90deg, #ff4d4d, #ff0055); box-shadow: 0 0 8px rgba(255,77,77,0.4); }
 .budget-status { font-size: 11.5px; color: var(--muted); }
 
 /* ── MODAL ────────────────────────────────────────────────────── */
@@ -464,8 +465,8 @@ body {
 .heatmap-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px; }
 .heatmap-weekdays span { text-align: center; font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; padding: 3px 0; }
 .heatmap-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-.heatmap-cell { height: 34px; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: transform 0.12s, box-shadow 0.12s; }
-.heatmap-cell:hover { transform: scale(1.1); z-index: 1; box-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+.heatmap-cell { height: 34px; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: transform 0.12s, box-shadow 0.12s; animation: cellPop 0.3s ease both; }
+.heatmap-cell:hover { transform: scale(1.15); z-index: 1; box-shadow: 0 0 0 2px rgba(255,255,255,0.2), 0 4px 16px rgba(0,0,0,0.6); }
 .heatmap-cell.empty { cursor: default; background: transparent; }
 .heatmap-cell.empty:hover { transform: none; box-shadow: none; }
 .heatmap-day-num { font-size: 10.5px; font-weight: 500; }
@@ -479,6 +480,11 @@ body {
 .heatmap-cell.level-3 .heatmap-day-num { color: var(--red); }
 .heatmap-cell.level-4 { background: var(--red); }
 .heatmap-cell.level-4 .heatmap-day-num { color: white; }
+.heatmap-cell.level-0:hover { background: var(--surface3); }
+.heatmap-cell.level-1:hover { background: rgba(0,232,122,0.38);  box-shadow: 0 0 0 2px rgba(0,232,122,0.4),  0 4px 16px rgba(0,232,122,0.2); }
+.heatmap-cell.level-2:hover { background: rgba(255,184,77,0.45); box-shadow: 0 0 0 2px rgba(255,184,77,0.4), 0 4px 16px rgba(255,184,77,0.2); }
+.heatmap-cell.level-3:hover { background: rgba(255,77,77,0.5);   box-shadow: 0 0 0 2px rgba(255,77,77,0.4),  0 4px 16px rgba(255,77,77,0.2); }
+.heatmap-cell.level-4:hover { background: #ff6b6b;               box-shadow: 0 0 0 2px rgba(255,77,77,0.6),  0 4px 16px rgba(255,77,77,0.3); }
 .heatmap-today { box-shadow: 0 0 0 2px var(--blue); }
 .heatmap-legend { display: flex; align-items: center; justify-content: flex-end; gap: 4px; margin-top: 10px; }
 .heatmap-legend-label { font-size: 10.5px; color: var(--muted); margin: 0 4px; }
@@ -561,7 +567,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 .category-item:nth-child(1) { animation-delay: 0.08s; }
 .category-item:nth-child(2) { animation-delay: 0.16s; }
 .category-item:nth-child(3) { animation-delay: 0.24s; }
-.heatmap-cell { animation: cellPop 0.3s ease both; }
+
 .budget-item { animation: slideUp 0.35s ease both; }
 .budget-item:nth-child(1) { animation-delay: 0.04s; }
 .budget-item:nth-child(2) { animation-delay: 0.10s; }
@@ -634,7 +640,56 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 .profile-form .profile-form-group:nth-child(4) { animation-delay: 0.27s; }
 .profile-form .btn-primary { animation: slideUp 0.4s ease 0.34s both; }
 
-/* ── DARK MODE (keep for compatibility, but base is already dark) ─ */
+/* ── DARK MODE (keep for compatibility) ───────────────────────── */
 body.dark-mode { background: var(--bg); }
 body.dark-mode .theme-toggle .icon-sun  { display: none; }
 body.dark-mode .theme-toggle .icon-moon { display: block; }
+/* ── LIGHT MODE ───────────────────────────────────────────────── */
+body.light-mode {
+  --bg:          #f0f4f8;
+  --surface:     #ffffff;
+  --surface2:    #f1f5f9;
+  --surface3:    #e2e8f0;
+  --border:      rgba(0,0,0,0.08);
+  --border2:     rgba(0,0,0,0.14);
+  --text:        #0f172a;
+  --text2:       #334155;
+  --muted:       #64748b;
+}
+body.light-mode .sidebar          { box-shadow: 2px 0 12px rgba(0,0,0,0.06); }
+body.light-mode .stat-card        { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+body.light-mode .card             { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+body.light-mode .modal            { box-shadow: 0 24px 64px rgba(0,0,0,0.15); }
+body.light-mode .theme-toggle     { background: var(--surface2); color: var(--muted); }
+body.light-mode .theme-toggle:hover { color: var(--amber); }
+body.light-mode .modal-body input,
+body.light-mode .modal-body select { background: var(--surface2); color: var(--text); }
+body.light-mode .txn-table tbody tr:hover { background: var(--surface2); }
+body.light-mode .heatmap-cell.level-0 { background: var(--surface3); }
+body.light-mode .period-select    { background: var(--surface2); color: var(--text2); }
+body.light-mode .chart-container  { background: var(--surface2); }
+body.light-mode .budget-bar       { background: var(--surface3); }
+body.light-mode .progress-bar     { background: var(--surface3); }
+body.light-mode .toggle-slider    { background: var(--surface3); }
+body.light-mode .action-btn       { background: var(--surface2); }
+body.light-mode .profile-input    { background: var(--surface2); color: var(--text); }
+body.light-mode .pref-badge       { background: var(--surface2); color: var(--text2); }
+body.light-mode .txn-search,
+body.light-mode .txn-filter-select { background: var(--surface2); color: var(--text); }
+body.light-mode .btn-secondary    { background: var(--surface2); }
+body.light-mode .type-btn         { background: var(--surface2); }
+body.light-mode .summary-card     { background: var(--surface2); }
+body.light-mode .heatmap-day-detail { background: var(--surface2); }
+body.light-mode .monthly-group-summary .monthly-summary-item { background: var(--surface2); }
+body.light-mode .chart-badge      { background: var(--surface2); color: var(--text2); }
+body.light-mode .top-expense-rank { background: var(--surface2); }
+body.light-mode .txn-cat-badge    { background: var(--surface2); color: var(--muted); }
+body.light-mode .budget-detail-card { background: var(--surface); }
+body.light-mode .insight-card     { background: var(--surface); }
+body.light-mode .analytics-chart-card { background: var(--surface); }
+
+/* icon visibility */
+body.light-mode .theme-toggle .icon-sun  { display: block; }
+body.light-mode .theme-toggle .icon-moon { display: none; }
+body.dark-mode  .theme-toggle .icon-sun  { display: none; }
+body.dark-mode  .theme-toggle .icon-moon { display: block; }

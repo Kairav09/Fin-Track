@@ -175,14 +175,17 @@
 
   <script>
     // ── Theme ──────────────────────────────────────────────────────────────────
-    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
+    const _savedTheme = localStorage.getItem("theme") || "dark";
+    document.body.classList.add(_savedTheme === "light" ? "light-mode" : "dark-mode");
     document.getElementById("themeToggle")?.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      const isLight = document.body.classList.contains("light-mode");
+      document.body.classList.toggle("light-mode", !isLight);
+      document.body.classList.toggle("dark-mode", isLight);
+      localStorage.setItem("theme", isLight ? "dark" : "light");
       updateThemeIcon();
     });
     function updateThemeIcon() {
-      const dark = document.body.classList.contains("dark-mode");
+      const dark = document.body.classList.contains("dark-mode") && !document.body.classList.contains("light-mode");
       document.querySelector(".sun-icon").style.display = dark ? "none" : "block";
       document.querySelector(".moon-icon").style.display = dark ? "block" : "none";
     }
@@ -230,26 +233,41 @@
       <div class="ie-bar-row"><span class="ie-label">Expenses</span><div class="ie-bar-track"><div class="ie-bar-fill expense-bar" style="width:${Math.round((totalExpense / maxVal) * 100)}%"></div></div><span class="ie-amount expense">₹${totalExpense.toLocaleString("en-IN")}</span></div>
       <div class="ie-bar-row"><span class="ie-label">Savings</span> <div class="ie-bar-track"><div class="ie-bar-fill savings-bar" style="width:${Math.max(0, Math.round(((totalIncome - totalExpense) / maxVal) * 100))}%"></div></div><span class="ie-amount" style="color:${net >= 0 ? "#10b981" : "#ef4444"}">₹${Math.abs(net).toLocaleString("en-IN")}</span></div>`;
 
-    // ── Donut Chart (CSS conic-gradient) ───────────────────────────────────────
-    const donutColors = ["#10b981", "#3b82f6", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899", "#14b8a6", "#f97316"];
+    // ── Donut Chart (CSS conic-gradient with per-segment gradients) ────────────
+    const donutGradients = [
+      ["#00e87a", "#00b8ff"],  // green → cyan
+      ["#4da6ff", "#a855f7"],  // blue → purple
+      ["#ffb84d", "#ff6b35"],  // amber → orange
+      ["#ff4d4d", "#ff0080"],  // red → pink
+      ["#a78bfa", "#6366f1"],  // purple → indigo
+      ["#f472b6", "#fb7185"],  // pink → rose
+      ["#2dd4bf", "#06b6d4"],  // teal → cyan
+      ["#fb923c", "#fbbf24"],  // orange → yellow
+    ];
     if (catEntries.length > 0) {
       let angle = 0;
-      const gradParts = catEntries.map(([, amt], i) => {
+      const gradParts = [];
+      catEntries.forEach(([, amt], i) => {
         const pct = (amt / totalExpense) * 100;
-        const color = donutColors[i % donutColors.length];
-        const part = `${color} ${angle}% ${angle + pct}%`;
-        angle += pct; return part;
+        const [c1, c2] = donutGradients[i % donutGradients.length];
+        const mid = angle + pct / 2;
+        // interpolate from c1 at segment start to c2 at segment end via midpoint
+        gradParts.push(`${c1} ${angle.toFixed(2)}%`);
+        gradParts.push(`${c2} ${(angle + pct).toFixed(2)}%`);
+        angle += pct;
       });
-      document.getElementById("donutChart").style.background = `conic-gradient(${gradParts.join(",")})`;
-      document.getElementById("donutLegend").innerHTML = catEntries.map(([cat, amt], i) =>
-        `<div class="donut-legend-item">
-          <span class="donut-legend-dot" style="background:${donutColors[i % donutColors.length]}"></span>
+      document.getElementById("donutChart").style.background = `conic-gradient(${gradParts.join(", ")})`;
+      document.getElementById("donutLegend").innerHTML = catEntries.map(([cat, amt], i) => {
+        const [c1, c2] = donutGradients[i % donutGradients.length];
+        return `<div class="donut-legend-item">
+          <span class="donut-legend-dot" style="background:linear-gradient(135deg,${c1},${c2})"></span>
           <span class="donut-legend-label">${cat}</span>
           <span class="donut-legend-value">${Math.round((amt / totalExpense) * 100)}%</span>
-        </div>`).join("");
+        </div>`;
+      }).join("");
     } else {
-      document.getElementById("donutChart").style.background = "#e2e8f0";
-      document.getElementById("donutLegend").innerHTML = '<p style="color:#94a3b8;font-size:13px">No expenses to display</p>';
+      document.getElementById("donutChart").style.background = "var(--surface2)";
+      document.getElementById("donutLegend").innerHTML = '<p style="color:var(--muted);font-size:13px">No expenses to display</p>';
     }
 
     // ── Monthly Spending Trend ─────────────────────────────────────────────────

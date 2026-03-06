@@ -181,20 +181,23 @@
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
     // ── Theme ──────────────────────────────────────────────────────────────────
-    document.body.classList.add("dark-mode");
+    const _savedTheme = localStorage.getItem("theme") || "dark";
+    document.body.classList.add(_savedTheme === "light" ? "light-mode" : "dark-mode");
     const themeToggle = document.getElementById("themeToggle");
-    themeToggle?.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-      updateThemeIcon();
-      document.getElementById("prefDarkMode").checked = document.body.classList.contains("dark-mode");
-    });
     function updateThemeIcon() {
-      const dark = document.body.classList.contains("dark-mode");
-      document.querySelector(".sun-icon").style.display = dark ? "none" : "block";
-      document.querySelector(".moon-icon").style.display = dark ? "block" : "none";
+      const isLight = document.body.classList.contains("light-mode");
+      document.querySelector(".sun-icon").style.display = isLight ? "block" : "none";
+      document.querySelector(".moon-icon").style.display = isLight ? "none" : "block";
     }
     updateThemeIcon();
+    themeToggle?.addEventListener("click", () => {
+      const isLight = document.body.classList.contains("light-mode");
+      document.body.classList.toggle("light-mode", !isLight);
+      document.body.classList.toggle("dark-mode", isLight);
+      localStorage.setItem("theme", isLight ? "dark" : "light");
+      updateThemeIcon();
+      document.getElementById("prefDarkMode").checked = !isLight;
+    });
 
     // ── Populate Profile ───────────────────────────────────────────────────────
     const fullname = localStorage.getItem("fullname") || "Demo User";
@@ -223,10 +226,12 @@
 
     // Dark mode preference toggle
     const prefDark = document.getElementById("prefDarkMode");
-    prefDark.checked = document.body.classList.contains("dark-mode");
+    prefDark.checked = document.body.classList.contains("light-mode") ? false : true;
     prefDark.addEventListener("change", () => {
-      document.body.classList.toggle("dark-mode");
-      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      const isDark = prefDark.checked;
+      document.body.classList.toggle("dark-mode", isDark);
+      document.body.classList.toggle("light-mode", !isDark);
+      localStorage.setItem("theme", isDark ? "dark" : "light");
       updateThemeIcon();
     });
 
