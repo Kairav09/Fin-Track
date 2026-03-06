@@ -3406,3 +3406,23 @@ body.dark-mode .heatmap-legend-label {
 .pref-row:nth-child(3) {
   animation-delay: 0.22s;
 }
+
+/* ── PROFILE: Form groups (Account Info, Preferences, Password) ── */
+.profile-form-group {
+  animation: slideUp 0.4s ease both;
+}
+.profile-form .profile-form-group:nth-child(1) {
+  animation-delay: 0.06s;
+}
+.profile-form .profile-form-group:nth-child(2) {
+  animation-delay: 0.13s;
+}
+.profile-form .profile-form-group:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.profile-form .profile-form-group:nth-child(4) {
+  animation-delay: 0.27s;
+}
+.profile-form .btn-primary {
+  animation: slideUp 0.4s ease 0.34s both;
+}
