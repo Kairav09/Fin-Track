@@ -1,727 +1,359 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Budgets - FinTrack</title>
-    <link rel="stylesheet" href="dashboard.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <div class="logo">
-          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-            <rect width="40" height="40" rx="8" fill="#10b981" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Budgets - FinTrack</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+          <rect width="40" height="40" rx="8" fill="#10b981" />
+          <path d="M20 10v20M12 18l8-8 8 8" stroke="white" stroke-width="3" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <span>FinTrack</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+          <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+          <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+          <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+        </svg><span>Dashboard</span></a>
+      <a href="transactions.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg><span>Transactions</span></a>
+      <a href="budgets.html" class="nav-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+          <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg><span>Budgets</span></a>
+      <a href="analytics.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <path d="M7 16l4-4 3 3 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg><span>Analytics</span></a>
+      <a href="profile.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
+          <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" />
+        </svg><span>Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" class="nav-item logout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg><span>Logout</span></a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="dashboard-header">
+      <div class="header-left">
+        <h1>Budgets</h1>
+        <p>Set, track, and analyze your spending limits</p>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" />
             <path
-              d="M20 10v20M12 18l8-8 8 8"
-              stroke="white"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
-          <span>FinTrack</span>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Summary Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#dbeafe"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="#3b82f6" stroke-width="2"
+              stroke-linecap="round" />
+          </svg></div>
+        <div class="stat-info"><span class="stat-label">Total Budget</span>
+          <h3 class="stat-value" id="totalBudget">₹0</h3>
         </div>
       </div>
-      <nav class="sidebar-nav">
-        <a href="dashboard.html" class="nav-item"
-          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <rect
-              x="3"
-              y="3"
-              width="7"
-              height="7"
-              rx="1"
-              stroke="currentColor"
-              stroke-width="2"
-            />
-            <rect
-              x="14"
-              y="3"
-              width="7"
-              height="7"
-              rx="1"
-              stroke="currentColor"
-              stroke-width="2"
-            />
-            <rect
-              x="3"
-              y="14"
-              width="7"
-              height="7"
-              rx="1"
-              stroke="currentColor"
-              stroke-width="2"
-            />
-            <rect
-              x="14"
-              y="14"
-              width="7"
-              height="7"
-              rx="1"
-              stroke="currentColor"
-              stroke-width="2"
-            /></svg
-          ><span>Dashboard</span></a
-        >
-        <a href="transactions.html" class="nav-item"
-          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M3 12h18M3 6h18M3 18h18"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            /></svg
-          ><span>Transactions</span></a
-        >
-        <a href="budgets.html" class="nav-item active"
-          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <circle
-              cx="12"
-              cy="12"
-              r="9"
-              stroke="currentColor"
-              stroke-width="2"
-            />
-            <path
-              d="M12 6v6l4 2"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            /></svg
-          ><span>Budgets</span></a
-        >
-        <a href="analytics.html" class="nav-item"
-          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M3 3v18h18"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <path
-              d="M7 16l4-4 3 3 6-6"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            /></svg
-          ><span>Analytics</span></a
-        >
-        <a href="profile.html" class="nav-item"
-          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <circle
-              cx="12"
-              cy="8"
-              r="4"
-              stroke="currentColor"
-              stroke-width="2"
-            />
-            <path
-              d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            /></svg
-          ><span>Profile</span></a
-        >
-      </nav>
-      <div class="sidebar-footer">
-        <a href="index.html" class="nav-item logout"
-          ><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            /></svg
-          ><span>Logout</span></a
-        >
-      </div>
-    </aside>
-
-    <main class="main-content">
-      <header class="dashboard-header">
-        <div class="header-left">
-          <h1>Budgets</h1>
-          <p>Set, track, and analyze your spending limits</p>
-        </div>
-        <div class="header-right">
-          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
-            <svg
-              class="sun-icon"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="5"
-                stroke="currentColor"
-                stroke-width="2"
-              />
-              <path
-                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-            <svg
-              class="moon-icon"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              style="display: none"
-            >
-              <path
-                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-      </header>
-
-      <!-- Summary Stats -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon" style="background: #dbeafe">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
-                stroke="#3b82f6"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </div>
-          <div class="stat-info">
-            <span class="stat-label">Total Budget</span>
-            <h3 class="stat-value" id="totalBudget">₹0</h3>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background: #fee2e2">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M12 5v14M19 12l-7 7-7-7"
-                stroke="#ef4444"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-          <div class="stat-info">
-            <span class="stat-label">Total Spent</span>
-            <h3 class="stat-value" id="totalSpent">₹0</h3>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background: #d1fae5">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M12 19V5M5 12l7-7 7 7"
-                stroke="#10b981"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-          <div class="stat-info">
-            <span class="stat-label">Remaining</span>
-            <h3 class="stat-value" id="totalRemaining">₹0</h3>
-          </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#fee2e2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M19 12l-7 7-7-7" stroke="#ef4444" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg></div>
+        <div class="stat-info"><span class="stat-label">Total Spent</span>
+          <h3 class="stat-value" id="totalSpent">₹0</h3>
         </div>
       </div>
-
-      <!-- Add Budget Form -->
-      <div class="card" style="margin-bottom: 20px">
-        <div class="card-header">
-          <h3>Add New Budget</h3>
-        </div>
-        <div class="txn-filters" style="margin-top: 16px">
-          <select id="budgetCat" class="txn-filter-select" style="flex: 2">
-            <option value="">Select Category</option>
-            <option value="Food & Dining">Food & Dining</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Transportation">Transportation</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Utilities">Utilities</option>
-            <option value="Housing">Housing</option>
-            <option value="Monthly Budget">Monthly Budget</option>
-            <option value="Other">Other</option>
-          </select>
-          <input
-            type="number"
-            id="budgetAmt"
-            class="txn-search"
-            placeholder="Budget amount ₹"
-            min="1"
-            style="flex: 1"
-          />
-          <button
-            class="btn-primary"
-            id="addBudgetBtn"
-            style="padding: 12px 24px"
-          >
-            Add Budget
-          </button>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#d1fae5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke="#10b981" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg></div>
+        <div class="stat-info"><span class="stat-label">Remaining</span>
+          <h3 class="stat-value" id="totalRemaining">₹0</h3>
         </div>
       </div>
+    </div>
 
-      <!-- Budget vs Actual Comparison Chart -->
-      <div class="card" style="margin-bottom: 20px">
-        <div class="card-header">
-          <h3>Budget vs Actual Spending</h3>
-        </div>
-        <div class="bva-chart" id="bvaChart"></div>
+    <!-- Add Budget -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-header">
+        <h3>Add New Budget</h3>
       </div>
+      <div class="txn-filters" style="margin-top:16px">
+        <select id="budgetCat" class="txn-filter-select" style="flex:2">
+          <option value="">Select Category</option>
+          <option>Food & Dining</option>
+          <option>Entertainment</option>
+          <option>Transportation</option>
+          <option>Shopping</option>
+          <option>Utilities</option>
+          <option>Housing</option>
+          <option value="Monthly Budget">Monthly Budget</option>
+          <option>Other</option>
+        </select>
+        <input type="number" id="budgetAmt" class="txn-search" placeholder="Budget amount ₹" min="1" style="flex:1" />
+        <button class="btn-primary" id="addBudgetBtn" style="padding:12px 24px">Add Budget</button>
+      </div>
+    </div>
 
-      <!-- Two column: Budget Cards + Tips -->
-      <div class="budget-page-grid">
-        <!-- Budget Cards -->
-        <div>
-          <div class="budget-cards-grid" id="budgetCardsGrid"></div>
-        </div>
+    <!-- Budget vs Actual Chart -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-header">
+        <h3>Budget vs Actual Spending</h3>
+      </div>
+      <div class="bva-chart" id="bvaChart"></div>
+    </div>
 
-        <!-- Utilization & Tips -->
-        <div>
-          <!-- Overall Utilization -->
-          <div class="card" style="margin-bottom: 20px">
-            <div class="card-header">
-              <h3>Budget Utilization</h3>
+    <!-- Budget Cards + Tips -->
+    <div class="budget-page-grid">
+      <div>
+        <div class="budget-cards-grid" id="budgetCardsGrid"></div>
+      </div>
+      <div>
+        <!-- Utilization Ring -->
+        <div class="card" style="margin-bottom:20px">
+          <div class="card-header">
+            <h3>Budget Utilization</h3>
+          </div>
+          <div class="utilization-ring-container">
+            <div class="health-score-ring" id="utilRing">
+              <svg viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="10" />
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round"
+                  stroke-dasharray="327" stroke-dashoffset="327" id="utilArc" transform="rotate(-90 60 60)" />
+              </svg>
+              <div class="health-score-text"><span class="health-score-number" id="utilPercent">0%</span><span
+                  class="health-score-label">used</span></div>
             </div>
-            <div class="utilization-ring-container">
-              <div class="health-score-ring" id="utilRing">
-                <svg viewBox="0 0 120 120">
-                  <circle
-                    cx="60"
-                    cy="60"
-                    r="52"
-                    fill="none"
-                    stroke="#e2e8f0"
-                    stroke-width="10"
-                  />
-                  <circle
-                    cx="60"
-                    cy="60"
-                    r="52"
-                    fill="none"
-                    stroke="#10b981"
-                    stroke-width="10"
-                    stroke-linecap="round"
-                    stroke-dasharray="327"
-                    stroke-dashoffset="327"
-                    id="utilArc"
-                    transform="rotate(-90 60 60)"
-                  />
-                </svg>
-                <div class="health-score-text">
-                  <span class="health-score-number" id="utilPercent">0%</span>
-                  <span class="health-score-label">used</span>
-                </div>
-              </div>
-              <div class="util-stats" id="utilStats"></div>
-            </div>
-          </div>
-
-          <!-- Smart Tips -->
-          <div class="card">
-            <div class="card-header">
-              <h3>💡 Smart Tips</h3>
-            </div>
-            <div class="tips-list" id="tipsList"></div>
+            <div class="util-stats" id="utilStats"></div>
           </div>
         </div>
+        <!-- Smart Tips -->
+        <div class="card">
+          <div class="card-header">
+            <h3>💡 Smart Tips</h3>
+          </div>
+          <div class="tips-list" id="tipsList"></div>
+        </div>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <script>
-      // Dark mode
-      const saved = localStorage.getItem("theme");
-      if (saved === "dark") document.body.classList.add("dark-mode");
-      const toggle = document.getElementById("themeToggle");
-      if (toggle)
-        toggle.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          localStorage.setItem(
-            "theme",
-            document.body.classList.contains("dark-mode") ? "dark" : "light",
-          );
-          updateThemeIcon();
-        });
-      function updateThemeIcon() {
-        const isDark = document.body.classList.contains("dark-mode");
-        document.querySelector(".sun-icon").style.display = isDark
-          ? "none"
-          : "block";
-        document.querySelector(".moon-icon").style.display = isDark
-          ? "block"
-          : "none";
-      }
+  <script>
+    // ── Theme ──────────────────────────────────────────────────────────────────
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
+    document.getElementById("themeToggle")?.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
       updateThemeIcon();
+    });
+    function updateThemeIcon() {
+      const dark = document.body.classList.contains("dark-mode");
+      document.querySelector(".sun-icon").style.display = dark ? "none" : "block";
+      document.querySelector(".moon-icon").style.display = dark ? "block" : "none";
+    }
+    updateThemeIcon();
 
-      function getBudgets() {
-        return JSON.parse(localStorage.getItem("budgets") || "[]");
-      }
-      function saveBudgets(b) {
-        localStorage.setItem("budgets", JSON.stringify(b));
-      }
+    const getBudgets = () => JSON.parse(localStorage.getItem("budgets") || "[]");
+    const saveBudgets = (b) => localStorage.setItem("budgets", JSON.stringify(b));
 
-      function getSpent(category) {
-        const txns = JSON.parse(localStorage.getItem("transactions") || "[]");
-        if (category === "Monthly Budget")
-          return txns
-            .filter((t) => t.type === "expense")
-            .reduce((s, t) => s + t.amount, 0);
-        return txns
-          .filter((t) => t.type === "expense" && t.category === category)
-          .reduce((s, t) => s + t.amount, 0);
-      }
+    function getSpent(category) {
+      const txns = JSON.parse(localStorage.getItem("transactions") || "[]");
+      return category === "Monthly Budget"
+        ? txns.filter(t => t.type === "expense").reduce((s, t) => s + t.amount, 0)
+        : txns.filter(t => t.type === "expense" && t.category === category).reduce((s, t) => s + t.amount, 0);
+    }
 
-      function renderAll() {
-        const budgets = getBudgets();
-        let totalBudget = 0,
-          totalSpent = 0;
-        const budgetData = budgets.map((b) => {
-          const spent = getSpent(b.category);
-          totalBudget += b.limit;
-          totalSpent += spent;
-          const pct = Math.min(Math.round((spent / b.limit) * 100), 100);
-          const remaining = Math.max(b.limit - spent, 0);
-          let barColor = "#10b981",
-            statusClass = "budget-status-ok",
-            statusText = "On Track";
-          if (pct >= 85) {
-            barColor = "#ef4444";
-            statusClass = "budget-status-danger";
-            statusText = "Over Budget";
-          } else if (pct >= 60) {
-            barColor = "#f59e0b";
-            statusClass = "budget-status-warn";
-            statusText = "Warning";
-          }
-          return {
-            ...b,
-            spent,
-            pct,
-            remaining,
-            barColor,
-            statusClass,
-            statusText,
-          };
-        });
+    // SVG icons reused in cards
+    const editSVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
+    const deleteSVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6M9 6V4h6v2"/></svg>`;
 
-        const totalRemaining = Math.max(totalBudget - totalSpent, 0);
+    function renderAll() {
+      const budgets = getBudgets();
+      let totalBudget = 0, totalSpent = 0;
 
-        // Stats
-        document.getElementById("totalBudget").textContent =
-          "₹" + totalBudget.toLocaleString("en-IN");
-        document.getElementById("totalSpent").textContent =
-          "₹" + totalSpent.toLocaleString("en-IN");
-        document.getElementById("totalRemaining").textContent =
-          "₹" + totalRemaining.toLocaleString("en-IN");
+      const budgetData = budgets.map(b => {
+        const spent = getSpent(b.category);
+        const pct = Math.min(Math.round((spent / b.limit) * 100), 100);
+        const remaining = Math.max(b.limit - spent, 0);
+        totalBudget += b.limit; totalSpent += spent;
+        let barColor = "#10b981", statusClass = "budget-status-ok", statusText = "On Track";
+        if (pct >= 85) { barColor = "#ef4444"; statusClass = "budget-status-danger"; statusText = "Over Budget"; }
+        else if (pct >= 60) { barColor = "#f59e0b"; statusClass = "budget-status-warn"; statusText = "Warning"; }
+        return { ...b, spent, pct, remaining, barColor, statusClass, statusText };
+      });
 
-        // Budget vs Actual Chart
-        const bvaChart = document.getElementById("bvaChart");
-        if (budgetData.length === 0) {
-          bvaChart.innerHTML =
-            '<p style="text-align:center; color:#94a3b8; padding:32px; font-size:13px;">Add budgets to see the comparison chart</p>';
-        } else {
-          const maxVal = Math.max(
-            ...budgetData.map((b) => Math.max(b.limit, b.spent)),
-            1,
-          );
-          bvaChart.innerHTML = `<div class="bva-rows">${budgetData
-            .filter((b) => b.category !== "Monthly Budget")
-            .map((b) => {
-              const budgetW = Math.round((b.limit / maxVal) * 100);
-              const spentW = Math.round((b.spent / maxVal) * 100);
-              return `<div class="bva-row">
-              <span class="bva-label">${b.category}</span>
-              <div class="bva-bars">
-                <div class="bva-bar-track">
-                  <div class="bva-bar budget-bar-fill" style="width:${budgetW}%"></div>
-                </div>
-                <div class="bva-bar-track">
-                  <div class="bva-bar actual-bar-fill" style="width:${spentW}%; background:${b.barColor}"></div>
-                </div>
-              </div>
-              <div class="bva-amounts">
-                <span class="bva-amt-budget">₹${b.limit > 999 ? Math.round(b.limit / 1000) + "k" : b.limit}</span>
-                <span class="bva-amt-actual" style="color:${b.barColor}">₹${b.spent > 999 ? Math.round(b.spent / 1000) + "k" : b.spent}</span>
-              </div>
-            </div>`;
-            })
-            .join("")}</div>
-          <div class="bva-legend">
-            <span class="bva-legend-item"><span class="bva-legend-dot" style="background:#3b82f6"></span> Budget</span>
-            <span class="bva-legend-item"><span class="bva-legend-dot" style="background:#10b981"></span> Actual</span>
+      const totalRemaining = Math.max(totalBudget - totalSpent, 0);
+
+      // Stats
+      document.getElementById("totalBudget").textContent = "₹" + totalBudget.toLocaleString("en-IN");
+      document.getElementById("totalSpent").textContent = "₹" + totalSpent.toLocaleString("en-IN");
+      document.getElementById("totalRemaining").textContent = "₹" + totalRemaining.toLocaleString("en-IN");
+
+      // Budget vs Actual Chart
+      const bvaChart = document.getElementById("bvaChart");
+      if (budgetData.length === 0) {
+        bvaChart.innerHTML = '<p style="text-align:center;color:#94a3b8;padding:32px;font-size:13px">Add budgets to see the comparison chart</p>';
+      } else {
+        const maxVal = Math.max(...budgetData.map(b => Math.max(b.limit, b.spent)), 1);
+        bvaChart.innerHTML = `<div class="bva-rows">${budgetData.filter(b => b.category !== "Monthly Budget").map(b => {
+          const bW = Math.round((b.limit / maxVal) * 100), sW = Math.round((b.spent / maxVal) * 100);
+          const fmt = v => v > 999 ? Math.round(v / 1000) + "k" : v;
+          return `<div class="bva-row">
+            <span class="bva-label">${b.category}</span>
+            <div class="bva-bars">
+              <div class="bva-bar-track"><div class="bva-bar budget-bar-fill"  style="width:${bW}%"></div></div>
+              <div class="bva-bar-track"><div class="bva-bar actual-bar-fill" style="width:${sW}%;background:${b.barColor}"></div></div>
+            </div>
+            <div class="bva-amounts">
+              <span class="bva-amt-budget">₹${fmt(b.limit)}</span>
+              <span class="bva-amt-actual" style="color:${b.barColor}">₹${fmt(b.spent)}</span>
+            </div>
           </div>`;
-        }
+        }).join("")}</div>
+        <div class="bva-legend">
+          <span class="bva-legend-item"><span class="bva-legend-dot" style="background:#3b82f6"></span> Budget</span>
+          <span class="bva-legend-item"><span class="bva-legend-dot" style="background:#10b981"></span> Actual</span>
+        </div>`;
+      }
 
-        // Budget Cards
-        const grid = document.getElementById("budgetCardsGrid");
-        if (budgetData.length === 0) {
-          grid.innerHTML =
-            '<div class="card" style="padding:48px; text-align:center; color:#94a3b8; grid-column:1/-1;">No budgets set yet. Add one above!</div>';
-        } else {
-          grid.innerHTML = budgetData
-            .map(
-              (b) => `
-            <div class="card budget-detail-card">
-              <div class="budget-detail-header">
-                <h4>${b.category}</h4>
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <span class="budget-detail-badge ${b.statusClass}">${b.statusText}</span>
-                  <div style="display:inline-flex; gap:4px; align-items:center;">
-                    <button class="budget-trash-btn edit-btn" onclick="editBudget(${b.id})" title="Edit budget" aria-label="Edit budget" style="display:flex; align-items:center; justify-content:center; padding:4px;">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                      </svg>
-                    </button>
-                    <button class="budget-trash-btn delete-btn" onclick="deleteBudget(${b.id})" title="Delete budget" aria-label="Delete budget" style="display:flex; align-items:center; justify-content:center; padding:4px;">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
-                      </svg>
-                    </button>
-                  </div>
+      // Budget Cards
+      const grid = document.getElementById("budgetCardsGrid");
+      grid.innerHTML = budgetData.length === 0
+        ? '<div class="card" style="padding:48px;text-align:center;color:#94a3b8;grid-column:1/-1">No budgets set yet. Add one above!</div>'
+        : budgetData.map(b => `
+          <div class="card budget-detail-card">
+            <div class="budget-detail-header">
+              <h4>${b.category}</h4>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="budget-detail-badge ${b.statusClass}">${b.statusText}</span>
+                <div style="display:inline-flex;gap:4px;align-items:center">
+                  <button class="budget-trash-btn edit-btn"   onclick="editBudget(${b.id})"   title="Edit"   style="display:flex;align-items:center;justify-content:center;padding:4px">${editSVG}</button>
+                  <button class="budget-trash-btn delete-btn" onclick="deleteBudget(${b.id})" title="Delete" style="display:flex;align-items:center;justify-content:center;padding:4px">${deleteSVG}</button>
                 </div>
-              </div>
-              <div class="budget-detail-amounts">
-                <span>₹${b.spent.toLocaleString("en-IN")} spent</span>
-                <span>of ₹${b.limit.toLocaleString("en-IN")}</span>
-              </div>
-              <div class="budget-bar" style="height:10px; border-radius:5px;">
-                <div class="budget-fill" style="width:${b.pct}%; background:${b.barColor}; border-radius:5px; height:10px;"></div>
-              </div>
-              <div class="budget-detail-footer">
-                <span class="budget-status">${b.pct}% used</span>
-                <span class="budget-status">₹${b.remaining.toLocaleString("en-IN")} remaining</span>
               </div>
             </div>
-          `,
-            )
-            .join("");
-        }
+            <div class="budget-detail-amounts"><span>₹${b.spent.toLocaleString("en-IN")} spent</span><span>of ₹${b.limit.toLocaleString("en-IN")}</span></div>
+            <div class="budget-bar" style="height:10px;border-radius:5px"><div class="budget-fill" style="width:${b.pct}%;background:${b.barColor};border-radius:5px;height:10px"></div></div>
+            <div class="budget-detail-footer"><span class="budget-status">${b.pct}% used</span><span class="budget-status">₹${b.remaining.toLocaleString("en-IN")} remaining</span></div>
+          </div>`).join("");
 
-        // Utilization Ring
-        const utilPct =
-          totalBudget > 0
-            ? Math.min(Math.round((totalSpent / totalBudget) * 100), 100)
-            : 0;
-        const circumference = 327;
-        const offset = circumference - (utilPct / 100) * circumference;
-        const arc = document.getElementById("utilArc");
-        arc.setAttribute("stroke-dashoffset", offset);
-        let arcColor = "#10b981";
-        if (utilPct >= 85) arcColor = "#ef4444";
-        else if (utilPct >= 60) arcColor = "#f59e0b";
-        arc.setAttribute("stroke", arcColor);
-        document.getElementById("utilPercent").textContent = utilPct + "%";
+      // Utilization Ring
+      const utilPct = totalBudget > 0 ? Math.min(Math.round((totalSpent / totalBudget) * 100), 100) : 0;
+      const arc = document.getElementById("utilArc");
+      arc.setAttribute("stroke-dashoffset", 327 - (utilPct / 100) * 327);
+      const arcColor = utilPct >= 85 ? "#ef4444" : utilPct >= 60 ? "#f59e0b" : "#10b981";
+      arc.setAttribute("stroke", arcColor);
+      document.getElementById("utilPercent").textContent = utilPct + "%";
 
-        const onTrack = budgetData.filter((b) => b.pct < 60).length;
-        const warning = budgetData.filter(
-          (b) => b.pct >= 60 && b.pct < 85,
-        ).length;
-        const over = budgetData.filter((b) => b.pct >= 85).length;
+      const onTrack = budgetData.filter(b => b.pct < 60).length;
+      const warning = budgetData.filter(b => b.pct >= 60 && b.pct < 85).length;
+      const over = budgetData.filter(b => b.pct >= 85).length;
+      document.getElementById("utilStats").innerHTML = `
+        <div class="util-stat"><span class="util-stat-dot" style="background:#10b981"></span> ${onTrack} on track</div>
+        <div class="util-stat"><span class="util-stat-dot" style="background:#f59e0b"></span> ${warning} warning</div>
+        <div class="util-stat"><span class="util-stat-dot" style="background:#ef4444"></span> ${over} over budget</div>
+        <div class="util-stat" style="margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0"><strong>₹${totalRemaining.toLocaleString("en-IN")}</strong> total remaining</div>`;
 
-        document.getElementById("utilStats").innerHTML = `
-          <div class="util-stat"><span class="util-stat-dot" style="background:#10b981"></span> ${onTrack} on track</div>
-          <div class="util-stat"><span class="util-stat-dot" style="background:#f59e0b"></span> ${warning} warning</div>
-          <div class="util-stat"><span class="util-stat-dot" style="background:#ef4444"></span> ${over} over budget</div>
-          <div class="util-stat" style="margin-top:8px; padding-top:8px; border-top:1px solid #e2e8f0;"><strong>₹${totalRemaining.toLocaleString("en-IN")}</strong> total remaining</div>
-        `;
+      // Smart Tips
+      const tips = [];
+      if (budgetData.length === 0) tips.push({ icon: "📊", text: "Start by adding your first budget above to begin tracking your spending." });
+      budgetData.forEach(b => {
+        if (b.pct >= 90) tips.push({ icon: "🚨", text: `<strong>${b.category}</strong> is at ${b.pct}%! Consider reducing spending or increasing the budget.` });
+        else if (b.pct >= 70) tips.push({ icon: "⚠️", text: `<strong>${b.category}</strong> is at ${b.pct}%. Be mindful of spending in this category.` });
+      });
+      if (onTrack === budgetData.length && budgetData.length > 0) tips.push({ icon: "🎉", text: "All budgets are on track! Great job managing your finances." });
+      if (totalBudget > 0 && utilPct < 50) tips.push({ icon: "💰", text: `You've only used ${utilPct}% of your total budget. You're saving well!` });
+      if (budgetData.length > 0 && budgetData.length < 4) tips.push({ icon: "💡", text: "Consider adding budgets for more categories to get a complete picture of your spending." });
+      tips.push({ icon: "📈", text: "Visit the <a href='analytics.html' style='color:#10b981;font-weight:600'>Analytics</a> page for deeper insights into your spending patterns." });
+      document.getElementById("tipsList").innerHTML = tips.map(t => `<div class="tip-item"><span class="tip-icon">${t.icon}</span><span class="tip-text">${t.text}</span></div>`).join("");
+    }
 
-        // Smart Tips
-        const tips = [];
-        if (budgetData.length === 0) {
-          tips.push({
-            icon: "📊",
-            text: "Start by adding your first budget above to begin tracking your spending.",
-          });
-        }
-        budgetData.forEach((b) => {
-          if (b.pct >= 90)
-            tips.push({
-              icon: "🚨",
-              text: `<strong>${b.category}</strong> is at ${b.pct}%! Consider reducing spending or increasing the budget.`,
-            });
-          else if (b.pct >= 70)
-            tips.push({
-              icon: "⚠️",
-              text: `<strong>${b.category}</strong> is at ${b.pct}%. Be mindful of spending in this category.`,
-            });
-        });
-        if (onTrack === budgetData.length && budgetData.length > 0) {
-          tips.push({
-            icon: "🎉",
-            text: "All budgets are on track! Great job managing your finances.",
-          });
-        }
-        if (totalBudget > 0 && utilPct < 50) {
-          tips.push({
-            icon: "💰",
-            text: `You've only used ${utilPct}% of your total budget. You're saving well!`,
-          });
-        }
-        if (budgetData.length > 0 && budgetData.length < 4) {
-          tips.push({
-            icon: "💡",
-            text: "Consider adding budgets for more categories to get a complete picture of your spending.",
-          });
-        }
-        tips.push({
-          icon: "📈",
-          text: "Visit the <a href='analytics.html' style='color:#10b981;font-weight:600;'>Analytics</a> page for deeper insights into your spending patterns.",
-        });
+    window.deleteBudget = function (id) {
+      if (!confirm("Delete this budget?")) return;
+      saveBudgets(getBudgets().filter(b => b.id !== id)); renderAll();
+    };
+    window.editBudget = function (id) {
+      const budgets = getBudgets(), b = budgets.find(b => b.id === id); if (!b) return;
+      const val = Number(prompt(`Enter new budget amount for ${b.category}:`, b.limit));
+      if (!isNaN(val) && val > 0) { b.limit = val; saveBudgets(budgets); renderAll(); }
+      else if (val !== null) alert("Please enter a valid amount greater than 0.");
+    };
 
-        document.getElementById("tipsList").innerHTML = tips
-          .map(
-            (t) =>
-              `<div class="tip-item"><span class="tip-icon">${t.icon}</span><span class="tip-text">${t.text}</span></div>`,
-          )
-          .join("");
-      }
+    document.getElementById("addBudgetBtn").addEventListener("click", function () {
+      const cat = document.getElementById("budgetCat").value;
+      const amt = parseFloat(document.getElementById("budgetAmt").value);
+      if (!cat) { alert("Please select a category."); return; }
+      if (!amt || amt <= 0) { alert("Please enter a valid amount."); return; }
 
-      window.deleteBudget = function (id) {
-        if (!confirm("Delete this budget?")) return;
-        let budgets = getBudgets();
-        budgets = budgets.filter((b) => b.id !== id);
-        saveBudgets(budgets);
-        renderAll();
-      };
-
-      window.editBudget = function (id) {
-        const budgets = getBudgets();
-        const budget = budgets.find((b) => b.id === id);
-        if (!budget) return;
-
-        const newLimit = prompt(
-          `Enter new budget amount for ${budget.category}:`,
-          budget.limit,
-        );
-        if (newLimit !== null) {
-          const amount = Number(newLimit);
-          if (!isNaN(amount) && amount > 0) {
-            budget.limit = amount;
-            saveBudgets(budgets);
-            renderAll();
-          } else {
-            alert("Please enter a valid amount greater than 0.");
-          }
-        }
-      };
-
-      document
-        .getElementById("addBudgetBtn")
-        .addEventListener("click", function () {
-          const cat = document.getElementById("budgetCat").value;
-          const amt = parseFloat(document.getElementById("budgetAmt").value);
-          if (!cat) {
-            alert("Please select a category.");
-            return;
-          }
-          if (!amt || amt <= 0) {
-            alert("Please enter a valid amount.");
-            return;
-          }
-
-          const budgets = getBudgets();
-          const existing = budgets.find((b) => b.category === cat);
-          if (existing) {
-            if (
-              confirm(
-                `Budget for "${cat}" already exists (₹${existing.limit.toLocaleString("en-IN")}). Update to ₹${amt.toLocaleString("en-IN")}?`,
-              )
-            ) {
-              existing.limit = amt;
-            } else return;
-          } else {
-            budgets.push({ id: Date.now(), category: cat, limit: amt });
-          }
-          saveBudgets(budgets);
-          document.getElementById("budgetCat").value = "";
-          document.getElementById("budgetAmt").value = "";
-          renderAll();
-        });
-
-      // Init
-      if (!localStorage.getItem("budgets")) {
-        saveBudgets([
-          { id: 1, category: "Monthly Budget", limit: 35000 },
-          { id: 2, category: "Food & Dining", limit: 10000 },
-          { id: 3, category: "Entertainment", limit: 5000 },
-        ]);
-      }
+      const budgets = getBudgets();
+      const existing = budgets.find(b => b.category === cat);
+      if (existing) {
+        if (confirm(`Budget for "${cat}" already exists (₹${existing.limit.toLocaleString("en-IN")}). Update to ₹${amt.toLocaleString("en-IN")}?`)) existing.limit = amt;
+        else return;
+      } else { budgets.push({ id: Date.now(), category: cat, limit: amt }); }
+      saveBudgets(budgets);
+      document.getElementById("budgetCat").value = "";
+      document.getElementById("budgetAmt").value = "";
       renderAll();
-    </script>
+    });
 
-    <script>
-      // Scroll-triggered fade-in for cards and sections
-      (function () {
-        const style = document.createElement("style");
-        style.textContent = `
-        .scroll-animate {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .scroll-animate.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `;
-        document.head.appendChild(style);
+    // Seed defaults on first visit
+    if (!localStorage.getItem("budgets")) {
+      saveBudgets([{ id: 1, category: "Monthly Budget", limit: 35000 }, { id: 2, category: "Food & Dining", limit: 10000 }, { id: 3, category: "Entertainment", limit: 5000 }]);
+    }
 
-        function initScrollAnimations() {
-          const cards = document.querySelectorAll(
-            ".card, .summary-card, .stat-card, .budget-detail-card, .transaction-item, .category-item",
-          );
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                  setTimeout(
-                    () => entry.target.classList.add("visible"),
-                    i * 60,
-                  );
-                  observer.unobserve(entry.target);
-                }
-              });
-            },
-            { threshold: 0.1 },
-          );
+    // ── Scroll fade-in animation ───────────────────────────────────────────────
+    (function () {
+      const style = document.createElement("style");
+      style.textContent = ".scroll-animate{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}.scroll-animate.visible{opacity:1;transform:none}";
+      document.head.appendChild(style);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add("visible"), i * 60); observer.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      function init() {
+        document.querySelectorAll(".card,.stat-card,.budget-detail-card").forEach(el => { el.classList.add("scroll-animate"); observer.observe(el); });
+      }
+      document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", init) : init();
+    })();
 
-          cards.forEach((el) => {
-            el.classList.add("scroll-animate");
-            observer.observe(el);
-          });
-        }
+    renderAll();
+  </script>
+</body>
 
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", initScrollAnimations);
-        } else {
-          initScrollAnimations();
-        }
-      })();
-    </script>
-  </body>
 </html>

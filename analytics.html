@@ -70,7 +70,7 @@
               d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
-          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display: none">
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -78,66 +78,53 @@
       </div>
     </header>
 
-    <!-- Insight Cards Row -->
+    <!-- Insight Cards -->
     <div class="analytics-insights-grid">
       <div class="insight-card savings-card">
-        <div class="insight-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <div class="insight-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </div>
+          </svg></div>
         <span class="insight-label">Savings Rate</span>
-        <h2 class="insight-value" id="savingsRate">0%</h2>
-        <span class="insight-subtext" id="savingsSubtext">of income saved</span>
+        <h2 class="insight-value" id="savingsRate">0%</h2><span class="insight-subtext" id="savingsSubtext">of income
+          saved</span>
       </div>
       <div class="insight-card spending-card">
-        <div class="insight-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <div class="insight-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" />
-          </svg>
-        </div>
+          </svg></div>
         <span class="insight-label">Avg Daily Spending</span>
-        <h2 class="insight-value" id="avgDaily">₹0</h2>
-        <span class="insight-subtext" id="avgDailySubtext">per day</span>
+        <h2 class="insight-value" id="avgDaily">₹0</h2><span class="insight-subtext" id="avgDailySubtext">per day</span>
       </div>
       <div class="insight-card top-card">
-        <div class="insight-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <div class="insight-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M12 20V10M18 20V4M6 20v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
-          </svg>
-        </div>
+          </svg></div>
         <span class="insight-label">Top Category</span>
-        <h2 class="insight-value" id="topCategory">—</h2>
-        <span class="insight-subtext" id="topCategoryAmt">highest spending</span>
+        <h2 class="insight-value" id="topCategory">—</h2><span class="insight-subtext" id="topCategoryAmt">highest
+          spending</span>
       </div>
       <div class="insight-card txn-card">
-        <div class="insight-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <div class="insight-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
-          </svg>
-        </div>
+          </svg></div>
         <span class="insight-label">Transactions</span>
-        <h2 class="insight-value" id="txnCount">0</h2>
-        <span class="insight-subtext" id="txnCountSubtext">total recorded</span>
+        <h2 class="insight-value" id="txnCount">0</h2><span class="insight-subtext" id="txnCountSubtext">total
+          recorded</span>
       </div>
     </div>
 
     <!-- Charts Row -->
     <div class="analytics-grid">
-      <!-- Income vs Expense Comparison -->
       <div class="card analytics-chart-card">
         <div class="card-header">
-          <h3>Income vs Expenses</h3>
-          <span class="chart-badge" id="netBadge">Net: ₹0</span>
+          <h3>Income vs Expenses</h3><span class="chart-badge" id="netBadge">Net: ₹0</span>
         </div>
         <div class="income-expense-bars" id="incomeExpenseBars"></div>
       </div>
-
-      <!-- Category Donut Chart -->
       <div class="card analytics-chart-card">
         <div class="card-header">
           <h3>Spending by Category</h3>
@@ -149,26 +136,22 @@
       </div>
     </div>
 
-    <!-- Monthly Spending Trend -->
-    <div class="card analytics-chart-card" style="margin-bottom: 20px">
+    <!-- Monthly Trend -->
+    <div class="card analytics-chart-card" style="margin-bottom:20px">
       <div class="card-header">
-        <h3>Monthly Spending Trend</h3>
-        <span class="insight-subtext">Last 6 months</span>
+        <h3>Monthly Spending Trend</h3><span class="insight-subtext">Last 6 months</span>
       </div>
       <div class="monthly-chart" id="monthlyChart"></div>
     </div>
 
-    <!-- Detailed Breakdown -->
+    <!-- Breakdown -->
     <div class="analytics-grid">
-      <!-- Top Expenses Table -->
       <div class="card analytics-chart-card">
         <div class="card-header">
           <h3>Top Expenses</h3>
         </div>
         <div class="top-expenses-list" id="topExpensesList"></div>
       </div>
-
-      <!-- Financial Health Score -->
       <div class="card analytics-chart-card">
         <div class="card-header">
           <h3>Financial Health</h3>
@@ -180,10 +163,8 @@
               <circle cx="60" cy="60" r="52" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round"
                 stroke-dasharray="327" stroke-dashoffset="327" id="healthArc" transform="rotate(-90 60 60)" />
             </svg>
-            <div class="health-score-text">
-              <span class="health-score-number" id="healthScore">0</span>
-              <span class="health-score-label">/ 100</span>
-            </div>
+            <div class="health-score-text"><span class="health-score-number" id="healthScore">0</span><span
+                class="health-score-label">/ 100</span></div>
           </div>
           <div class="health-factors" id="healthFactors"></div>
         </div>
@@ -192,305 +173,161 @@
   </main>
 
   <script>
-    // Dark mode
-    const saved = localStorage.getItem("theme");
-    if (saved === "dark") document.body.classList.add("dark-mode");
-    const toggle = document.getElementById("themeToggle");
-    if (toggle)
-      toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem(
-          "theme",
-          document.body.classList.contains("dark-mode") ? "dark" : "light",
-        );
-        updateThemeIcon();
-      });
+    // ── Theme ──────────────────────────────────────────────────────────────────
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
+    document.getElementById("themeToggle")?.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      updateThemeIcon();
+    });
     function updateThemeIcon() {
-      const isDark = document.body.classList.contains("dark-mode");
-      document.querySelector(".sun-icon").style.display = isDark
-        ? "none"
-        : "block";
-      document.querySelector(".moon-icon").style.display = isDark
-        ? "block"
-        : "none";
+      const dark = document.body.classList.contains("dark-mode");
+      document.querySelector(".sun-icon").style.display = dark ? "none" : "block";
+      document.querySelector(".moon-icon").style.display = dark ? "block" : "none";
     }
     updateThemeIcon();
 
-    // Data
-    const transactions = JSON.parse(
-      localStorage.getItem("transactions") || "[]",
-    );
-    const expenses = transactions.filter((t) => t.type === "expense");
-    const incomes = transactions.filter((t) => t.type === "income");
+    // ── Data ───────────────────────────────────────────────────────────────────
+    const transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
+    const expenses = transactions.filter(t => t.type === "expense");
+    const incomes = transactions.filter(t => t.type === "income");
     const totalIncome = incomes.reduce((s, t) => s + t.amount, 0);
     const totalExpense = expenses.reduce((s, t) => s + t.amount, 0);
 
-    // === INSIGHT CARDS ===
-    // Savings Rate
-    const savingsRate =
-      totalIncome > 0
-        ? Math.round(((totalIncome - totalExpense) / totalIncome) * 100)
-        : 0;
+    // ── Insight Cards ──────────────────────────────────────────────────────────
+    const savingsRate = totalIncome > 0 ? Math.round(((totalIncome - totalExpense) / totalIncome) * 100) : 0;
     document.getElementById("savingsRate").textContent = savingsRate + "%";
-    document.getElementById("savingsSubtext").textContent =
-      totalIncome > 0
-        ? `₹${(totalIncome - totalExpense).toLocaleString("en-IN")} saved`
-        : "No income recorded";
+    document.getElementById("savingsSubtext").textContent = totalIncome > 0 ? `₹${(totalIncome - totalExpense).toLocaleString("en-IN")} saved` : "No income recorded";
 
-    // Avg Daily
     if (expenses.length > 0) {
-      const dates = expenses.map((t) => new Date(t.date).getTime());
-      const daySpan = Math.max(
-        1,
-        Math.ceil((Math.max(...dates) - Math.min(...dates)) / 86400000) + 1,
-      );
-      document.getElementById("avgDaily").textContent =
-        "₹" + Math.round(totalExpense / daySpan).toLocaleString("en-IN");
-      document.getElementById("avgDailySubtext").textContent =
-        `over ${daySpan} days`;
+      const dates = expenses.map(t => new Date(t.date).getTime());
+      const daySpan = Math.max(1, Math.ceil((Math.max(...dates) - Math.min(...dates)) / 86400000) + 1);
+      document.getElementById("avgDaily").textContent = "₹" + Math.round(totalExpense / daySpan).toLocaleString("en-IN");
+      document.getElementById("avgDailySubtext").textContent = `over ${daySpan} days`;
     }
 
-    // Top Category
+    // Category totals
     const catMap = {};
-    expenses.forEach((t) => {
-      catMap[t.category] = (catMap[t.category] || 0) + t.amount;
-    });
+    expenses.forEach(t => { catMap[t.category] = (catMap[t.category] || 0) + t.amount; });
     const catEntries = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
     if (catEntries.length > 0) {
       document.getElementById("topCategory").textContent = catEntries[0][0];
-      document.getElementById("topCategoryAmt").textContent =
-        "₹" + catEntries[0][1].toLocaleString("en-IN");
+      document.getElementById("topCategoryAmt").textContent = "₹" + catEntries[0][1].toLocaleString("en-IN");
     }
-
-    // Transaction count
     document.getElementById("txnCount").textContent = transactions.length;
-    document.getElementById("txnCountSubtext").textContent =
-      `${incomes.length} income · ${expenses.length} expense`;
+    document.getElementById("txnCountSubtext").textContent = `${incomes.length} income · ${expenses.length} expense`;
 
-    // === INCOME VS EXPENSE BAR ===
+    // ── Income vs Expense Bar ──────────────────────────────────────────────────
     const maxVal = Math.max(totalIncome, totalExpense, 1);
-    const incPct = Math.round((totalIncome / maxVal) * 100);
-    const expPct = Math.round((totalExpense / maxVal) * 100);
     const net = totalIncome - totalExpense;
-    document.getElementById("netBadge").textContent =
-      `Net: ${net >= 0 ? "+" : ""}₹${net.toLocaleString("en-IN")}`;
-    document.getElementById("netBadge").style.color =
-      net >= 0 ? "#10b981" : "#ef4444";
+    const netBadge = document.getElementById("netBadge");
+    netBadge.textContent = `Net: ${net >= 0 ? "+" : ""}₹${net.toLocaleString("en-IN")}`;
+    netBadge.style.color = net >= 0 ? "#10b981" : "#ef4444";
 
     document.getElementById("incomeExpenseBars").innerHTML = `
-        <div class="ie-bar-row">
-          <span class="ie-label">Income</span>
-          <div class="ie-bar-track"><div class="ie-bar-fill income-bar" style="width:${incPct}%"></div></div>
-          <span class="ie-amount income">₹${totalIncome.toLocaleString("en-IN")}</span>
-        </div>
-        <div class="ie-bar-row">
-          <span class="ie-label">Expenses</span>
-          <div class="ie-bar-track"><div class="ie-bar-fill expense-bar" style="width:${expPct}%"></div></div>
-          <span class="ie-amount expense">₹${totalExpense.toLocaleString("en-IN")}</span>
-        </div>
-        <div class="ie-bar-row">
-          <span class="ie-label">Savings</span>
-          <div class="ie-bar-track"><div class="ie-bar-fill savings-bar" style="width:${Math.max(0, Math.round(((totalIncome - totalExpense) / maxVal) * 100))}%"></div></div>
-          <span class="ie-amount" style="color:${net >= 0 ? "#10b981" : "#ef4444"}">₹${Math.abs(net).toLocaleString("en-IN")}</span>
-        </div>
-      `;
+      <div class="ie-bar-row"><span class="ie-label">Income</span>  <div class="ie-bar-track"><div class="ie-bar-fill income-bar"  style="width:${Math.round((totalIncome / maxVal) * 100)}%"></div></div><span class="ie-amount income">₹${totalIncome.toLocaleString("en-IN")}</span></div>
+      <div class="ie-bar-row"><span class="ie-label">Expenses</span><div class="ie-bar-track"><div class="ie-bar-fill expense-bar" style="width:${Math.round((totalExpense / maxVal) * 100)}%"></div></div><span class="ie-amount expense">₹${totalExpense.toLocaleString("en-IN")}</span></div>
+      <div class="ie-bar-row"><span class="ie-label">Savings</span> <div class="ie-bar-track"><div class="ie-bar-fill savings-bar" style="width:${Math.max(0, Math.round(((totalIncome - totalExpense) / maxVal) * 100))}%"></div></div><span class="ie-amount" style="color:${net >= 0 ? "#10b981" : "#ef4444"}">₹${Math.abs(net).toLocaleString("en-IN")}</span></div>`;
 
-    // === DONUT CHART (CSS conic-gradient) ===
-    const donutColors = [
-      "#10b981",
-      "#3b82f6",
-      "#f59e0b",
-      "#ef4444",
-      "#8b5cf6",
-      "#ec4899",
-      "#14b8a6",
-      "#f97316",
-    ];
+    // ── Donut Chart (CSS conic-gradient) ───────────────────────────────────────
+    const donutColors = ["#10b981", "#3b82f6", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899", "#14b8a6", "#f97316"];
     if (catEntries.length > 0) {
-      let gradParts = [];
       let angle = 0;
-      catEntries.forEach(([cat, amt], i) => {
+      const gradParts = catEntries.map(([, amt], i) => {
         const pct = (amt / totalExpense) * 100;
         const color = donutColors[i % donutColors.length];
-        gradParts.push(`${color} ${angle}% ${angle + pct}%`);
-        angle += pct;
+        const part = `${color} ${angle}% ${angle + pct}%`;
+        angle += pct; return part;
       });
-      const donut = document.getElementById("donutChart");
-      donut.style.background = `conic-gradient(${gradParts.join(", ")})`;
-
-      document.getElementById("donutLegend").innerHTML = catEntries
-        .map(([cat, amt], i) => {
-          const pct = Math.round((amt / totalExpense) * 100);
-          return `<div class="donut-legend-item">
-            <span class="donut-legend-dot" style="background:${donutColors[i % donutColors.length]}"></span>
-            <span class="donut-legend-label">${cat}</span>
-            <span class="donut-legend-value">${pct}%</span>
-          </div>`;
-        })
-        .join("");
+      document.getElementById("donutChart").style.background = `conic-gradient(${gradParts.join(",")})`;
+      document.getElementById("donutLegend").innerHTML = catEntries.map(([cat, amt], i) =>
+        `<div class="donut-legend-item">
+          <span class="donut-legend-dot" style="background:${donutColors[i % donutColors.length]}"></span>
+          <span class="donut-legend-label">${cat}</span>
+          <span class="donut-legend-value">${Math.round((amt / totalExpense) * 100)}%</span>
+        </div>`).join("");
     } else {
       document.getElementById("donutChart").style.background = "#e2e8f0";
-      document.getElementById("donutLegend").innerHTML =
-        '<p style="color:#94a3b8; font-size:13px;">No expenses to display</p>';
+      document.getElementById("donutLegend").innerHTML = '<p style="color:#94a3b8;font-size:13px">No expenses to display</p>';
     }
 
-    // === MONTHLY SPENDING TREND ===
+    // ── Monthly Spending Trend ─────────────────────────────────────────────────
     const monthlyData = {};
     const now = new Date();
     for (let i = 5; i >= 0; i--) {
-      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-      const key = d.toLocaleDateString("en-IN", {
-        month: "short",
-        year: "2-digit",
-      });
+      const key = new Date(now.getFullYear(), now.getMonth() - i, 1).toLocaleDateString("en-IN", { month: "short", year: "2-digit" });
       monthlyData[key] = 0;
     }
-    expenses.forEach((t) => {
-      const d = new Date(t.date);
-      const key = d.toLocaleDateString("en-IN", {
-        month: "short",
-        year: "2-digit",
-      });
+    expenses.forEach(t => {
+      const key = new Date(t.date).toLocaleDateString("en-IN", { month: "short", year: "2-digit" });
       if (key in monthlyData) monthlyData[key] += t.amount;
     });
-
     const monthEntries = Object.entries(monthlyData);
-    const monthMax = Math.max(...monthEntries.map((e) => e[1]), 1);
+    const monthMax = Math.max(...monthEntries.map(e => e[1]), 1);
+    document.getElementById("monthlyChart").innerHTML = `<div class="monthly-chart-bars">${monthEntries.map(([month, amt]) => {
+      const h = Math.round((amt / monthMax) * 180);
+      return `<div class="monthly-bar-col">
+        <span class="monthly-bar-amt">₹${amt > 999 ? Math.round(amt / 1000) + "k" : amt}</span>
+        <div class="monthly-bar" style="height:${Math.max(h, 4)}px"></div>
+        <span class="monthly-bar-label">${month}</span>
+      </div>`;
+    }).join("")}</div>`;
 
-    document.getElementById("monthlyChart").innerHTML = `
-        <div class="monthly-chart-bars">
-          ${monthEntries
-        .map(([month, amt]) => {
-          const h = Math.round((amt / monthMax) * 180);
-          return `<div class="monthly-bar-col">
-              <span class="monthly-bar-amt">₹${amt > 999 ? Math.round(amt / 1000) + "k" : amt}</span>
-              <div class="monthly-bar" style="height:${Math.max(h, 4)}px"></div>
-              <span class="monthly-bar-label">${month}</span>
-            </div>`;
-        })
-        .join("")}
-        </div>
-      `;
-
-    // === TOP EXPENSES LIST ===
-    const topExpenses = [...expenses]
-      .sort((a, b) => b.amount - a.amount)
-      .slice(0, 5);
-    if (topExpenses.length > 0) {
-      document.getElementById("topExpensesList").innerHTML = topExpenses
-        .map((t, i) => {
-          const d = new Date(t.date).toLocaleDateString("en-IN", {
-            day: "numeric",
-            month: "short",
-          });
-          return `<div class="top-expense-item">
+    // ── Top 5 Expenses ─────────────────────────────────────────────────────────
+    const topExpenses = [...expenses].sort((a, b) => b.amount - a.amount).slice(0, 5);
+    document.getElementById("topExpensesList").innerHTML = topExpenses.length > 0
+      ? topExpenses.map((t, i) => {
+        const d = new Date(t.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+        return `<div class="top-expense-item">
             <span class="top-expense-rank">#${i + 1}</span>
-            <div class="top-expense-info">
-              <span class="top-expense-name">${t.name}</span>
-              <span class="top-expense-meta">${d} · ${t.category}</span>
-            </div>
+            <div class="top-expense-info"><span class="top-expense-name">${t.name}</span><span class="top-expense-meta">${d} · ${t.category}</span></div>
             <span class="top-expense-amount">₹${t.amount.toLocaleString("en-IN")}</span>
           </div>`;
-        })
-        .join("");
-    } else {
-      document.getElementById("topExpensesList").innerHTML =
-        '<p style="text-align:center; color:#94a3b8; padding:24px; font-size:13px;">No expenses recorded yet.</p>';
-    }
+      }).join("")
+      : '<p style="text-align:center;color:#94a3b8;padding:24px;font-size:13px">No expenses recorded yet.</p>';
 
-    // === FINANCIAL HEALTH SCORE ===
-    let score = 50; // base
-    if (savingsRate >= 20) score += 20;
-    else if (savingsRate >= 10) score += 10;
-    else if (savingsRate < 0) score -= 20;
+    // ── Financial Health Score ─────────────────────────────────────────────────
+    let score = 50;
+    if (savingsRate >= 20) score += 20; else if (savingsRate >= 10) score += 10; else if (savingsRate < 0) score -= 20;
 
     const budgets = JSON.parse(localStorage.getItem("budgets") || "[]");
-    let budgetsOnTrack = 0;
-    budgets.forEach((b) => {
-      const spent =
-        b.category === "Monthly Budget"
-          ? totalExpense
-          : expenses
-            .filter((t) => t.category === b.category)
-            .reduce((s, t) => s + t.amount, 0);
-      if (spent <= b.limit) budgetsOnTrack++;
-    });
-    if (budgets.length > 0) {
-      score += Math.round((budgetsOnTrack / budgets.length) * 20);
-    }
-
+    const onTrack = budgets.filter(b => {
+      const spent = b.category === "Monthly Budget" ? totalExpense : expenses.filter(t => t.category === b.category).reduce((s, t) => s + t.amount, 0);
+      return spent <= b.limit;
+    }).length;
+    if (budgets.length > 0) score += Math.round((onTrack / budgets.length) * 20);
     if (transactions.length >= 10) score += 5;
     if (catEntries.length >= 3) score += 5;
     score = Math.min(100, Math.max(0, score));
 
-    const circumference = 327;
-    const offset = circumference - (score / 100) * circumference;
     const arc = document.getElementById("healthArc");
-    arc.setAttribute("stroke-dashoffset", offset);
-
-    let arcColor = "#10b981";
-    if (score < 40) arcColor = "#ef4444";
-    else if (score < 70) arcColor = "#f59e0b";
+    arc.setAttribute("stroke-dashoffset", 327 - (score / 100) * 327);
+    const arcColor = score < 40 ? "#ef4444" : score < 70 ? "#f59e0b" : "#10b981";
     arc.setAttribute("stroke", arcColor);
-
     document.getElementById("healthScore").textContent = score;
 
-    let healthLabel = "Excellent";
-    if (score < 40) healthLabel = "Needs Work";
-    else if (score < 60) healthLabel = "Fair";
-    else if (score < 80) healthLabel = "Good";
-
+    const healthLabel = score < 40 ? "Needs Work" : score < 60 ? "Fair" : score < 80 ? "Good" : "Excellent";
     document.getElementById("healthFactors").innerHTML = `
-        <div class="health-label" style="color:${arcColor}">${healthLabel}</div>
-        <div class="health-factor"><span class="health-factor-dot" style="background:${savingsRate >= 10 ? "#10b981" : "#ef4444"}"></span> Savings rate: ${savingsRate}%</div>
-        <div class="health-factor"><span class="health-factor-dot" style="background:${budgetsOnTrack === budgets.length && budgets.length > 0 ? "#10b981" : "#f59e0b"}"></span> Budgets on track: ${budgetsOnTrack}/${budgets.length}</div>
-        <div class="health-factor"><span class="health-factor-dot" style="background:${transactions.length >= 5 ? "#10b981" : "#94a3b8"}"></span> Transaction tracking: ${transactions.length >= 5 ? "Active" : "Low activity"}</div>
-        <div class="health-factor"><span class="health-factor-dot" style="background:${catEntries.length >= 3 ? "#10b981" : "#94a3b8"}"></span> Category diversity: ${catEntries.length} categories</div>
-      `;
-  </script>
+      <div class="health-label" style="color:${arcColor}">${healthLabel}</div>
+      <div class="health-factor"><span class="health-factor-dot" style="background:${savingsRate >= 10 ? "#10b981" : "#ef4444"}"></span> Savings rate: ${savingsRate}%</div>
+      <div class="health-factor"><span class="health-factor-dot" style="background:${onTrack === budgets.length && budgets.length > 0 ? "#10b981" : "#f59e0b"}"></span> Budgets on track: ${onTrack}/${budgets.length}</div>
+      <div class="health-factor"><span class="health-factor-dot" style="background:${transactions.length >= 5 ? "#10b981" : "#94a3b8"}"></span> Transaction tracking: ${transactions.length >= 5 ? "Active" : "Low activity"}</div>
+      <div class="health-factor"><span class="health-factor-dot" style="background:${catEntries.length >= 3 ? "#10b981" : "#94a3b8"}"></span> Category diversity: ${catEntries.length} categories</div>`;
 
-  <script>
-    // Scroll-triggered fade-in for cards and sections
+    // ── Scroll fade-in animation ───────────────────────────────────────────────
     (function () {
-      const style = document.createElement('style');
-      style.textContent = `
-        .scroll-animate {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .scroll-animate.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `;
+      const style = document.createElement("style");
+      style.textContent = ".scroll-animate{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}.scroll-animate.visible{opacity:1;transform:none}";
       document.head.appendChild(style);
-
-      function initScrollAnimations() {
-        const cards = document.querySelectorAll('.card, .summary-card, .stat-card, .budget-detail-card, .transaction-item, .category-item');
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => entry.target.classList.add('visible'), i * 60);
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-
-        cards.forEach(el => {
-          el.classList.add('scroll-animate');
-          observer.observe(el);
-        });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add("visible"), i * 60); observer.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      function init() {
+        document.querySelectorAll(".card,.stat-card,.insight-card").forEach(el => { el.classList.add("scroll-animate"); observer.observe(el); });
       }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initScrollAnimations);
-      } else {
-        initScrollAnimations();
-      }
+      document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", init) : init();
     })();
   </script>
-
 </body>
 
 </html>

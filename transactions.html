@@ -19,7 +19,8 @@
           <rect width="40" height="40" rx="8" fill="#10b981" />
           <path d="M20 10v20M12 18l8-8 8 8" stroke="white" stroke-width="3" stroke-linecap="round"
             stroke-linejoin="round" />
-        </svg><span>FinTrack</span>
+        </svg>
+        <span>FinTrack</span>
       </div>
     </div>
     <nav class="sidebar-nav">
@@ -61,7 +62,7 @@
         <h1>Transactions</h1>
         <p>View, add, and manage all your transactions</p>
       </div>
-      <div class="header-right" style="display: flex; gap: 10px; align-items: center">
+      <div class="header-right" style="display:flex;gap:10px;align-items:center">
         <button class="btn-export" id="exportBtn" title="Export as CSV">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor"
@@ -76,7 +77,7 @@
               d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
-          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display: none">
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -87,58 +88,41 @@
     <!-- Stats Row -->
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-icon" style="background: #dbeafe">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <div class="stat-icon" style="background:#dbeafe"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path d="M3 12h18M3 6h18M3 18h18" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">Total Transactions</span>
+          </svg></div>
+        <div class="stat-info"><span class="stat-label">Total Transactions</span>
           <h3 class="stat-value" id="totalTxnCount">0</h3>
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon" style="background: #d1fae5">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <div class="stat-icon" style="background:#d1fae5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path d="M12 19V5M5 12l7-7 7 7" stroke="#10b981" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">Total Income</span>
+          </svg></div>
+        <div class="stat-info"><span class="stat-label">Total Income</span>
           <h3 class="stat-value" id="totalTxnIncome">₹0</h3>
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon" style="background: #fee2e2">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <div class="stat-icon" style="background:#fee2e2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path d="M12 5v14M19 12l-7 7-7-7" stroke="#ef4444" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">Total Expenses</span>
+          </svg></div>
+        <div class="stat-info"><span class="stat-label">Total Expenses</span>
           <h3 class="stat-value" id="totalTxnExpense">₹0</h3>
         </div>
       </div>
     </div>
 
     <!-- Spending Heatmap -->
-    <div class="card" style="margin-bottom: 20px">
-      <div class="card-header" style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          ">
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
         <h3>Spending Heatmap</h3>
-        <div style="display: flex; align-items: center; gap: 8px">
-          <button class="heatmap-nav" id="heatmapPrev" title="Previous month">
-            ‹
-          </button>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button class="heatmap-nav" id="heatmapPrev" title="Previous month">‹</button>
           <span class="heatmap-month-label" id="heatmapLabel">March 2026</span>
-          <button class="heatmap-nav" id="heatmapNext" title="Next month">
-            ›
-          </button>
+          <button class="heatmap-nav" id="heatmapNext" title="Next month">›</button>
         </div>
       </div>
       <div class="heatmap-container">
@@ -148,24 +132,20 @@
         <div class="heatmap-grid" id="heatmapGrid"></div>
         <div class="heatmap-legend">
           <span class="heatmap-legend-label">Less</span>
-          <span class="heatmap-cell-legend" style="background: #e2e8f0"></span>
-          <span class="heatmap-cell-legend" style="background: #bbf7d0"></span>
-          <span class="heatmap-cell-legend" style="background: #fde68a"></span>
-          <span class="heatmap-cell-legend" style="background: #fca5a5"></span>
-          <span class="heatmap-cell-legend" style="background: #ef4444"></span>
+          <span class="heatmap-cell-legend" style="background:#e2e8f0"></span>
+          <span class="heatmap-cell-legend" style="background:#bbf7d0"></span>
+          <span class="heatmap-cell-legend" style="background:#fde68a"></span>
+          <span class="heatmap-cell-legend" style="background:#fca5a5"></span>
+          <span class="heatmap-cell-legend" style="background:#ef4444"></span>
           <span class="heatmap-legend-label">More</span>
         </div>
       </div>
-      <div class="heatmap-day-detail" id="heatmapDetail" style="display: none"></div>
+      <div class="heatmap-day-detail" id="heatmapDetail" style="display:none"></div>
     </div>
 
     <!-- Add Transaction Form -->
     <div class="card add-txn-card">
-      <div class="card-header" style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          ">
+      <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
         <h3>Add New Transaction</h3>
         <button class="btn-collapse" id="toggleAddForm" title="Toggle form">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -176,44 +156,35 @@
       </div>
       <div class="add-txn-form" id="addTxnForm">
         <div class="add-txn-grid">
-          <div class="profile-form-group">
-            <label>Transaction Name *</label><input type="text" id="txnName" class="profile-input"
-              placeholder="e.g. Grocery Shopping" />
-          </div>
-          <div class="profile-form-group">
-            <label>Amount (₹) *</label><input type="number" id="txnAmount" class="profile-input" placeholder="0"
-              min="1" />
-          </div>
-          <div class="profile-form-group">
-            <label>Type *</label><select id="txnType" class="txn-filter-select" style="width: 100%; padding: 10px 14px">
+          <div class="profile-form-group"><label>Transaction Name *</label><input type="text" id="txnName"
+              class="profile-input" placeholder="e.g. Grocery Shopping" /></div>
+          <div class="profile-form-group"><label>Amount (₹) *</label><input type="number" id="txnAmount"
+              class="profile-input" placeholder="0" min="1" /></div>
+          <div class="profile-form-group"><label>Type *</label><select id="txnType" class="txn-filter-select"
+              style="width:100%;padding:10px 14px">
               <option value="expense">Expense</option>
               <option value="income">Income</option>
+            </select></div>
+          <div class="profile-form-group"><label>Category *</label>
+            <select id="txnCategory" class="txn-filter-select" style="width:100%;padding:10px 14px">
+              <option>Food & Dining</option>
+              <option>Entertainment</option>
+              <option>Transportation</option>
+              <option>Shopping</option>
+              <option>Utilities</option>
+              <option>Housing</option>
+              <option>Salary</option>
+              <option>Freelance</option>
+              <option>Other</option>
             </select>
           </div>
-          <div class="profile-form-group">
-            <label>Category *</label><select id="txnCategory" class="txn-filter-select"
-              style="width: 100%; padding: 10px 14px">
-              <option value="Food & Dining">Food & Dining</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Transportation">Transportation</option>
-              <option value="Shopping">Shopping</option>
-              <option value="Utilities">Utilities</option>
-              <option value="Housing">Housing</option>
-              <option value="Salary">Salary</option>
-              <option value="Freelance">Freelance</option>
-              <option value="Other">Other</option>
-            </select>
+          <div class="profile-form-group"><label>Date *</label><input type="date" id="txnDate" class="profile-input" />
           </div>
-          <div class="profile-form-group">
-            <label>Date *</label><input type="date" id="txnDate" class="profile-input" />
-          </div>
-          <div class="profile-form-group">
-            <label>Notes (optional)</label><input type="text" id="txnNotes" class="profile-input"
-              placeholder="Add a note..." />
-          </div>
+          <div class="profile-form-group"><label>Notes (optional)</label><input type="text" id="txnNotes"
+              class="profile-input" placeholder="Add a note..." /></div>
         </div>
-        <button class="btn-primary" id="addTxnBtn" style="width: fit-content; padding: 10px 32px; margin-top: 8px">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="vertical-align: -2px; margin-right: 6px">
+        <button class="btn-primary" id="addTxnBtn" style="width:fit-content;padding:10px 32px;margin-top:8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:6px">
             <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
           Add Transaction
@@ -222,7 +193,7 @@
     </div>
 
     <!-- Filters -->
-    <div class="card" style="margin-bottom: 20px">
+    <div class="card" style="margin-bottom:20px">
       <div class="txn-filters">
         <input type="text" id="txnSearch" class="txn-search" placeholder="Search transactions..." />
         <select id="txnTypeFilter" class="txn-filter-select">
@@ -244,76 +215,51 @@
 
     <!-- Monthly Grouped List -->
     <div id="txnMonthlyGroups"></div>
-    <p id="txnEmpty" class="card" style="
-          text-align: center;
-          color: #94a3b8;
-          padding: 48px 24px;
-          font-size: 14px;
-          display: none;
-        ">
-      No transactions found.
-    </p>
+    <p id="txnEmpty" class="card" style="text-align:center;color:#94a3b8;padding:48px 24px;font-size:14px;display:none">
+      No transactions found.</p>
 
     <!-- Edit Modal -->
-    <div class="modal-overlay" id="editModal" style="display: none">
-      <div class="modal" style="max-width: 480px">
-        <div class="modal-header" style="
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              padding: 20px 24px;
-              border-bottom: 1px solid #e2e8f0;
-            ">
-          <h3 style="margin: 0; font-size: 18px">Edit Transaction</h3>
-          <button class="btn-collapse" id="closeEditModal" style="border: none">
-            ✕
-          </button>
+    <div class="modal-overlay" id="editModal" style="display:none">
+      <div class="modal" style="max-width:480px">
+        <div class="modal-header"
+          style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #e2e8f0">
+          <h3 style="margin:0;font-size:18px">Edit Transaction</h3>
+          <button class="btn-collapse" id="closeEditModal" style="border:none">✕</button>
         </div>
-        <div class="modal-body" style="padding: 24px">
-          <div style="display: flex; flex-direction: column; gap: 14px">
-            <div class="profile-form-group">
-              <label>Name</label><input type="text" id="editName" class="profile-input" />
+        <div class="modal-body" style="padding:24px">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="profile-form-group"><label>Name</label><input type="text" id="editName" class="profile-input" />
             </div>
-            <div class="profile-form-group">
-              <label>Amount (₹)</label><input type="number" id="editAmount" class="profile-input" min="1" />
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px">
-              <div class="profile-form-group">
-                <label>Type</label><select id="editType" class="txn-filter-select"
-                  style="width: 100%; padding: 10px 14px">
+            <div class="profile-form-group"><label>Amount (₹)</label><input type="number" id="editAmount"
+                class="profile-input" min="1" /></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <div class="profile-form-group"><label>Type</label><select id="editType" class="txn-filter-select"
+                  style="width:100%;padding:10px 14px">
                   <option value="expense">Expense</option>
                   <option value="income">Income</option>
+                </select></div>
+              <div class="profile-form-group"><label>Category</label>
+                <select id="editCategory" class="txn-filter-select" style="width:100%;padding:10px 14px">
+                  <option>Food & Dining</option>
+                  <option>Entertainment</option>
+                  <option>Transportation</option>
+                  <option>Shopping</option>
+                  <option>Utilities</option>
+                  <option>Housing</option>
+                  <option>Salary</option>
+                  <option>Freelance</option>
+                  <option>Other</option>
                 </select>
               </div>
-              <div class="profile-form-group">
-                <label>Category</label><select id="editCategory" class="txn-filter-select"
-                  style="width: 100%; padding: 10px 14px">
-                  <option value="Food & Dining">Food & Dining</option>
-                  <option value="Entertainment">Entertainment</option>
-                  <option value="Transportation">Transportation</option>
-                  <option value="Shopping">Shopping</option>
-                  <option value="Utilities">Utilities</option>
-                  <option value="Housing">Housing</option>
-                  <option value="Salary">Salary</option>
-                  <option value="Freelance">Freelance</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
             </div>
-            <div class="profile-form-group">
-              <label>Date</label><input type="date" id="editDate" class="profile-input" />
+            <div class="profile-form-group"><label>Date</label><input type="date" id="editDate" class="profile-input" />
             </div>
-            <div class="profile-form-group">
-              <label>Notes</label><input type="text" id="editNotes" class="profile-input" placeholder="Add a note..." />
-            </div>
+            <div class="profile-form-group"><label>Notes</label><input type="text" id="editNotes" class="profile-input"
+                placeholder="Add a note..." /></div>
           </div>
-          <div style="display: flex; gap: 10px; margin-top: 20px">
-            <button class="btn-primary" id="saveEditBtn" style="padding: 10px 24px">
-              Save Changes
-            </button>
-            <button class="btn-danger-outline" id="cancelEditBtn" style="width: auto; padding: 10px 24px">
-              Cancel
-            </button>
+          <div style="display:flex;gap:10px;margin-top:20px">
+            <button class="btn-primary" id="saveEditBtn" style="padding:10px 24px">Save Changes</button>
+            <button class="btn-danger-outline" id="cancelEditBtn" style="width:auto;padding:10px 24px">Cancel</button>
           </div>
         </div>
       </div>
@@ -321,28 +267,19 @@
   </main>
 
   <script>
-    // Dark mode
-    const saved = localStorage.getItem("theme");
-    if (saved === "dark") document.body.classList.add("dark-mode");
+    // ── Theme ──────────────────────────────────────────────────────────────────
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
     document.getElementById("themeToggle").addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
-      localStorage.setItem(
-        "theme",
-        document.body.classList.contains("dark-mode") ? "dark" : "light",
-      );
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
       updateThemeIcon();
     });
     function updateThemeIcon() {
-      const isDark = document.body.classList.contains("dark-mode");
-      document.querySelector(".sun-icon").style.display = isDark
-        ? "none"
-        : "block";
-      document.querySelector(".moon-icon").style.display = isDark
-        ? "block"
-        : "none";
+      const dark = document.body.classList.contains("dark-mode");
+      document.querySelector(".sun-icon").style.display = dark ? "none" : "block";
+      document.querySelector(".moon-icon").style.display = dark ? "block" : "none";
     }
     updateThemeIcon();
-
     document.getElementById("txnDate").valueAsDate = new Date();
 
     // Toggle add form
@@ -350,378 +287,119 @@
     const toggleBtn = document.getElementById("toggleAddForm");
     toggleBtn.addEventListener("click", () => {
       addForm.classList.toggle("collapsed");
-      toggleBtn.querySelector("svg").style.transform =
-        addForm.classList.contains("collapsed") ? "rotate(-90deg)" : "";
+      toggleBtn.querySelector("svg").style.transform = addForm.classList.contains("collapsed") ? "rotate(-90deg)" : "";
     });
 
-    function getTxns() {
-      return JSON.parse(localStorage.getItem("transactions") || "[]");
-    }
-    function saveTxns(t) {
-      localStorage.setItem("transactions", JSON.stringify(t));
-    }
+    const getTxns = () => JSON.parse(localStorage.getItem("transactions") || "[]");
+    const saveTxns = (t) => localStorage.setItem("transactions", JSON.stringify(t));
 
-    // Seed sample data if empty
-    // Added wide range of amounts so that the heatmap shows all color variations
-    if (
-      !localStorage.getItem("transactions") ||
-      JSON.parse(localStorage.getItem("transactions")).length === 0
-    ) {
+    // ── Seed sample data (with variety for heatmap color levels) ──────────────
+    if (!localStorage.getItem("transactions") || getTxns().length === 0) {
       saveTxns([
-        {
-          id: 1001,
-          name: "Coffee",
-          amount: 150, // Small amount (Light Green/Level 1)
-          type: "expense",
-          category: "Food & Dining",
-          date: "2026-03-01",
-          notes: "Morning coffee",
-        },
-        {
-          id: 1002,
-          name: "Grocery Store",
-          amount: 900, // Medium amount (Yellow/Level 2)
-          type: "expense",
-          category: "Food & Dining",
-          date: "2026-03-04",
-          notes: "Weekly groceries",
-        },
-        {
-          id: 1003,
-          name: "Electricity Bill",
-          amount: 2500, // Higher amount (Orange/Level 3)
-          type: "expense",
-          category: "Utilities",
-          date: "2026-03-10",
-          notes: "Monthly bill",
-        },
-        {
-          id: 1004,
-          name: "Car Repair",
-          amount: 8500, // Max amount (Red/Level 4)
-          type: "expense",
-          category: "Transportation",
-          date: "2026-03-15",
-          notes: "New tires",
-        },
-        {
-          id: 1005,
-          name: "Sneakers",
-          amount: 3200, // Orange
-          type: "expense",
-          category: "Shopping",
-          date: "2026-02-28",
-          notes: "Nike store",
-        },
-        {
-          id: 1006,
-          name: "Movie Tickets",
-          amount: 450, // Light Green
-          type: "expense",
-          category: "Entertainment",
-          date: "2026-02-20",
-          notes: "Weekend movie",
-        },
-        {
-          id: 1007,
-          name: "Salary",
-          amount: 45000,
-          type: "income",
-          category: "Salary",
-          date: "2026-03-01",
-          notes: "March Salary",
-        },
-        {
-          id: 1002,
-          name: "Movie Tickets",
-          amount: 600,
-          type: "expense",
-          category: "Entertainment",
-          date: "2026-03-01",
-          notes: "",
-        },
-        {
-          id: 1003,
-          name: "Uber Ride",
-          amount: 350,
-          type: "expense",
-          category: "Transportation",
-          date: "2026-03-01",
-          notes: "",
-        },
-        {
-          id: 1004,
-          name: "Salary",
-          amount: 45000,
-          type: "income",
-          category: "Salary",
-          date: "2026-03-01",
-          notes: "March salary",
-        },
-        {
-          id: 1005,
-          name: "Coffee",
-          amount: 150,
-          type: "expense",
-          category: "Food & Dining",
-          date: "2026-03-02",
-          notes: "",
-        },
-        {
-          id: 1006,
-          name: "Bus Pass",
-          amount: 200,
-          type: "expense",
-          category: "Transportation",
-          date: "2026-03-02",
-          notes: "",
-        },
-        {
-          id: 1007,
-          name: "Lunch",
-          amount: 250,
-          type: "expense",
-          category: "Food & Dining",
-          date: "2026-03-03",
-          notes: "",
-        },
-        {
-          id: 1008,
-          name: "Electricity Bill",
-          amount: 1200,
-          type: "expense",
-          category: "Utilities",
-          date: "2026-03-03",
-          notes: "Feb bill",
-        },
-        {
-          id: 1009,
-          name: "Netflix",
-          amount: 649,
-          type: "expense",
-          category: "Entertainment",
-          date: "2026-03-03",
-          notes: "",
-        },
-        {
-          id: 1010,
-          name: "Rent",
-          amount: 12000,
-          type: "expense",
-          category: "Housing",
-          date: "2026-03-04",
-          notes: "March rent",
-        },
-        {
-          id: 1011,
-          name: "Freelance Project",
-          amount: 8000,
-          type: "income",
-          category: "Freelance",
-          date: "2026-03-04",
-          notes: "Website design",
-        },
-        {
-          id: 1012,
-          name: "Dinner Out",
-          amount: 950,
-          type: "expense",
-          category: "Food & Dining",
-          date: "2026-02-28",
-          notes: "",
-        },
-        {
-          id: 1013,
-          name: "Shopping Mall",
-          amount: 3500,
-          type: "expense",
-          category: "Shopping",
-          date: "2026-02-25",
-          notes: "New shoes",
-        },
-        {
-          id: 1014,
-          name: "Gas Station",
-          amount: 500,
-          type: "expense",
-          category: "Transportation",
-          date: "2026-02-20",
-          notes: "",
-        },
-        {
-          id: 1015,
-          name: "Freelance Payment",
-          amount: 12000,
-          type: "income",
-          category: "Freelance",
-          date: "2026-02-15",
-          notes: "",
-        },
-        {
-          id: 1016,
-          name: "Restaurant",
-          amount: 1800,
-          type: "expense",
-          category: "Food & Dining",
-          date: "2026-02-10",
-          notes: "Birthday dinner",
-        },
-        {
-          id: 1017,
-          name: "Internet Bill",
-          amount: 999,
-          type: "expense",
-          category: "Utilities",
-          date: "2026-02-05",
-          notes: "",
-        },
-        {
-          id: 1018,
-          name: "Salary Feb",
-          amount: 45000,
-          type: "income",
-          category: "Salary",
-          date: "2026-02-01",
-          notes: "February salary",
-        },
+        { id: 1001, name: "Coffee", amount: 150, type: "expense", category: "Food & Dining", date: "2026-03-01", notes: "Morning coffee" },
+        { id: 1002, name: "Movie Tickets", amount: 600, type: "expense", category: "Entertainment", date: "2026-03-01", notes: "" },
+        { id: 1003, name: "Uber Ride", amount: 350, type: "expense", category: "Transportation", date: "2026-03-01", notes: "" },
+        { id: 1004, name: "Salary", amount: 45000, type: "income", category: "Salary", date: "2026-03-01", notes: "March salary" },
+        { id: 1005, name: "Coffee", amount: 150, type: "expense", category: "Food & Dining", date: "2026-03-02", notes: "" },
+        { id: 1006, name: "Bus Pass", amount: 200, type: "expense", category: "Transportation", date: "2026-03-02", notes: "" },
+        { id: 1007, name: "Lunch", amount: 250, type: "expense", category: "Food & Dining", date: "2026-03-03", notes: "" },
+        { id: 1008, name: "Electricity Bill", amount: 1200, type: "expense", category: "Utilities", date: "2026-03-03", notes: "Feb bill" },
+        { id: 1009, name: "Netflix", amount: 649, type: "expense", category: "Entertainment", date: "2026-03-03", notes: "" },
+        { id: 1010, name: "Rent", amount: 12000, type: "expense", category: "Housing", date: "2026-03-04", notes: "March rent" },
+        { id: 1011, name: "Freelance Project", amount: 8000, type: "income", category: "Freelance", date: "2026-03-04", notes: "Website design" },
+        { id: 1012, name: "Grocery Store", amount: 900, type: "expense", category: "Food & Dining", date: "2026-03-04", notes: "Weekly groceries" },
+        { id: 1013, name: "Car Repair", amount: 8500, type: "expense", category: "Transportation", date: "2026-03-15", notes: "New tires" },
+        { id: 1014, name: "Dinner Out", amount: 950, type: "expense", category: "Food & Dining", date: "2026-02-28", notes: "" },
+        { id: 1015, name: "Sneakers", amount: 3200, type: "expense", category: "Shopping", date: "2026-02-28", notes: "Nike store" },
+        { id: 1016, name: "Shopping Mall", amount: 3500, type: "expense", category: "Shopping", date: "2026-02-25", notes: "New shoes" },
+        { id: 1017, name: "Movie Tickets", amount: 450, type: "expense", category: "Entertainment", date: "2026-02-20", notes: "Weekend movie" },
+        { id: 1018, name: "Gas Station", amount: 500, type: "expense", category: "Transportation", date: "2026-02-20", notes: "" },
+        { id: 1019, name: "Freelance Payment", amount: 12000, type: "income", category: "Freelance", date: "2026-02-15", notes: "" },
+        { id: 1020, name: "Restaurant", amount: 1800, type: "expense", category: "Food & Dining", date: "2026-02-10", notes: "Birthday dinner" },
+        { id: 1021, name: "Internet Bill", amount: 999, type: "expense", category: "Utilities", date: "2026-02-05", notes: "" },
+        { id: 1022, name: "Salary Feb", amount: 45000, type: "income", category: "Salary", date: "2026-02-01", notes: "February salary" },
       ]);
     }
 
     let transactions = getTxns();
 
-    // Category filter
-    const cats = [...new Set(transactions.map((t) => t.category))];
+    // Populate category filter dropdown
     const catFilter = document.getElementById("txnCatFilter");
-    cats.forEach((c) => {
-      const o = document.createElement("option");
-      o.value = c;
-      o.textContent = c;
-      catFilter.appendChild(o);
-    });
+    const cats = [...new Set(transactions.map(t => t.category))];
+    cats.forEach(c => { const o = document.createElement("option"); o.value = o.textContent = c; catFilter.appendChild(o); });
 
-    // ====== SPENDING HEATMAP ======
+    // ── Spending Heatmap ───────────────────────────────────────────────────────
     let heatmapDate = new Date();
 
     function renderHeatmap() {
-      const year = heatmapDate.getFullYear();
-      const month = heatmapDate.getMonth();
-      document.getElementById("heatmapLabel").textContent = new Date(
-        year,
-        month,
-      ).toLocaleDateString("en-IN", { month: "long", year: "numeric" });
-
+      const year = heatmapDate.getFullYear(), month = heatmapDate.getMonth();
+      document.getElementById("heatmapLabel").textContent = new Date(year, month).toLocaleDateString("en-IN", { month: "long", year: "numeric" });
       const firstDay = new Date(year, month, 1);
-      const lastDay = new Date(year, month + 1, 0);
-      const daysInMonth = lastDay.getDate();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
 
       // Compute daily expense totals
-      const dailyTotals = {};
-      transactions.forEach((t) => {
+      const daily = {};
+      transactions.forEach(t => {
         if (t.type !== "expense") return;
         const d = new Date(t.date);
-        if (d.getFullYear() === year && d.getMonth() === month) {
-          const day = d.getDate();
-          dailyTotals[day] = (dailyTotals[day] || 0) + t.amount;
-        }
+        if (d.getFullYear() === year && d.getMonth() === month) daily[d.getDate()] = (daily[d.getDate()] || 0) + t.amount;
       });
-
-      const maxSpend = Math.max(...Object.values(dailyTotals), 1);
-
-      // Build grid — start from correct weekday (Mon=0)
-      let startOffset = (firstDay.getDay() + 6) % 7; // Monday = 0
+      const maxSpend = Math.max(...Object.values(daily), 1);
+      const today = new Date();
       let cells = "";
 
-      // Empty cells before 1st
-      for (let i = 0; i < startOffset; i++) {
-        cells += `<div class="heatmap-cell empty"></div>`;
-      }
-
+      // Empty cells before 1st of month (Monday=0)
+      for (let i = 0; i < (firstDay.getDay() + 6) % 7; i++) cells += `<div class="heatmap-cell empty"></div>`;
       for (let day = 1; day <= daysInMonth; day++) {
-        const amt = dailyTotals[day] || 0;
-        const intensity =
-          amt === 0 ? 0 : Math.min(Math.ceil((amt / maxSpend) * 4), 4);
-        const isToday =
-          year === new Date().getFullYear() &&
-          month === new Date().getMonth() &&
-          day === new Date().getDate();
-        const todayClass = isToday ? " heatmap-today" : "";
-        const tooltip =
-          amt > 0 ? `₹${amt.toLocaleString("en-IN")}` : "No spending";
-        cells += `<div class="heatmap-cell level-${intensity}${todayClass}" data-day="${day}" title="${day}: ${tooltip}"><span class="heatmap-day-num">${day}</span></div>`;
+        const amt = daily[day] || 0;
+        const level = amt === 0 ? 0 : Math.min(Math.ceil((amt / maxSpend) * 4), 4);
+        const isToday = year === today.getFullYear() && month === today.getMonth() && day === today.getDate();
+        cells += `<div class="heatmap-cell level-${level}${isToday ? " heatmap-today" : ""}" data-day="${day}" title="${day}: ${amt > 0 ? "₹" + amt.toLocaleString("en-IN") : "No spending"}"><span class="heatmap-day-num">${day}</span></div>`;
       }
-
       document.getElementById("heatmapGrid").innerHTML = cells;
 
-      // Click handler for each day
-      document.querySelectorAll(".heatmap-cell[data-day]").forEach((cell) => {
-        cell.addEventListener("click", () => {
-          const day = parseInt(cell.dataset.day);
-          showDayDetail(year, month, day);
-        });
+      document.querySelectorAll(".heatmap-cell[data-day]").forEach(cell => {
+        cell.addEventListener("click", () => showDayDetail(year, month, parseInt(cell.dataset.day)));
       });
     }
 
     function showDayDetail(year, month, day) {
       const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-      const dayTxns = transactions.filter((t) => t.date === dateStr);
+      const dayTxns = transactions.filter(t => t.date === dateStr);
       const detail = document.getElementById("heatmapDetail");
+      const dateLabel = new Date(year, month, day).toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" });
 
       if (dayTxns.length === 0) {
         detail.style.display = "block";
-        detail.innerHTML = `<div class="heatmap-detail-header"><strong>${new Date(year, month, day).toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" })}</strong></div><p style="color:#94a3b8; font-size:13px; margin:8px 0 0;">No transactions on this day.</p>`;
+        detail.innerHTML = `<div class="heatmap-detail-header"><strong>${dateLabel}</strong></div><p style="color:#94a3b8;font-size:13px;margin:8px 0 0">No transactions on this day.</p>`;
         return;
       }
-
-      const total = dayTxns
-        .filter((t) => t.type === "expense")
-        .reduce((s, t) => s + t.amount, 0);
+      const total = dayTxns.filter(t => t.type === "expense").reduce((s, t) => s + t.amount, 0);
       detail.style.display = "block";
       detail.innerHTML = `
-          <div class="heatmap-detail-header">
-            <strong>${new Date(year, month, day).toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" })}</strong>
-            <span style="font-size:13px; color:#64748b;">${dayTxns.length} transaction${dayTxns.length > 1 ? "s" : ""} · ₹${total.toLocaleString("en-IN")} spent</span>
-          </div>
-          ${dayTxns
-          .map(
-            (t) => `
-            <div class="heatmap-detail-row">
-              <span class="txn-type-badge ${t.type}" style="font-size:11px;">${t.type === "income" ? "Income" : "Expense"}</span>
-              <span style="font-weight:500; flex:1;">${t.name}</span>
-              <span style="font-weight:600; color:${t.type === "income" ? "#10b981" : "#ef4444"};">${t.type === "income" ? "+" : "-"}₹${t.amount.toLocaleString("en-IN")}</span>
-            </div>
-          `,
-          )
-          .join("")}
-        `;
+        <div class="heatmap-detail-header">
+          <strong>${dateLabel}</strong>
+          <span style="font-size:13px;color:#64748b">${dayTxns.length} transaction${dayTxns.length > 1 ? "s" : ""} · ₹${total.toLocaleString("en-IN")} spent</span>
+        </div>
+        ${dayTxns.map(t => `
+          <div class="heatmap-detail-row">
+            <span class="txn-type-badge ${t.type}" style="font-size:11px">${t.type === "income" ? "Income" : "Expense"}</span>
+            <span style="font-weight:500;flex:1">${t.name}</span>
+            <span style="font-weight:600;color:${t.type === "income" ? "#10b981" : "#ef4444"}">${t.type === "income" ? "+" : "-"}₹${t.amount.toLocaleString("en-IN")}</span>
+          </div>`).join("")}`;
     }
 
-    document.getElementById("heatmapPrev").addEventListener("click", () => {
-      heatmapDate.setMonth(heatmapDate.getMonth() - 1);
-      renderHeatmap();
-    });
-    document.getElementById("heatmapNext").addEventListener("click", () => {
-      heatmapDate.setMonth(heatmapDate.getMonth() + 1);
-      renderHeatmap();
-    });
+    document.getElementById("heatmapPrev").addEventListener("click", () => { heatmapDate.setMonth(heatmapDate.getMonth() - 1); renderHeatmap(); });
+    document.getElementById("heatmapNext").addEventListener("click", () => { heatmapDate.setMonth(heatmapDate.getMonth() + 1); renderHeatmap(); });
 
-    // ====== STATS ======
+    // ── Stats Row ──────────────────────────────────────────────────────────────
     function updateStats(data) {
       document.getElementById("totalTxnCount").textContent = data.length;
-      document.getElementById("totalTxnIncome").textContent =
-        "₹" +
-        data
-          .filter((t) => t.type === "income")
-          .reduce((s, t) => s + t.amount, 0)
-          .toLocaleString("en-IN");
-      document.getElementById("totalTxnExpense").textContent =
-        "₹" +
-        data
-          .filter((t) => t.type === "expense")
-          .reduce((s, t) => s + t.amount, 0)
-          .toLocaleString("en-IN");
+      document.getElementById("totalTxnIncome").textContent = "₹" + data.filter(t => t.type === "income").reduce((s, t) => s + t.amount, 0).toLocaleString("en-IN");
+      document.getElementById("totalTxnExpense").textContent = "₹" + data.filter(t => t.type === "expense").reduce((s, t) => s + t.amount, 0).toLocaleString("en-IN");
     }
 
-    // ====== MONTHLY GROUPED TABLE ======
+    // ── Monthly Grouped Table ──────────────────────────────────────────────────
     function renderTable() {
       let data = [...transactions];
       const search = document.getElementById("txnSearch").value.toLowerCase();
@@ -729,298 +407,174 @@
       const cat = document.getElementById("txnCatFilter").value;
       const sort = document.getElementById("txnSortFilter").value;
 
-      if (search)
-        data = data.filter(
-          (t) =>
-            t.name.toLowerCase().includes(search) ||
-            t.category.toLowerCase().includes(search) ||
-            (t.notes && t.notes.toLowerCase().includes(search)),
-        );
-      if (type !== "all") data = data.filter((t) => t.type === type);
-      if (cat !== "all") data = data.filter((t) => t.category === cat);
+      if (search) data = data.filter(t => t.name.toLowerCase().includes(search) || t.category.toLowerCase().includes(search) || (t.notes && t.notes.toLowerCase().includes(search)));
+      if (type !== "all") data = data.filter(t => t.type === type);
+      if (cat !== "all") data = data.filter(t => t.category === cat);
 
-      if (sort === "newest")
-        data.sort((a, b) => new Date(b.date) - new Date(a.date));
-      else if (sort === "oldest")
-        data.sort((a, b) => new Date(a.date) - new Date(b.date));
+      if (sort === "newest") data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      else if (sort === "oldest") data.sort((a, b) => new Date(a.date) - new Date(b.date));
       else if (sort === "highest") data.sort((a, b) => b.amount - a.amount);
       else data.sort((a, b) => a.amount - b.amount);
 
       updateStats(data);
-
       const container = document.getElementById("txnMonthlyGroups");
       const empty = document.getElementById("txnEmpty");
 
-      if (data.length === 0) {
-        container.innerHTML = "";
-        empty.style.display = "block";
-        return;
-      }
+      if (data.length === 0) { container.innerHTML = ""; empty.style.display = "block"; return; }
       empty.style.display = "none";
 
+      // Group by month label
       const groups = {};
-      data.forEach((t) => {
-        const key = new Date(t.date).toLocaleDateString("en-IN", {
-          month: "long",
-          year: "numeric",
-        });
-        if (!groups[key]) groups[key] = [];
-        groups[key].push(t);
+      data.forEach(t => {
+        const key = new Date(t.date).toLocaleDateString("en-IN", { month: "long", year: "numeric" });
+        (groups[key] = groups[key] || []).push(t);
       });
 
-      container.innerHTML = Object.entries(groups)
-        .map(([month, items]) => {
-          const mInc = items
-            .filter((t) => t.type === "income")
-            .reduce((s, t) => s + t.amount, 0);
-          const mExp = items
-            .filter((t) => t.type === "expense")
-            .reduce((s, t) => s + t.amount, 0);
+      // SVG icons for action buttons (inlined once as strings)
+      const editIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      const deleteIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-          const rows = items
-            .map((t) => {
-              const d = new Date(t.date).toLocaleDateString("en-IN", {
-                day: "numeric",
-                month: "short",
-              });
-              const inc = t.type === "income";
-              const notesBadge = t.notes
-                ? `<span class="txn-notes-badge" title="${t.notes}">📝</span>`
-                : "";
-              return `<tr>
-              <td>${d}</td>
-              <td class="txn-name-cell">${t.name} ${notesBadge}</td>
-              <td><span class="txn-cat-badge">${t.category}</span></td>
-              <td><span class="txn-type-badge ${inc ? "income" : "expense"}">${inc ? "Income" : "Expense"}</span></td>
-              <td style="text-align:right;font-weight:600;" class="${inc ? "income" : "expense"}">${inc ? "+" : "-"}₹${t.amount.toLocaleString("en-IN")}</td>
-              <td style="text-align:center">
-                <div style="display:inline-flex; gap:4px; align-items:center;">
-                <button class="action-btn edit-btn" onclick="openEdit(${t.id})" title="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-                <button class="action-btn delete-btn" onclick="deleteTxn(${t.id})" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-                </div>
-              </td>
-            </tr>`;
-            })
-            .join("");
-
-          return `<div class="card monthly-group" style="margin-bottom:20px;">
-            <div class="monthly-group-header">
-              <h3 class="monthly-group-title">${month}</h3>
-              <div class="monthly-group-summary">
-                <span class="monthly-summary-item income">+₹${mInc.toLocaleString("en-IN")}</span>
-                <span class="monthly-summary-item expense">-₹${mExp.toLocaleString("en-IN")}</span>
-                <span class="monthly-summary-item net" style="color:${mInc - mExp >= 0 ? "#10b981" : "#ef4444"}">Net: ₹${(mInc - mExp).toLocaleString("en-IN")}</span>
-              </div>
+      container.innerHTML = Object.entries(groups).map(([month, items]) => {
+        const mInc = items.filter(t => t.type === "income").reduce((s, t) => s + t.amount, 0);
+        const mExp = items.filter(t => t.type === "expense").reduce((s, t) => s + t.amount, 0);
+        const rows = items.map(t => {
+          const d = new Date(t.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+          const inc = t.type === "income";
+          const noteBadge = t.notes ? `<span class="txn-notes-badge" title="${t.notes}">📝</span>` : "";
+          return `<tr>
+            <td>${d}</td>
+            <td class="txn-name-cell">${t.name} ${noteBadge}</td>
+            <td><span class="txn-cat-badge">${t.category}</span></td>
+            <td><span class="txn-type-badge ${inc ? "income" : "expense"}">${inc ? "Income" : "Expense"}</span></td>
+            <td style="text-align:right;font-weight:600" class="${inc ? "income" : "expense"}">${inc ? "+" : "-"}₹${t.amount.toLocaleString("en-IN")}</td>
+            <td style="text-align:center"><div style="display:inline-flex;gap:4px;align-items:center">
+              <button class="action-btn edit-btn"   onclick="openEdit(${t.id})"   title="Edit">${editIcon}</button>
+              <button class="action-btn delete-btn" onclick="deleteTxn(${t.id})" title="Delete">${deleteIcon}</button>
+            </div></td>
+          </tr>`;
+        }).join("");
+        return `<div class="card monthly-group" style="margin-bottom:20px">
+          <div class="monthly-group-header">
+            <h3 class="monthly-group-title">${month}</h3>
+            <div class="monthly-group-summary">
+              <span class="monthly-summary-item income">+₹${mInc.toLocaleString("en-IN")}</span>
+              <span class="monthly-summary-item expense">-₹${mExp.toLocaleString("en-IN")}</span>
+              <span class="monthly-summary-item net" style="color:${mInc - mExp >= 0 ? "#10b981" : "#ef4444"}">Net: ₹${(mInc - mExp).toLocaleString("en-IN")}</span>
             </div>
-            <table class="txn-table"><thead><tr><th>Date</th><th>Name</th><th>Category</th><th>Type</th><th style="text-align:right">Amount</th><th style="text-align:center">Actions</th></tr></thead><tbody>${rows}</tbody></table>
-          </div>`;
-        })
-        .join("");
+          </div>
+          <table class="txn-table">
+            <thead><tr><th>Date</th><th>Name</th><th>Category</th><th>Type</th><th style="text-align:right">Amount</th><th style="text-align:center">Actions</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>`;
+      }).join("");
     }
 
-    // ====== DELETE ======
+    // ── Delete ─────────────────────────────────────────────────────────────────
     window.deleteTxn = function (id) {
       if (!confirm("Delete this transaction?")) return;
-      transactions = transactions.filter((t) => t.id !== id);
-      saveTxns(transactions);
-      renderTable();
-      renderHeatmap();
+      transactions = transactions.filter(t => t.id !== id);
+      saveTxns(transactions); renderTable(); renderHeatmap();
     };
 
-    // ====== EDIT ======
+    // ── Edit ───────────────────────────────────────────────────────────────────
     let editingId = null;
-
     window.openEdit = function (id) {
-      const t = transactions.find((x) => x.id === id);
-      if (!t) return;
+      const t = transactions.find(x => x.id === id); if (!t) return;
       editingId = id;
-      document.getElementById("editName").value = t.name;
-      document.getElementById("editAmount").value = t.amount;
-      document.getElementById("editType").value = t.type;
-      document.getElementById("editCategory").value = t.category;
-      document.getElementById("editDate").value = t.date;
-      document.getElementById("editNotes").value = t.notes || "";
+      ["editName", "editAmount", "editType", "editCategory", "editDate", "editNotes"].forEach((eid, i) => {
+        document.getElementById(eid).value = [t.name, t.amount, t.type, t.category, t.date, t.notes || ""][i];
+      });
       document.getElementById("editModal").style.display = "flex";
     };
-
     document.getElementById("saveEditBtn").addEventListener("click", () => {
-      const t = transactions.find((x) => x.id === editingId);
-      if (!t) return;
+      const t = transactions.find(x => x.id === editingId); if (!t) return;
       const name = document.getElementById("editName").value.trim();
       const amount = parseFloat(document.getElementById("editAmount").value);
-      if (!name || !amount || amount <= 0) {
-        alert("Name and valid amount are required.");
-        return;
-      }
-      t.name = name;
-      t.amount = amount;
+      if (!name || !amount || amount <= 0) { alert("Name and valid amount are required."); return; }
+      t.name = name; t.amount = amount;
       t.type = document.getElementById("editType").value;
       t.category = document.getElementById("editCategory").value;
       t.date = document.getElementById("editDate").value;
       t.notes = document.getElementById("editNotes").value.trim();
       saveTxns(transactions);
       document.getElementById("editModal").style.display = "none";
-      renderTable();
-      renderHeatmap();
+      renderTable(); renderHeatmap();
+    });
+    const closeEdit = () => document.getElementById("editModal").style.display = "none";
+    document.getElementById("closeEditModal").addEventListener("click", closeEdit);
+    document.getElementById("cancelEditBtn").addEventListener("click", closeEdit);
+    document.getElementById("editModal").addEventListener("click", e => { if (e.target.id === "editModal") closeEdit(); });
+
+    // ── Add Transaction ────────────────────────────────────────────────────────
+    document.getElementById("addTxnBtn").addEventListener("click", function () {
+      const name = document.getElementById("txnName").value.trim();
+      const amount = parseFloat(document.getElementById("txnAmount").value);
+      const type = document.getElementById("txnType").value;
+      const category = document.getElementById("txnCategory").value;
+      const date = document.getElementById("txnDate").value;
+      const notes = document.getElementById("txnNotes").value.trim();
+
+      if (!name) { alert("Please enter a transaction name."); return; }
+      if (!amount || amount <= 0) { alert("Please enter a valid amount."); return; }
+      if (!date) { alert("Please select a date."); return; }
+
+      const dup = transactions.find(t => t.name.toLowerCase() === name.toLowerCase() && t.amount === amount && t.date === date);
+      if (dup && !confirm(`A similar transaction "${name}" for ₹${amount.toLocaleString("en-IN")} on ${date} already exists. Add anyway?`)) return;
+
+      transactions.push({ id: Date.now(), name, amount, type, category, date, notes });
+      saveTxns(transactions);
+      document.getElementById("txnName").value = "";
+      document.getElementById("txnAmount").value = "";
+      document.getElementById("txnNotes").value = "";
+      document.getElementById("txnDate").valueAsDate = new Date();
+
+      // Add new category to filter if needed
+      if (!cats.includes(category)) {
+        cats.push(category);
+        const o = document.createElement("option"); o.value = o.textContent = category;
+        catFilter.appendChild(o);
+      }
+      renderTable(); renderHeatmap();
     });
 
-    document
-      .getElementById("closeEditModal")
-      .addEventListener("click", () => {
-        document.getElementById("editModal").style.display = "none";
+    // ── Export CSV ─────────────────────────────────────────────────────────────
+    document.getElementById("exportBtn").addEventListener("click", function () {
+      if (transactions.length === 0) { alert("No transactions to export."); return; }
+      let csv = "Date,Name,Category,Type,Amount,Notes\n";
+      transactions.forEach(t => {
+        csv += `"${new Date(t.date).toLocaleDateString("en-IN")}","${t.name}","${t.category}","${t.type}","${t.amount}","${t.notes || ""}"\n`;
       });
-    document.getElementById("cancelEditBtn").addEventListener("click", () => {
-      document.getElementById("editModal").style.display = "none";
-    });
-    document.getElementById("editModal").addEventListener("click", (e) => {
-      if (e.target.id === "editModal")
-        document.getElementById("editModal").style.display = "none";
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+      a.download = "fintrack_transactions.csv";
+      a.click();
     });
 
-    // ====== ADD ======
-    document
-      .getElementById("addTxnBtn")
-      .addEventListener("click", function () {
-        const name = document.getElementById("txnName").value.trim();
-        const amount = parseFloat(document.getElementById("txnAmount").value);
-        const type = document.getElementById("txnType").value;
-        const category = document.getElementById("txnCategory").value;
-        const date = document.getElementById("txnDate").value;
-        const notes = document.getElementById("txnNotes").value.trim();
+    // Filter event listeners
+    ["txnSearch", "txnTypeFilter", "txnCatFilter", "txnSortFilter"].forEach(id => {
+      document.getElementById(id).addEventListener(id === "txnSearch" ? "input" : "change", renderTable);
+    });
 
-        if (!name) {
-          alert("Please enter a transaction name.");
-          return;
-        }
-        if (!amount || amount <= 0) {
-          alert("Please enter a valid amount.");
-          return;
-        }
-        if (!date) {
-          alert("Please select a date.");
-          return;
-        }
-
-        const dup = transactions.find(
-          (t) =>
-            t.name.toLowerCase() === name.toLowerCase() &&
-            t.amount === amount &&
-            t.date === date,
-        );
-        if (
-          dup &&
-          !confirm(
-            `A similar transaction "${name}" for ₹${amount.toLocaleString("en-IN")} on ${date} already exists. Add anyway?`,
-          )
-        )
-          return;
-
-        transactions.push({
-          id: Date.now(),
-          name,
-          amount,
-          type,
-          category,
-          date,
-          notes,
+    // ── Scroll fade-in animation ───────────────────────────────────────────────
+    (function () {
+      const style = document.createElement("style");
+      style.textContent = ".scroll-animate{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}.scroll-animate.visible{opacity:1;transform:none}";
+      document.head.appendChild(style);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add("visible"), i * 60); observer.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      function init() {
+        document.querySelectorAll(".card,.stat-card,.transaction-item,.category-item").forEach(el => {
+          el.classList.add("scroll-animate"); observer.observe(el);
         });
-        saveTxns(transactions);
-
-        document.getElementById("txnName").value = "";
-        document.getElementById("txnAmount").value = "";
-        document.getElementById("txnNotes").value = "";
-        document.getElementById("txnDate").valueAsDate = new Date();
-
-        if (!cats.includes(category)) {
-          cats.push(category);
-          const o = document.createElement("option");
-          o.value = category;
-          o.textContent = category;
-          catFilter.appendChild(o);
-        }
-
-        renderTable();
-        renderHeatmap();
-      });
-
-    // ====== EXPORT CSV ======
-    document
-      .getElementById("exportBtn")
-      .addEventListener("click", function () {
-        if (transactions.length === 0) {
-          alert("No transactions to export.");
-          return;
-        }
-        let csv = "Date,Name,Category,Type,Amount,Notes\n";
-        transactions.forEach((t) => {
-          csv += `"${new Date(t.date).toLocaleDateString("en-IN")}","${t.name}","${t.category}","${t.type}","${t.amount}","${t.notes || ""}"\n`;
-        });
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
-        a.download = "fintrack_transactions.csv";
-        a.click();
-      });
-
-    // Filters
-    ["txnSearch", "txnTypeFilter", "txnCatFilter", "txnSortFilter"].forEach(
-      (id) => {
-        document
-          .getElementById(id)
-          .addEventListener(
-            id === "txnSearch" ? "input" : "change",
-            renderTable,
-          );
-      },
-    );
+      }
+      document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", init) : init();
+    })();
 
     renderTable();
     renderHeatmap();
   </script>
-
-  <script>
-    // Scroll-triggered fade-in for cards and sections
-    (function () {
-      const style = document.createElement('style');
-      style.textContent = `
-        .scroll-animate {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .scroll-animate.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `;
-      document.head.appendChild(style);
-
-      function initScrollAnimations() {
-        const cards = document.querySelectorAll('.card, .summary-card, .stat-card, .budget-detail-card, .transaction-item, .category-item');
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => entry.target.classList.add('visible'), i * 60);
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-
-        cards.forEach(el => {
-          el.classList.add('scroll-animate');
-          observer.observe(el);
-        });
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initScrollAnimations);
-      } else {
-        initScrollAnimations();
-      }
-    })();
-  </script>
-
 </body>
 
 </html>
-
-<!-- force cache bust -->
