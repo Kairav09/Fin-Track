@@ -513,8 +513,6 @@ function renderTransactions() {
 }
 
 // Update stat cards from transactions
-
-// Animated count-up for stat values
 function animateCount(el, target, prefix) {
   const duration = 900;
   const start = performance.now();
@@ -988,6 +986,20 @@ if (closeBudgetBtn) {
 if (budgetModal) {
   budgetModal.addEventListener("click", function (e) {
     if (e.target === budgetModal) budgetModal.classList.remove("active");
+  });
+}
+
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+const overlay = document.getElementById("mobileOverlay");
+if (menuBtn && sidebar && overlay) {
+  menuBtn.addEventListener("click", () => {
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+  });
+  overlay.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
   });
 }
 
