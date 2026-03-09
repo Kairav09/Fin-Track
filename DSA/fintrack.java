@@ -6,6 +6,7 @@ public class fintrack {
     // ── Transaction Model ────────────────────────────────────────────────────
     record Transaction(int id, String name, String type, String category, double amount, String date) {
 
+        @Override
         public String toString() {
             return String.format("[#%d] %-22s | %-7s | %-15s | ₹%8.2f | %s", id, name, type, category, amount, date);
         }
