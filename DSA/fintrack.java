@@ -271,6 +271,5 @@ public class fintrack {
                     System.out.println("  Invalid option. Please choose between 0 and 10.");
             }
         }
-        sc.close();
     }
 }
