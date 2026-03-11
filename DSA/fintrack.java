@@ -4,7 +4,40 @@ import java.util.*;
 public class fintrack {
 
     // ── Transaction Model ────────────────────────────────────────────────────
-    record Transaction(int id, String name, String type, String category, double amount, String date) {
+    static class Transaction {
+
+        int id;
+        String name, type, category, date;
+        double amount;
+
+        Transaction(int id, String name, String type, String category, double amount, String date) {
+            this.id = id;
+            this.name = name;
+            this.type = type;
+            this.category = category;
+            this.amount = amount;
+            this.date = date;
+        }
+
+        int id() {
+            return id;
+        }
+
+        double amount() {
+            return amount;
+        }
+
+        String date() {
+            return date;
+        }
+
+        String category() {
+            return category;
+        }
+
+        String type() {
+            return type;
+        }
 
         @Override
         public String toString() {
